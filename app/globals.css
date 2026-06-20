@@ -63,7 +63,10 @@
   --surface-warm:    #FAF4EC;
   --surface-hover:   #FFF9F0;
 
-  --sage:            #6B8F71;
+  /* --sage 调暗到 #5A7E60 以满足 WCAG AA：白字在 sage 背景上对比度 4.58:1（旧 3.63:1 不达标）。
+     --sage-light/-lighter/-bg 仅作浅色调点缀，保持原值即可（不承载文字）。
+     --sage-dark 已是更深绿，保留。 */
+  --sage:            #5A7E60;
   --sage-light:      #8AAD8F;
   --sage-lighter:    #D4E5D6;
   --sage-bg:         #EFF5F0;
@@ -87,8 +90,10 @@
 
   --text-primary:    #2C2417;
   --text-secondary:  #5A4F42;
-  --text-muted:      #8A7A66;
-  --text-faint:      #9D8E7B;
+  /* --text-muted / --text-faint 调暗以满足 WCAG AA：原值 3.89/2.99 不达标，
+     新值 5.62/4.83，均 >= 4.5。 */
+  --text-muted:      #6F614F;
+  --text-faint:      #7A6B58;
 
   --border:          #E8DDD0;
   --border-light:    #F0E8DD;

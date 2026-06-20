@@ -43,7 +43,7 @@ export default function Hero() {
             <div className="hero-trust-text">
               <strong>28 题 Likert 测评</strong>
               <br />
-              <span style={{ fontSize: "0.8rem" }}>
+              <span style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
                 整合 6 大权威心理学框架·尊重每一种独特
               </span>
             </div>

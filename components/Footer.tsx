@@ -3,7 +3,7 @@ import Link from "next/link";
 interface FooterLink {
   label: string;
   href: string;
-  /** true = 占位链接，加 aria-disabled */
+  /** true = 真正还没实现的功能（不同于 stub 页），用 aria-disabled 标记。 */
   placeholder?: boolean;
 }
 
@@ -13,6 +13,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "MBTI 28 题测评", href: "/#quiz" },
       { label: "16 种人格图谱", href: "/types" },
+      // 这些量表确实尚未实现，保留 placeholder 视觉态。
       { label: "大五人格量表", href: "#", placeholder: true },
       { label: "九型人格测评", href: "#", placeholder: true },
       { label: "DISC 行为风格", href: "#", placeholder: true },
@@ -30,28 +31,31 @@ const COLS: { title: string; links: FooterLink[] }[] = [
   },
   {
     title: "关于",
+    // about / contact / privacy / terms 已在 app/ 下补齐 stub 页面（QA-V2 P1-NEW-4），
+    // 不再用 placeholder。
     links: [
-      { label: "关于心栖", href: "/about", placeholder: true },
-      { label: "学术顾问", href: "/about#advisors", placeholder: true },
-      { label: "投稿合作", href: "/contact", placeholder: true },
-      { label: "隐私政策", href: "/privacy", placeholder: true },
-      { label: "使用条款", href: "/terms", placeholder: true },
+      { label: "关于心栖", href: "/about" },
+      { label: "学术顾问", href: "/about#advisors" },
+      { label: "投稿合作", href: "/contact" },
+      { label: "隐私政策", href: "/privacy" },
+      { label: "使用条款", href: "/terms" },
     ],
   },
 ];
 
 function renderLink(l: FooterLink) {
-  // 内部锚点（# 开头）也允许 — 但绝不输出空 href="#"。
   if (l.placeholder) {
+    // 真正未实现的功能仍然保留 disabled 视觉态，但 href 不再是空 "#"，
+    // 而是回到首页，避免点击造成困惑/404。
     return (
-      <a
-        href={l.href === "#" ? "/" : l.href}
+      <Link
+        href="/"
         aria-disabled="true"
         title="敬请期待"
         tabIndex={-1}
       >
         {l.label}
-      </a>
+      </Link>
     );
   }
   return <Link href={l.href}>{l.label}</Link>;
@@ -92,15 +96,9 @@ export default function Footer() {
         <div className="footer-bottom">
           <span>© 2025 心栖 MindNest · 人格探索实验室</span>
           <div className="footer-bottom-links">
-            <a href="/privacy" aria-disabled="true" tabIndex={-1}>
-              隐私政策
-            </a>
-            <a href="/terms" aria-disabled="true" tabIndex={-1}>
-              使用条款
-            </a>
-            <a href="/contact" aria-disabled="true" tabIndex={-1}>
-              联系我们
-            </a>
+            <Link href="/privacy">隐私政策</Link>
+            <Link href="/terms">使用条款</Link>
+            <Link href="/contact">联系我们</Link>
           </div>
         </div>
       </div>

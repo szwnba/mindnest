@@ -11,20 +11,32 @@ export type LikertScore = 1 | 2 | 3 | 4 | 5;
  */
 export type Answers = Record<number, LikertScore>;
 
+/** confidence level：基于 letterPercent。 */
+export type ConfidenceLevel = "high" | "medium" | "low";
+
 export interface DimensionResult {
   /** 该维度落在哪个字母（E/I, S/N, T/F, J/P） */
   letter: "E" | "I" | "S" | "N" | "T" | "F" | "J" | "P";
-  /** letter 对应的得分（7-35，越大越偏向该字母） */
-  letterScore: number;
-  /** 反向字母得分（letter + opposite = 42） */
-  oppositeScore: number;
   /**
-   * letter 占该维度总分（42）的百分比，整数 0-100。
-   * 50 = 完全居中；越大越偏 letter。
+   * 偏移量（offset），范围 -14..+14。
+   * - >0：偏向 primary 字母（E/S/T/J）
+   * - <0：偏向 opposite 字母（I/N/F/P）
+   * - =0：完全居中（ambiguous=true）
+   *
+   * 计算：每题 (answer - 3) * (reverse ? -1 : 1) ∈ [-2, +2]，
+   * 7 题求和，理论极值 ±14。
+   */
+  offset: number;
+  /**
+   * letter 占该维度的百分比，整数 50-100（始终视作"所选字母"的强度）。
+   * 50 = 完全居中（仅当 offset=0 时出现，此时 letter 默认 primary）；
+   * 越大代表越倾向所选字母。
    */
   letterPercent: number;
-  /** 是否处于游移区（letterPercent 在 45-55 之间） */
+  /** 是否处于游移区（letterPercent <= 55 视为 ambiguous） */
   ambiguous: boolean;
+  /** 该维度的把握度等级 */
+  confidence: ConfidenceLevel;
 }
 
 export interface QuizResult {
@@ -55,65 +67,75 @@ const DIMENSION_LETTERS: Record<
   JP: { primary: "J", opposite: "P" },
 };
 
+/** 每维度满分偏移（每维度 7 题，每题 ±2）。 */
+const MAX_OFFSET = 14;
+/** ambiguous 阈值：letterPercent <= 55 视为游移。 */
+const AMBIGUOUS_THRESHOLD = 55;
+
 /**
- * 把单题原始分（1-5）转化为 \"主字母\" 与 \"对立字母\" 的得分增量。
+ * 单题偏移：(raw - 3) * (reverse ? -1 : 1) ∈ [-2, +2]，
+ * 表示 "向 primary 字母（E/S/T/J）所偏的量"。
  *
- * - reverse=false：raw 越高越偏 primary（E/S/T/J）
- * - reverse=true ：raw 越高越偏 opposite（I/N/F/P）
- *
- * 两个字母的得分恒满足 primary + opposite = 6。
+ * - 中立答（3）→ 偏移 0，不贡献任何方向；
+ * - 正向题答 5（非常同意）→ +2，偏 primary；
+ * - 反向题答 5（非常同意）→ -2，偏 opposite（因为反向题表达 opposite 立场）。
  */
-function scoreItem(
-  q: QuizQuestion,
-  raw: LikertScore,
-): { primaryDelta: number; oppositeDelta: number } {
-  if (q.reverse) {
-    return { primaryDelta: 6 - raw, oppositeDelta: raw };
-  }
-  return { primaryDelta: raw, oppositeDelta: 6 - raw };
+function itemOffset(q: QuizQuestion, raw: LikertScore): number {
+  return (raw - 3) * (q.reverse ? -1 : 1);
+}
+
+/**
+ * 把维度 offset 映射到 [50, 100] 的"所选字母强度"百分比。
+ * - offset = ±14 → 100%
+ * - offset = 0 → 50%
+ */
+function offsetToPercent(offset: number): number {
+  return Math.round((Math.abs(offset) / MAX_OFFSET) * 50 + 50);
+}
+
+function levelFromPercent(pct: number): ConfidenceLevel {
+  if (pct >= 85) return "high";
+  if (pct >= 65) return "medium";
+  return "low";
 }
 
 /**
  * 根据全部回答计算结果。
- * 缺答的题用中立分 3 兜底（比 0 更合理：避免严重偏向某一极）。
+ * 缺答的题用中立分 3 兜底（不贡献偏移）。
+ *
+ * 计分采用"偏移制"：每题 (raw-3)*(reverse?-1:1)，维度满分 ±14；
+ * 这样无脑全选同一档（如全 5）时，正向题和反向题相互抵消，
+ * 落入 ambiguous 区，避免任何极端用户都被打"游移"标签的旧 bug。
  */
 export function computeResult(answers: Answers): QuizResult {
-  const sums: Record<Dimension, { primary: number; opposite: number }> = {
-    EI: { primary: 0, opposite: 0 },
-    SN: { primary: 0, opposite: 0 },
-    TF: { primary: 0, opposite: 0 },
-    JP: { primary: 0, opposite: 0 },
+  const offsets: Record<Dimension, number> = {
+    EI: 0,
+    SN: 0,
+    TF: 0,
+    JP: 0,
   };
 
   let answered = 0;
   for (const q of QUIZ_QUESTIONS) {
     const raw = (answers[q.id] ?? 3) as LikertScore;
     if (answers[q.id]) answered += 1;
-    const { primaryDelta, oppositeDelta } = scoreItem(q, raw);
-    sums[q.dimension].primary += primaryDelta;
-    sums[q.dimension].opposite += oppositeDelta;
+    offsets[q.dimension] += itemOffset(q, raw);
   }
 
   function buildDim(dim: Dimension): DimensionResult {
     const { primary, opposite } = DIMENSION_LETTERS[dim];
-    const primaryScore = sums[dim].primary;
-    const oppositeScore = sums[dim].opposite;
-    const total = primaryScore + oppositeScore || 1;
-    // 主字母占比
-    const primaryPercent = Math.round((primaryScore / total) * 100);
-    const useOpposite = primaryScore < oppositeScore;
-    // 平局（primary === opposite）时，落到 primary（E/S/T/J）以提供稳定输出
-    const letter = useOpposite ? opposite : primary;
-    const letterScore = useOpposite ? oppositeScore : primaryScore;
-    const oppoScore = useOpposite ? primaryScore : oppositeScore;
-    const letterPercent = useOpposite ? 100 - primaryPercent : primaryPercent;
-    const ambiguous = letterPercent <= 55;
+    const offset = offsets[dim];
+    // offset > 0 → primary, offset < 0 → opposite, offset == 0 → 默认 primary 但 ambiguous
+    const letter = offset < 0 ? opposite : primary;
+    const letterPercent = offsetToPercent(offset);
+    const ambiguous = letterPercent <= AMBIGUOUS_THRESHOLD;
+    const confidence = levelFromPercent(letterPercent);
     return {
       letter,
-      letterScore,
-      oppositeScore: oppoScore,
+      offset,
       letterPercent,
       ambiguous,
+      confidence,
     };
   }
 
@@ -147,3 +169,37 @@ export function computeResult(answers: Answers): QuizResult {
 
 export const STORAGE_KEY = "mindnest:quiz-result-v1";
 export const ANSWERS_STORAGE_KEY = "mindnest:quiz-answers-v1";
+
+/* ──────────────────────────────────────────────────────────
+ * dev-only 自检：启动时打印 all-5 / all-1 / all-3 三个用例，
+ * 用于回归 P0 计分修复（QA-V2 P0-NEW-1）。
+ * 仅在 NODE_ENV === "development" 时执行（生产环境会被 dead-code 消除）。
+ * ────────────────────────────────────────────────────────── */
+if (process.env.NODE_ENV === "development") {
+  const cases: { name: string; answers: Answers }[] = [
+    {
+      name: "all-5",
+      answers: Object.fromEntries(
+        QUIZ_QUESTIONS.map((q) => [q.id, 5 as LikertScore]),
+      ) as Answers,
+    },
+    {
+      name: "all-1",
+      answers: Object.fromEntries(
+        QUIZ_QUESTIONS.map((q) => [q.id, 1 as LikertScore]),
+      ) as Answers,
+    },
+    {
+      name: "all-3",
+      answers: Object.fromEntries(
+        QUIZ_QUESTIONS.map((q) => [q.id, 3 as LikertScore]),
+      ) as Answers,
+    },
+  ];
+  for (const c of cases) {
+    const r = computeResult(c.answers);
+    console.log(
+      `[scoring-test] ${c.name}: code=${r.code} hasAmbiguous=${r.hasAmbiguous} pct=${r.dimensions.EI.letterPercent}/${r.dimensions.SN.letterPercent}/${r.dimensions.TF.letterPercent}/${r.dimensions.JP.letterPercent}`,
+    );
+  }
+}

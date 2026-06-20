@@ -55,11 +55,23 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    // QA-V2 P1-NEW-3：补 og:image / twitter:image。
+    // 实际图片由 app/opengraph-image.tsx 通过 next/og 动态生成（1200×630）。
+    // 这里显式声明，避免某些抓取器忽略 file-convention 推断。
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "心栖 MindNest · 专业人格心理测评平台",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
