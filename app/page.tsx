@@ -7,12 +7,14 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import PersonalityTypes from "@/components/PersonalityTypes";
 import Quiz from "@/components/Quiz";
+import { RevealObserver } from "@/components/RevealObserver";
 import Resources from "@/components/Resources";
 import TrustBar from "@/components/TrustBar";
 
 export default function Home() {
   return (
     <>
+      <RevealObserver />
       <Header />
       <main id="main">
         <Hero />
