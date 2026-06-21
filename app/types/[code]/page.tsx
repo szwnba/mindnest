@@ -23,6 +23,9 @@ export async function generateMetadata({
   const { code } = await params;
   const type = getTypeByCode(code);
   if (!type) return { title: "未找到该人格类型" };
+  // 此页 /types/[code]/opengraph-image.tsx 通过 Next.js metadata file convention 自动注入 og:image，
+  // 这里在 openGraph 内显式声明，是为兼容某些不识别 file-convention 的抓取器。
+  const ogImage = `/types/${type.code}/opengraph-image`;
   return {
     title: `${type.code} · ${type.nameZh}（${type.nameEn}）`,
     description: type.shortDesc,
@@ -32,6 +35,20 @@ export async function generateMetadata({
       description: type.shortDesc,
       url: `/types/${type.code}`,
       type: "article",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${type.code} ${type.nameZh} 人格类型`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${type.code} · ${type.nameZh}`,
+      description: type.shortDesc,
+      images: [ogImage],
     },
   };
 }

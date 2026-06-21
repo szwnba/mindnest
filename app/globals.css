@@ -2883,3 +2883,127 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
     animation: none !important;
   }
 }
+
+/* ─── /share/[type]/[code] 分享着陆页 ─── */
+.share-landing {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.share-landing-card {
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.share-landing-icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.share-landing-code {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--text-primary);
+}
+
+.share-landing-name {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.share-landing-name small {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.share-landing-desc {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1.05rem;
+  max-width: 460px;
+  margin: 0;
+}
+
+.share-landing-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.share-landing-note {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin: 0.5rem 0 0;
+  opacity: 0.7;
+}
+
+.share-landing-dims {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.share-landing-dims li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.25rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 0.75rem;
+}
+
+.share-landing-dim-key {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.share-landing-dim-zh {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.share-landing-dim-val {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--sage-dark);
+}
+
+@media (max-width: 480px) {
+  .share-landing-card {
+    padding: 2rem 1.5rem;
+  }
+  .share-landing-code {
+    font-size: 2.25rem;
+  }
+  .share-landing-name {
+    font-size: 1.5rem;
+  }
+}
