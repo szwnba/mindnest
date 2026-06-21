@@ -89,10 +89,11 @@
   --rose-bg:         #FBF0F2;
 
   --text-primary:    #2C2417;
-  --text-secondary:  #5A4F42;
+  /* P1 polish: 把 secondary/muted 调更深，提升暖米底上的正文对比度。 */
+  --text-secondary:  #4A4136;
   /* --text-muted / --text-faint 调暗以满足 WCAG AA：原值 3.89/2.99 不达标，
      新值 5.62/4.83，均 >= 4.5。 */
-  --text-muted:      #6F614F;
+  --text-muted:      #5F5345;
   --text-faint:      #7A6B58;
 
   --border:          #E8DDD0;
@@ -2402,4 +2403,140 @@ a[aria-disabled="true"] {
 .resource-small-card:focus-within {
   border-color: var(--card-border-hover);
   box-shadow: var(--card-shadow-hover);
+}
+
+/* ═══════════════════════════════════════════
+   P1 POLISH — Section rhythm, CTA gravity, body legibility,
+   How-step clarity, trust icon de-saturation
+   ───────────────────────────────────────────
+   不改任何 class/id/结构，只覆盖样式。E2E selector 全部保留。
+   ═══════════════════════════════════════════ */
+
+/* ① 区块交替背景 + 极细分隔 —— 让长页面有节奏感 */
+main > section.section {
+  border-top: 1px solid rgba(220, 216, 210, 0.45);
+}
+/* Hero 紧邻的第一个 .section（Frameworks）不要再加顶分隔，TrustBar 已经分隔了 */
+main > .trust-bar + section.section {
+  border-top: none;
+}
+/* 紧跟在 .divider 后面的 section 也不需要顶分隔（避免双线） */
+main > .divider + section.section {
+  border-top: none;
+}
+
+/* 极淡米色变体作偶数节奏（Quiz 有自己的 quiz-bg，跳过它） */
+main > section.section:nth-of-type(even):not(.quiz-bg) {
+  background: rgba(244, 232, 216, 0.32);
+}
+
+/* ② CTA 主按钮强化 —— 把"开始免费测评"这种关键路径按钮做出重量 */
+.btn-primary {
+  font-size: 1.0625rem; /* 17px */
+  padding: 14px 32px;
+  box-shadow: 0 8px 24px rgba(74, 124, 89, 0.25);
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 32px rgba(74, 124, 89, 0.32);
+  transform: translateY(-2px);
+}
+.btn-primary.btn-lg {
+  font-size: 1.125rem; /* 18px */
+  padding: 16px 38px;
+  box-shadow: 0 10px 28px rgba(74, 124, 89, 0.28);
+}
+.btn-primary.btn-lg:hover {
+  box-shadow: 0 14px 36px rgba(74, 124, 89, 0.35);
+}
+
+/* 按钮右侧箭头 → hover 时位移 */
+.btn-primary > span[aria-hidden="true"],
+.btn-warm > span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+.btn-primary:hover > span[aria-hidden="true"],
+.btn-warm:hover > span[aria-hidden="true"] {
+  transform: translateX(4px);
+}
+
+/* ③ 正文可读性 —— 字号小升、行高保留、对比度跟随新 token */
+.method-desc {
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.75;
+}
+.step-desc {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  max-width: 300px;
+}
+.resource-featured-excerpt {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+/* 信任徽章 / 辅助文字底线 13px */
+.hero-trust-text {
+  font-size: 0.875rem;
+}
+.trust-label {
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.4;
+}
+.method-features li {
+  font-size: 0.8125rem;
+}
+.method-full-name {
+  font-size: 0.75rem; /* 12px → 仍是 mono 小注，略升一点 */
+}
+
+/* ④ How 流程区块加强 —— 圆环、连接线、标题字号统一加权 */
+.steps-grid {
+  gap: clamp(24px, 4vw, 64px);
+}
+.steps-grid::before {
+  /* 连接线从透明灰升级为带方向的 sage 渐变 */
+  background: linear-gradient(
+    to right,
+    rgba(74, 124, 89, 0.10),
+    rgba(74, 124, 89, 0.30),
+    rgba(74, 124, 89, 0.30),
+    rgba(74, 124, 89, 0.10)
+  );
+  height: 2px;
+  top: 44px;
+}
+.step-number {
+  border: 2px solid var(--sage-dark);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.15);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--sage-dark);
+}
+.step-card:hover .step-number {
+  box-shadow: 0 8px 20px rgba(74, 124, 89, 0.28);
+}
+.step-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* ⑤ 信任图标降饱和 —— 给 4 个 emoji 图标和 hero 头像加灰度，
+   保持温和不抢戏。莫兰迪色不被破坏。 */
+.trust-icon {
+  filter: grayscale(0.35) opacity(0.92);
+}
+.hero-trust-avatar {
+  filter: grayscale(0.30) opacity(0.92);
+}
+
+/* 让正文段落（section-subtitle 等长 form 文本）也更易读 */
+.section-subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.hero-desc {
+  line-height: 1.85;
 }
