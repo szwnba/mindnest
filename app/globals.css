@@ -2293,6 +2293,63 @@ a[aria-disabled="true"] {
   font-size: 0.85em;
 }
 
+/* ── 扩展子板块（关系/职业/盲点/人物） ── */
+.type-detail-section {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+}
+.type-detail-section-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+.type-detail-section-para {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 0.85rem;
+}
+.type-detail-section-para:last-child { margin-bottom: 0; }
+.type-detail-section-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.type-detail-figures {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+@media (max-width: 640px) {
+  .type-detail-figures { grid-template-columns: 1fr; }
+}
+.type-detail-figure {
+  padding: 0.75rem 1rem;
+  background: var(--sage-bg);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.type-detail-figure-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.type-detail-figure-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.type-detail-cta { margin-top: 1rem; }
+
 /* 16 类型总览页：复用 types-grid，但顶部加 hero */
 .types-overview {
   padding: 120px clamp(1.25rem, 5vw, 3rem) 80px;

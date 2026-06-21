@@ -93,7 +93,51 @@ export default async function TypeDetailPage({ params }: PageProps) {
           </section>
         </div>
 
+        {type.relationships && (
+          <section className="type-detail-section" aria-labelledby="relationships-h">
+            <h2 id="relationships-h" className="type-detail-section-title">关系模式</h2>
+            {type.relationships.split(/\n\n+/).map((para, i) => (
+              <p key={i} className="type-detail-section-para">{para}</p>
+            ))}
+          </section>
+        )}
+        {type.career && (
+          <section className="type-detail-section" aria-labelledby="career-h">
+            <h2 id="career-h" className="type-detail-section-title">职业倾向</h2>
+            {type.career.split(/\n\n+/).map((para, i) => (
+              <p key={i} className="type-detail-section-para">{para}</p>
+            ))}
+          </section>
+        )}
+        {type.blindSpots && (
+          <section className="type-detail-section" aria-labelledby="blindspots-h">
+            <h2 id="blindspots-h" className="type-detail-section-title">成长盲点</h2>
+            {type.blindSpots.split(/\n\n+/).map((para, i) => (
+              <p key={i} className="type-detail-section-para">{para}</p>
+            ))}
+          </section>
+        )}
+        {type.figures && type.figures.length > 0 && (
+          <section className="type-detail-section" aria-labelledby="figures-h">
+            <h2 id="figures-h" className="type-detail-section-title">代表人物</h2>
+            <p className="type-detail-section-note">
+              以下人物的特质与 {type.code} 类型高度吻合，仅作参考，非官方认证。
+            </p>
+            <ul className="type-detail-figures">
+              {type.figures.map((f) => (
+                <li key={f.name} className="type-detail-figure">
+                  <span className="type-detail-figure-name">{f.name}</span>
+                  <span className="type-detail-figure-role">
+                    {f.fictional ? "（虚构）" : ""} {f.role}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <div
+          className="type-detail-cta"
           style={{
             background: `var(${type.accentBg})`,
             padding: "2rem",
