@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import CompareSection from "@/components/CompareSection";
 import CtaBanner from "@/components/CtaBanner";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -36,6 +37,8 @@ export default function Home() {
         <div className="divider" aria-hidden="true" />
         <QuizHistory />
         <HowItWorks />
+        <div className="divider" aria-hidden="true" />
+        <CompareSection />
         <div className="divider" aria-hidden="true" />
         <Resources />
         <div className="divider" aria-hidden="true" />

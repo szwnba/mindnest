@@ -14,6 +14,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/#types", label: "人格类型" },
   { href: "/#quiz", label: "开始测评" },
   { href: "/#resources", label: "资料库" },
+  { href: "/#compare", label: "对比" },
   { href: "/#faq", label: "常见问题" },
   { href: "/#quiz", label: "免费测评", cta: true },
 ];

@@ -3007,3 +3007,397 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
     font-size: 1.5rem;
   }
 }
+
+/* ============================================================
+   CompareSection —「我们 vs 16Personalities」对比表
+   ============================================================ */
+.compare-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+}
+
+.compare-table-wrap {
+  margin-top: 2.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  table-layout: fixed;
+}
+
+.compare-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-warm);
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-table thead .compare-col-us {
+  color: var(--sage-dark);
+}
+
+.compare-col-dim { width: 18%; }
+.compare-col-us { width: 41%; }
+.compare-col-them { width: 41%; }
+
+.compare-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.2s ease;
+}
+.compare-table tbody tr:last-child { border-bottom: none; }
+
+.compare-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+.compare-table .compare-dim {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.1rem 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.compare-table .compare-us,
+.compare-table .compare-them {
+  vertical-align: top;
+  padding: 1.1rem 1.25rem;
+  line-height: 1.7;
+}
+
+.compare-table .compare-us {
+  background: var(--sage-bg);
+  color: var(--text-primary);
+  border-left: 3px solid var(--sage);
+}
+
+.compare-table .compare-row.compare-tie .compare-us {
+  background: var(--warm-gold-bg);
+  border-left-color: var(--warm-gold);
+}
+
+.compare-table .compare-row.compare-behind .compare-us {
+  background: var(--bg-warm);
+  border-left-color: var(--text-faint);
+}
+
+.compare-table .compare-them {
+  color: var(--text-muted);
+}
+
+.compare-us-inner {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+/* Badges */
+.compare-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.compare-badge-win {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--sage);
+  color: #fff;
+  font-size: 0.85rem;
+  margin-top: 0.1rem;
+}
+
+.compare-badge-behind {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg-muted);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.compare-badge-tie {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--warm-gold-bg);
+  color: var(--warm-gold);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Mobile cards — 默认隐藏 */
+.compare-cards {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+
+.compare-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--sage);
+}
+.compare-card.compare-tie { border-left-color: var(--warm-gold); }
+.compare-card.compare-behind { border-left-color: var(--text-faint); }
+
+.compare-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+.compare-card-idx {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+
+.compare-card-dim {
+  flex: 1;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.compare-card-row {
+  margin-bottom: 0.8rem;
+}
+.compare-card-row:last-child { margin-bottom: 0; }
+
+.compare-card-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 0.3rem;
+}
+
+.compare-card-row-them .compare-card-label {
+  color: var(--text-muted);
+}
+
+.compare-card-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.compare-coda {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-family: var(--font-display);
+}
+
+.compare-cta {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+/* 响应式：≤768px 切换为卡片堆叠 */
+@media (max-width: 768px) {
+  .compare-table-wrap { display: none; }
+  .compare-cards { display: block; }
+}
+
+/* ============================================================
+   /compare 独立页面
+   ============================================================ */
+.compare-page {
+  padding: 5rem 1.5rem 6rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.compare-page-breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.compare-page-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.compare-page-breadcrumb a:hover { color: var(--sage-dark); }
+
+.compare-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.compare-page-lede {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0 0 3rem 0;
+}
+
+.compare-page-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: compare-counter;
+}
+
+.compare-page-item {
+  counter-increment: compare-counter;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  margin-bottom: 1.25rem;
+  border-left: 4px solid var(--sage);
+}
+.compare-page-item.compare-tie { border-left-color: var(--warm-gold); }
+.compare-page-item.compare-behind { border-left-color: var(--text-faint); }
+
+.compare-page-item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+.compare-page-item-head::before {
+  content: counter(compare-counter, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+  letter-spacing: 0.05em;
+}
+
+.compare-page-item-dim {
+  flex: 1;
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.compare-page-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.compare-page-row:last-of-type { border-bottom: none; }
+
+.compare-page-row-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-top: 0.15rem;
+}
+
+.compare-page-row.compare-page-row-us .compare-page-row-label {
+  color: var(--sage-dark);
+}
+
+.compare-page-row-text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.compare-page-detail {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-warm);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+}
+
+.compare-page-detail summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--sage-dark);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  user-select: none;
+  list-style: none;
+}
+.compare-page-detail summary::-webkit-details-marker { display: none; }
+.compare-page-detail summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.compare-page-detail[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.compare-page-detail-body {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.compare-page-coda {
+  margin: 3rem 0 0 0;
+  padding: 2rem;
+  background: var(--sage-bg);
+  border-radius: 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .compare-page { padding: 4rem 1.25rem 5rem; }
+  .compare-page-item { padding: 1.4rem 1.25rem 1.2rem; }
+  .compare-page-row {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    padding: 0.75rem 0;
+  }
+}
