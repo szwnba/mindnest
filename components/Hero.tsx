@@ -23,6 +23,13 @@ export default function Hero() {
             用科学的方法帮你理解思维偏好、情感模式与行为倾向。
             不是给你贴标签，而是为你打开一扇理解自己的窗。
           </p>
+          <p className="hero-quote">
+            <em>你不是一种类型，你是一种可能。</em>
+          </p>
+          <div className="hero-pull" aria-hidden="true">
+            <span className="hero-pull-line" />
+            <span className="hero-pull-text">只需 5 分钟，开始你的探索</span>
+          </div>
           <div className="hero-actions">
             <Link href="/#quiz" className="btn btn-primary btn-lg">
               开始免费测评
