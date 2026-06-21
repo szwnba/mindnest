@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="hero" id="home">
+    <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="hero-deco hero-deco-1" aria-hidden="true" />
       <div className="hero-deco hero-deco-2" aria-hidden="true" />
       <div className="hero-deco hero-deco-3" aria-hidden="true" />
@@ -13,7 +13,7 @@ export default function Hero() {
             <span className="hero-greeting-line" aria-hidden="true" />
             专业人格心理测评平台
           </div>
-          <h1 className="hero-title">
+          <h1 id="hero-title" className="hero-title">
             认识你自己，
             <br />
             是一切<em>成长</em>的起点

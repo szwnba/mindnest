@@ -15,11 +15,11 @@ export default function CtaBanner() {
   }
 
   return (
-    <section className="section">
+    <section className="section" aria-labelledby="newsletter-title">
       <div className="section-inner">
         <div className="cta-banner reveal">
           <div className="cta-banner-content">
-            <h2 className="cta-banner-title">让理解成为一种习惯</h2>
+            <h2 id="newsletter-title" className="cta-banner-title">让理解成为一种习惯</h2>
             <p className="cta-banner-desc">
               订阅我们的月度通讯，接收最新的人格心理学研究、深度解读文章与实用成长建议。
             </p>
