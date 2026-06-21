@@ -117,6 +117,45 @@
   --ease-smooth:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── 视觉升级（v2）：字体层级 / 间距节奏 / 卡片质感 ──
+     新增 token，与既有 token 并存，不破坏现有 selector。 */
+
+  /* 字体层级（fluid scale） */
+  --fs-display:      clamp(2.5rem, 5vw, 4rem);   /* Hero 大标题 */
+  --fs-h2:           clamp(1.75rem, 3vw, 2.5rem);/* section 标题 */
+  --fs-h3:           1.25rem;                     /* 卡片标题 */
+  --fs-body:         1rem;                        /* 正文 */
+  --fs-small:        0.875rem;                    /* 辅助 */
+  --fw-display:      700;
+  --fw-heading:      600;
+  --fw-body:         400;
+  --lh-tight:        1.2;
+  --lh-snug:         1.4;
+  --lh-relaxed:      1.7;
+
+  /* 间距节奏 */
+  --section-pad-y:   clamp(64px, 8vw, 120px);
+
+  /* 卡片质感统一系统 */
+  --card-bg:           #ffffff;
+  --card-border:       rgba(220, 216, 210, 0.6);
+  --card-border-hover: rgba(74, 124, 89, 0.3);
+  --card-radius:       16px;
+  --card-shadow:       0 4px 24px rgba(40, 72, 52, 0.06);
+  --card-shadow-hover: 0 10px 36px rgba(40, 72, 52, 0.11);
+  --card-ease:         cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 辅助配色（呼应治愈感，低饱和） */
+  --accent-warm:     #f4e8d8;     /* 燕麦暖米 */
+  --accent-mint:     #e8f5ec;     /* 薄荷淡绿 */
+  --accent-rose:     #fce8e6;     /* 淡粉 */
+  --accent-mint-text:#2d5a3d;     /* 薄荷 chip 文字色 */
+  --border-subtle:   rgba(220, 216, 210, 0.6);
+  --border-strong:   rgba(74, 124, 89, 0.3);
+
+  /* 「成长」马克笔高亮的浅色变体（基于品牌绿） */
+  --highlight-mark:  rgba(180, 220, 195, 0.7);
 }
 
 /* ═══════════════════════════════════════════
@@ -390,6 +429,17 @@ body::before {
 .tag--gold { background: var(--warm-gold-bg); color: var(--warm-gold); }
 .tag--sky  { background: var(--sky-bg); color: var(--sky); }
 
+/* .tag 在 .section-eyebrow chip 内时退成纯文字，避免双重背景 */
+.section-eyebrow .tag {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 /* ── Cards ── */
 .card {
   background: var(--surface);
@@ -408,7 +458,7 @@ body::before {
 /* ── Section Wrapper ── */
 .section {
   position: relative;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  padding: var(--section-pad-y) clamp(1.5rem, 5vw, 5rem);
   z-index: 1;
 }
 
@@ -429,14 +479,22 @@ body::before {
   align-items: center;
   gap: 8px;
   margin-bottom: 1rem;
+  background: var(--accent-mint);
+  color: var(--accent-mint-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
 }
 
 .section-eyebrow-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--sage);
   animation: breathe 3s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes breathe {
@@ -446,17 +504,18 @@ body::before {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.15;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-display);
+  line-height: var(--lh-snug);
   color: var(--text-primary);
   margin-bottom: 1rem;
+  letter-spacing: -0.01em;
 }
 
 .section-subtitle {
   font-size: 1.05rem;
   color: var(--text-secondary);
-  line-height: 1.85;
+  line-height: var(--lh-relaxed);
 }
 
 /* ── Divider ── */
@@ -551,9 +610,9 @@ body::before {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 6vw, 4.2rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: var(--fs-display);
+  font-weight: var(--fw-display);
+  line-height: var(--lh-tight);
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
   opacity: 0;
@@ -564,6 +623,9 @@ body::before {
   font-style: normal;
   color: var(--sage-dark);
   position: relative;
+  background: linear-gradient(180deg, transparent 60%, var(--highlight-mark) 60%);
+  padding: 0 4px;
+  display: inline-block;
 }
 
 .hero-title em::after {
@@ -572,11 +634,11 @@ body::before {
   bottom: 2px;
   left: 0;
   right: 0;
-  height: 8px;
-  background: var(--sage-lighter);
+  height: 0;
+  background: transparent;
   border-radius: 4px;
   z-index: -1;
-  opacity: 0.7;
+  opacity: 0;
 }
 
 .hero-desc {
@@ -2243,3 +2305,101 @@ a[aria-disabled="true"] {
 
 /* QA §3.13 的 details 兜底动画在 reduce-motion 下也已被前面规则处理 */
 
+
+/* ═══════════════════════════════════════════
+   VISUAL UPGRADE v2 — UNIFIED CARD DEPTH LAYER
+   ───────────────────────────────────────────
+   在所有主要卡片类上覆盖统一的 border/radius/shadow/transition，
+   把它们的层级语言对齐到同一套规则。保留原有 class 名（测试依赖），
+   保留各卡片独特装饰（如 method-card 的顶部彩条）。
+   ═══════════════════════════════════════════ */
+
+.method-card,
+.type-card,
+.resource-featured,
+.resource-small-card,
+.type-detail-card,
+.hero-floating-card,
+.quiz-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s var(--card-ease),
+              box-shadow 0.3s var(--card-ease),
+              border-color 0.3s var(--card-ease);
+}
+
+.method-card:hover,
+.resource-featured:hover,
+.resource-small-card:hover,
+.type-detail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--card-border-hover);
+}
+
+/* type-card 已有 --type-accent hover 边色，保留它但用统一 shadow/transform 节奏 */
+.type-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+  /* border-color 由原规则的 --type-accent 接管，给彩色身份 */
+}
+
+/* hero 浮动卡保留它原本更深的 floating shadow（视觉层级需要），但用同样的 radius */
+.hero-floating-card {
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-lg);
+}
+.hero-floating-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* quiz-card：稍微大一点更稳重 */
+.quiz-card {
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+}
+
+/* ── 字体层级对齐 ── */
+.method-name,
+.resource-featured-title {
+  font-size: 1.35rem;
+  line-height: var(--lh-snug);
+}
+
+.resource-small-title,
+.type-detail-card h2,
+.step-title {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-display);
+}
+
+/* ── 卡片标题与正文之间的呼吸 ── */
+.method-card { padding: clamp(1.75rem, 2.5vw, 2.25rem); }
+.method-card .method-desc { line-height: var(--lh-relaxed); }
+
+/* ── 各 section 之间不要超过 150px 连续空白 ── */
+.section + .section { padding-top: clamp(48px, 6vw, 96px); }
+
+/* ── eyebrow 与 title 之间的呼吸更稳定 ── */
+.section-header .section-title { margin-top: 0.25rem; }
+
+/* ── Hero CTA 区域留白节奏 ── */
+.hero-actions { margin-top: 0.5rem; }
+
+/* ── 卡片内 list 文字色统一到 secondary，避免页面里乱跳 ── */
+.method-features li,
+.type-detail-card li {
+  color: var(--text-secondary);
+}
+
+/* ── 焦点环色统一（已存在，但补一条让卡片 :focus-within 也亮起来） ── */
+.method-card:focus-within,
+.type-card:focus-within,
+.resource-featured:focus-within,
+.resource-small-card:focus-within {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
