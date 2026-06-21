@@ -16,6 +16,7 @@ import {
   type QuizResult,
 } from "@/lib/scoring";
 import { getTypeByCode } from "@/lib/data/personality-types";
+import { projectMBTIResult, saveQuizHistory } from "@/lib/quiz-storage";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -42,6 +43,7 @@ export default function Quiz() {
   const [answers, setAnswers] = useState<Answers>({});
   const [result, setResult] = useState<QuizResult | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   // ── 从 sessionStorage 恢复（一次性 hydration；setState 是必要的） ──
@@ -127,6 +129,12 @@ export default function Quiz() {
       setTimeout(() => {
         setResult(r);
         setPhase("result");
+        // 写入持久化测评历史（localStorage）
+        saveQuizHistory({
+          type: "mbti",
+          completedAt: Date.now(),
+          result: projectMBTIResult(r),
+        });
         cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 220);
     }
@@ -149,14 +157,25 @@ export default function Quiz() {
 
   function shareResult() {
     if (!result) return;
-    const url = `${typeof window !== "undefined" ? window.location.origin : ""}/types/${result.code}`;
-    const text = `我在心栖 MindNest 测出的人格类型是 ${result.code}。看看你的：${url}`;
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    const typeUrl = `${origin}/types/${result.code}`;
+    const text = `我在心栖 MindNest 测出的人格类型是 ${result.code}。看看你的：${typeUrl}`;
     if (typeof navigator !== "undefined" && navigator.share) {
-      void navigator.share({ title: `我是 ${result.code}`, text, url }).catch(() => {});
+      void navigator.share({ title: `我是 ${result.code}`, text, url: typeUrl }).catch(() => {});
     } else if (typeof navigator !== "undefined" && navigator.clipboard) {
       void navigator.clipboard.writeText(text).then(() => {
-        // 简单反馈
         alert("分享文本已复制到剪贴板");
+      });
+    }
+  }
+
+  function copyShareLink() {
+    if (!result || typeof window === "undefined") return;
+    const url = `${window.location.origin}/?result=mbti:${result.code}`;
+    if (navigator.clipboard) {
+      void navigator.clipboard.writeText(url).then(() => {
+        setCopyStatus("copied");
+        setTimeout(() => setCopyStatus("idle"), 2400);
       });
     }
   }
@@ -201,6 +220,8 @@ export default function Quiz() {
               result={result}
               onReset={reset}
               onShare={shareResult}
+              onCopy={copyShareLink}
+              copyStatus={copyStatus}
             />
           )}
         </div>
@@ -343,10 +364,14 @@ function ResultPanel({
   result,
   onReset,
   onShare,
+  onCopy,
+  copyStatus,
 }: {
   result: QuizResult;
   onReset: () => void;
   onShare: () => void;
+  onCopy: () => void;
+  copyStatus: "idle" | "copied";
 }) {
   const type = useMemo(() => getTypeByCode(result.code), [result.code]);
 
@@ -445,12 +470,34 @@ function ResultPanel({
         <Link href="/types" className="btn btn-ghost">
           浏览全部 16 类型
         </Link>
+        <button type="button" className="btn btn-ghost" onClick={onCopy}>
+          {copyStatus === "copied" ? "✓ 链接已复制" : "📋 复制结果链接"}
+        </button>
         <button type="button" className="btn btn-ghost" onClick={onShare}>
           分享结果
         </button>
         <button type="button" className="btn btn-ghost" onClick={onReset}>
           重新测试
         </button>
+      </div>
+
+      <div
+        style={{
+          marginTop: "1.5rem",
+          padding: "1.1rem 1.25rem",
+          borderRadius: 14,
+          background: "var(--bg-elev-1, rgba(168, 184, 168, 0.08))",
+          border: "1px solid var(--border-soft, rgba(110, 130, 110, 0.18))",
+          textAlign: "center",
+        }}
+      >
+        <strong style={{ color: "var(--sage-dark)" }}>🌿 继续做大五人格测评</strong>
+        <span style={{ color: "var(--text-secondary)" }}>
+          {" "}— 用学界 BFI-10 量表，再花 60 秒补一个互补视角。{" "}
+        </span>
+        <Link href="/#quiz-bfi10" className="btn btn-primary btn-sm" style={{ marginTop: "0.6rem" }}>
+          继续做大五人格测评 →
+        </Link>
       </div>
 
       <p

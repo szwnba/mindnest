@@ -2625,3 +2625,168 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
     transform: none !important;
   }
 }
+
+/* ──────────────────────────────────────────────
+   Shared Result Banner（朋友分享的结果横幅）
+   ────────────────────────────────────────────── */
+.shared-result-banner {
+  background: linear-gradient(135deg, var(--sage-bg) 0%, var(--warm-gold-bg) 100%);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1rem 1.25rem;
+  animation: srb-slide-in 0.45s var(--ease-smooth);
+}
+@keyframes srb-slide-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shared-result-banner { animation: none; }
+}
+.shared-result-banner-inner {
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.shared-result-banner-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.shared-result-banner-text {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.shared-result-banner-text strong {
+  color: var(--sage-dark);
+  font-size: 1rem;
+}
+.shared-result-banner-text span {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+.shared-result-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.shared-result-banner-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.shared-result-banner-close:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+/* ──────────────────────────────────────────────
+   BFI-10 量表（与 MBTI Quiz 视觉一致，但独立 selector）
+   ────────────────────────────────────────────── */
+.bfi10-question-text {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+  line-height: 1.45;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 1.25rem 0 1.5rem;
+}
+.bfi10-intro .bfi10-question-text {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.bfi10-likert-row {
+  /* 复用 .likert-row 基础布局；这里只做微调留作扩展位 */
+}
+
+/* ──────────────────────────────────────────────
+   Quiz History（测评历史时间线）
+   ────────────────────────────────────────────── */
+.quiz-history-section {
+  background: var(--bg-base, var(--surface));
+}
+.quiz-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.quiz-history-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: border-color 0.25s var(--ease-smooth), transform 0.25s var(--ease-smooth);
+}
+.quiz-history-item:hover {
+  border-color: var(--sage-light);
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-history-item { transition: none; }
+  .quiz-history-item:hover { transform: none; }
+}
+.quiz-history-icon {
+  font-size: 1.75rem;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sage-bg);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.quiz-history-body {
+  flex: 1;
+  min-width: 0;
+}
+.quiz-history-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 2px;
+}
+.quiz-history-type {
+  font-weight: 600;
+  color: var(--sage-dark);
+  font-size: 0.95rem;
+}
+.quiz-history-time {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.quiz-history-desc {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 560px) {
+  .quiz-history-item { flex-wrap: wrap; }
+  .quiz-history-icon { width: 36px; height: 36px; font-size: 1.4rem; }
+}
