@@ -17,6 +17,7 @@ import {
 } from "@/lib/scoring";
 import { getTypeByCode } from "@/lib/data/personality-types";
 import { projectMBTIResult, saveQuizHistory } from "@/lib/quiz-storage";
+import RadarChart from "@/components/RadarChart";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -427,6 +428,24 @@ function ResultPanel({
             </div>
           );
         })}
+      </div>
+
+      {/* MBTI 四边形雷达图 */}
+      <div className="radar-result-wrap" style={{ marginTop: "1.5rem" }}>
+        <RadarChart
+          data={DIMENSION_ORDER.map((dim) => {
+            const r = result.dimensions[dim];
+            return {
+              label: DIMENSION_LABELS[dim],
+              value: r.letterPercent,
+              letter: r.letter,
+            };
+          })}
+          centerLabel={result.code}
+          ariaTitle={`MBTI 四维度雷达图（${result.code}）`}
+          color="--terracotta"
+          size={280}
+        />
       </div>
 
       {result.hasAmbiguous && (

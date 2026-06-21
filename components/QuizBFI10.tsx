@@ -20,6 +20,7 @@ import {
   type BFI10Result,
 } from "@/lib/bfi10-scoring";
 import { saveQuizHistory } from "@/lib/quiz-storage";
+import RadarChart from "@/components/RadarChart";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -372,6 +373,24 @@ function Bfi10Result({
             </div>
           );
         })}
+      </div>
+
+      {/* BFI-10 五边形雷达图 */}
+      <div className="radar-result-wrap" style={{ marginTop: "1.5rem" }}>
+        <RadarChart
+          data={dimensions.map((d) => {
+            const meta = BIG_FIVE_DIMENSIONS[d];
+            return {
+              label: meta.name,
+              value: result[d],
+              letter: meta.fullName,
+              emoji: meta.icon,
+            };
+          })}
+          ariaTitle="大五人格五维度雷达图"
+          color="--sage"
+          size={320}
+        />
       </div>
 
       <div className="quiz-result-actions">

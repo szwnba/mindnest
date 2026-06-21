@@ -2847,3 +2847,39 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   .quiz-history-item { flex-wrap: wrap; }
   .quiz-history-icon { width: 36px; height: 36px; font-size: 1.4rem; }
 }
+
+/* ─────────────── 雷达图容器 ─────────────── */
+.radar-result-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0 0.5rem;
+  position: relative;
+}
+.radar-result-wrap::before {
+  content: "数据可视化";
+  position: absolute;
+  top: 0.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.radar-chart-wrapper {
+  color: var(--text-secondary);
+}
+.radar-chart-wrapper svg {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+}
+@media (max-width: 640px) {
+  .radar-result-wrap svg {
+    max-width: 260px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-chart-wrapper svg {
+    animation: none !important;
+  }
+}
