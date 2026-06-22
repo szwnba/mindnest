@@ -41,6 +41,7 @@ export async function GET(request: Request) {
   const code = type?.code ?? codeRaw;
   const nameZh = type?.nameZh ?? "";
   const icon = type?.icon ?? "✦";
+  const tagline = type?.tagline ?? "";
   const theme = type ? GROUP_THEME[type.group] : GROUP_THEME.analyst;
 
   const e = clampPct(p.get("E")) ?? 50;
@@ -161,6 +162,22 @@ export async function GET(request: Request) {
                 }}
               >
                 {nameZh}
+              </div>
+            )}
+            {tagline && (
+              <div
+                style={{
+                  fontSize: 22,
+                  fontWeight: 400,
+                  marginTop: 18,
+                  color: "rgba(255,255,255,0.85)",
+                  lineHeight: 1.5,
+                  maxWidth: 440,
+                  display: "flex",
+                  letterSpacing: 1,
+                }}
+              >
+                “{tagline}”
               </div>
             )}
           </div>
