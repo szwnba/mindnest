@@ -128,4 +128,14 @@ export const COMPARISON: ComparisonRow[] = [
     detail:
       "这是 MindNest 刻意做的 trade-off：BFI-10 是国际学术界验证过的短量表，优点是 2 分钟就能完成，缺点是 Cronbach α 系数天然低于 60 题版本。我们目前的策略是「先让你进来，再邀请你深入」——如果你愿意，可以连续做 MBTI 28 题 + BFI-10 两套量表，用交叉验证弥补单套题量不足。",
   },
+  {
+    dimension: "品牌知名度",
+    mindNest:
+      "2026 年创建，无营销投放，几乎零自然流量。",
+    sixteenP:
+      "全球最大人格测评平台，月活跃用户以亿计，品牌印象深入人心。",
+    highlight: "behind",
+    detail:
+      "这是 MindNest 目前最难短期追上的项目。品牌是时间的函数，16Personalities 用十年做到了全球知名度，我们才刚刚开始。但我们相信：如果产品真的好，时间会站在这边。",
+  },
 ];

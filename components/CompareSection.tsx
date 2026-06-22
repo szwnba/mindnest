@@ -37,7 +37,7 @@ export default function CompareSection() {
         <div className="compare-table-wrap reveal" role="region" aria-labelledby="compare-title">
           <table className="compare-table">
             <caption className="sr-only">
-              MindNest 与 16Personalities 在 11 个维度上的对比
+              MindNest 与 16Personalities 在 12 个维度上的对比
             </caption>
             <thead>
               <tr>

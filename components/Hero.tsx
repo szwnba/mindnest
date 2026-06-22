@@ -7,6 +7,8 @@ export default function Hero() {
       <div className="hero-deco hero-deco-2" aria-hidden="true" />
       <div className="hero-deco hero-deco-3" aria-hidden="true" />
 
+      <div className="hero-aurora" aria-hidden="true" />
+
       <div className="hero-grid">
         <div className="hero-text">
           <div className="hero-greeting">
@@ -18,6 +20,27 @@ export default function Hero() {
             <br />
             是一切<em>成长</em>的起点
           </h1>
+          <div className="hero-type-wheel" aria-hidden="true">
+            {[
+              { code: "INTJ", name: "建筑师", color: "var(--sky)" },
+              { code: "ENFP", name: "竞选者", color: "var(--sage)" },
+              { code: "ISTJ", name: "物流师", color: "var(--warm-gold)" },
+              { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
+              { code: "INFJ", name: "提倩", color: "var(--sage)" },
+              { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
+              { code: "INTJ", name: "建筑师", color: "var(--sky)" },
+              { code: "ENFP", name: "竞选者", color: "var(--sage)" },
+              { code: "ISTJ", name: "物流师", color: "var(--warm-gold)" },
+              { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
+              { code: "INFJ", name: "提倩", color: "var(--sage)" },
+              { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
+            ].map((t, i) => (
+              <span key={`${t.code}-${i}`} className="hero-type-chip" style={{ animationDelay: `${(i % 6) * 0.15}s` }}>
+                <span className="hero-type-chip-code">{t.code}</span>
+                <span className="hero-type-chip-name">{t.name}</span>
+              </span>
+            ))}
+          </div>
           <p className="hero-desc">
             基于荣格心理类型理论、大五人格模型等经典框架，
             用科学的方法帮你理解思维偏好、情感模式与行为倾向。
