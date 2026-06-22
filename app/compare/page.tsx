@@ -31,10 +31,16 @@ export default function ComparePage() {
         <p className="compare-page-lede">
           16Personalities 是过去十年里全球最大的人格测评入口之一，它的存在
           让「了解自己的人格」变成了一个流行词。MindNest（心栖）不是它的替代品，
-          也不打算成为。这页所做的，是把 10 个维度上的差异一项一项摊开来 ——
+          也不打算成为。这页所做的，是把 11 个维度上的差异一项一项摊开来 ——
           有我们更好的地方，有我们暂时还不如的地方，都明说。
           你不需要选边站，只需要知道哪一种工具适合你现在的问题。
         </p>
+
+        <div className="compare-legend" aria-label="对比标记说明">
+          <span className="compare-legend-item compare-legend-win">🟢 占优</span>
+          <span className="compare-legend-item compare-legend-tie">🟡 平分</span>
+          <span className="compare-legend-item compare-legend-behind">⚪ 在路上</span>
+        </div>
 
         <ol className="compare-page-list">
           {COMPARISON.map((row, i) => {
@@ -57,7 +63,18 @@ export default function ComparePage() {
                   <div className="compare-page-row-text">{row.mindNest}</div>
                 </div>
                 <div className="compare-page-row">
-                  <div className="compare-page-row-label">16Personalities</div>
+                  <div className="compare-page-row-label">
+                    16Personalities
+                    {row.highlight === "win" && (
+                      <span className="compare-badge-lose" aria-label="对方"> ✗</span>
+                    )}
+                    {row.highlight === "tie" && (
+                      <span className="compare-badge-tie-them"> 平分</span>
+                    )}
+                    {row.highlight === "behind" && (
+                      <span className="compare-badge-win-them" aria-label="对方占优"> ✓</span>
+                    )}
+                  </div>
                   <div className="compare-page-row-text">{row.sixteenP}</div>
                 </div>
 

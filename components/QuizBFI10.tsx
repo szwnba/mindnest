@@ -14,6 +14,7 @@ import {
   BFI10_ANSWERS_STORAGE_KEY,
   BFI10_RESULT_STORAGE_KEY,
   encodeBFI10ForUrl,
+  getATPerspective,
   scoreBFI10,
   type BFI10Answers,
   type BFI10Likert,
@@ -393,6 +394,9 @@ function Bfi10Result({
         />
       </div>
 
+      {/* A/T 情绪稳定性视角 */}
+      <ATPerspectiveCard N={result.N} />
+
       <div className="quiz-result-actions">
         <button type="button" className="btn btn-primary" onClick={onCopy}>
           {copyStatus === "copied" ? "✓ 链接已复制" : "📋 复制结果链接"}
@@ -412,6 +416,39 @@ function Bfi10Result({
       }}>
         BFI-10 来自学术文献（Rammstedt &amp; John, 2007），适合快速画像；
         若想要细分到 60 个 facet，请期待 BFI-2 完整版的上线通知。
+      </p>
+    </div>
+  );
+}
+
+/* ──────────────── A/T 情绪稳定性视角 ──────────────── */
+function ATPerspectiveCard({ N }: { N: number }) {
+  const at = getATPerspective(N);
+  return (
+    <div className="at-perspective" aria-labelledby="at-title">
+      <div className="at-perspective-head">
+        <span className="at-perspective-eyebrow">
+          🎭 16Personalities 的 -A / -T 是什么？
+        </span>
+        <h3 className="at-perspective-title" id="at-title">
+          你的情绪稳定性视角
+        </h3>
+      </div>
+      <div className="at-perspective-badge">{at.label}</div>
+      <p className="at-perspective-subtitle">{at.subtitle}</p>
+      <p className="at-perspective-desc">{at.description}</p>
+      <div className="at-perspective-grid">
+        <div className="at-perspective-block">
+          <div className="at-perspective-block-label">✓ 优势</div>
+          <div className="at-perspective-block-text">{at.strength}</div>
+        </div>
+        <div className="at-perspective-block">
+          <div className="at-perspective-block-label">⚠ 注意</div>
+          <div className="at-perspective-block-text">{at.watchout}</div>
+        </div>
+      </div>
+      <p className="at-perspective-footnote">
+        注：16Personalities 用 -A / -T 标记这个维度；MindNest 使用学界标准的 Big Five 神经质（N）来测量同一特质。
       </p>
     </div>
   );

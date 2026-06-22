@@ -27,11 +27,17 @@ export default function CompareSection() {
           </p>
         </div>
 
+        <div className="compare-legend reveal" aria-label="对比标记说明">
+          <span className="compare-legend-item compare-legend-win">🟢 占优</span>
+          <span className="compare-legend-item compare-legend-tie">🟡 平分</span>
+          <span className="compare-legend-item compare-legend-behind">⚪ 在路上</span>
+        </div>
+
         {/* 桌面端表格 */}
         <div className="compare-table-wrap reveal" role="region" aria-labelledby="compare-title">
           <table className="compare-table">
             <caption className="sr-only">
-              MindNest 与 16Personalities 在 10 个维度上的对比
+              MindNest 与 16Personalities 在 11 个维度上的对比
             </caption>
             <thead>
               <tr>
@@ -57,7 +63,20 @@ export default function CompareSection() {
                       <span>{row.mindNest}</span>
                     </span>
                   </td>
-                  <td className="compare-them">{row.sixteenP}</td>
+                  <td className="compare-them">
+                    <span className="compare-them-inner">
+                      {row.highlight === "win" && (
+                        <span className="compare-badge-lose" aria-label="对方">✗</span>
+                      )}
+                      {row.highlight === "tie" && (
+                        <span className="compare-badge-tie-them">平分</span>
+                      )}
+                      {row.highlight === "behind" && (
+                        <span className="compare-badge-win-them" aria-label="对方占优">✓</span>
+                      )}
+                      <span>{row.sixteenP}</span>
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -89,7 +108,18 @@ export default function CompareSection() {
                 <div className="compare-card-text">{row.mindNest}</div>
               </div>
               <div className="compare-card-row compare-card-row-them">
-                <div className="compare-card-label">16Personalities</div>
+                <div className="compare-card-label">
+                  16Personalities
+                  {row.highlight === "win" && (
+                    <span className="compare-badge-lose" aria-label="对方"> ✗</span>
+                  )}
+                  {row.highlight === "tie" && (
+                    <span className="compare-badge-tie-them"> 平分</span>
+                  )}
+                  {row.highlight === "behind" && (
+                    <span className="compare-badge-win-them" aria-label="对方占优"> ✓</span>
+                  )}
+                </div>
                 <div className="compare-card-text">{row.sixteenP}</div>
               </div>
             </li>

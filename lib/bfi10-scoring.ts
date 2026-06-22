@@ -63,6 +63,51 @@ export function scoreBFI10(answers: BFI10Answers): BFI10Result {
   };
 }
 
+export interface ATPerspective {
+  label: "-A 自信型" | "-T 动荡型" | "中间区域";
+  subtitle: string;
+  description: string;
+  strength: string;
+  watchout: string;
+}
+
+export function getATPerspective(N: number): ATPerspective {
+  if (N < 40) {
+    return {
+      label: "-A 自信型",
+      subtitle: "你的情绪基线比较稳定，压力恢复力强",
+      description:
+        "在 Big Five 模型中，这对应「神经质（N）偏低」。你不太容易被突发状况打乱节奏，面对批评或挫折时恢复较快。",
+      strength:
+        "在高压环境（如 deadline 密集、频繁变更需求）中能保持清晰判断；团队中的「定海神针」角色。",
+      watchout:
+        "过低时可能显得「情绪迟钝」——对队友的焦虑信号不够敏感，或在需要表达紧迫感的场合显得过于松弛。",
+    };
+  }
+  if (N > 60) {
+    return {
+      label: "-T 动荡型",
+      subtitle: "你对压力和不确定性更敏感，驱动力强",
+      description:
+        "在 Big Five 模型中，这对应「神经质（N）偏高」。你对潜在风险有更早的警觉，对自我表现有更高的期待。",
+      strength:
+        "驱动力强，对细节和风险的嗅觉敏锐；在需要持续改进、追求完美主义的岗位（如品控、审计、深度创作）中表现出色。",
+      watchout:
+        "容易陷入反刍思维（反复回想失误），对批评反应强烈，需要更长的情绪恢复期。建议建立「情绪止损」机制。",
+    };
+  }
+  return {
+    label: "中间区域",
+    subtitle: "你既有稳定性，也有警觉性",
+    description:
+      "你的 N 分数处于中等区间，意味着你既能感知压力，也不会被压力淹没。这是一种适应性很强的分布。",
+    strength:
+      "能根据情境切换「稳定模式」和「警觉模式」；在变化快的团队中是最灵活的成员。",
+    watchout:
+      "不同情境下表现差异较大，容易被别人误读为「情绪不稳定」。建议有意识地标注自己当下的状态。",
+  };
+}
+
 export const BFI10_RESULT_STORAGE_KEY = "mindnest:bfi10-result-v1";
 export const BFI10_ANSWERS_STORAGE_KEY = "mindnest:bfi10-answers-v1";
 

@@ -3227,6 +3227,38 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   text-align: center;
 }
 
+/* 图例 */
+.compare-legend {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+.compare-legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+/* 桌面端行色条 */
+.compare-table tbody tr.compare-win { border-left: 4px solid var(--sage); }
+.compare-table tbody tr.compare-tie { border-left: 4px solid var(--warm-gold); }
+.compare-table tbody tr.compare-behind { border-left: 4px solid var(--text-faint); }
+
+/* 16P 反向标记 */
+.compare-badge-lose { color: var(--terracotta); font-weight: 700; }
+.compare-badge-tie-them { color: var(--warm-gold); font-weight: 600; font-size: 0.8rem; }
+.compare-badge-win-them { color: var(--sage-dark); font-weight: 700; }
+
+.compare-them-inner {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+/* compare-page 左侧色条 */
+.compare-page-item { border-left: 4px solid transparent; }
+.compare-page-item.compare-win { border-left-color: var(--sage); }
+.compare-page-item.compare-tie { border-left-color: var(--warm-gold); }
+.compare-page-item.compare-behind { border-left-color: var(--text-faint); }
+
 /* 响应式：≤768px 切换为卡片堆叠 */
 @media (max-width: 768px) {
   .compare-table-wrap { display: none; }
@@ -3869,4 +3901,80 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   .resources-toc { padding: 1rem; }
   .resources-toc-chip { padding: 0.45rem 0.85rem; font-size: 0.85rem; }
   .resource-detail-prose .md-lite { font-size: 1rem; }
+}
+
+/* ── A/T 情绪稳定性视角卡片 ── */
+.at-perspective {
+  margin-top: 2rem;
+  padding: 1.75rem 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-warm) 100%);
+  border: 1px solid var(--border);
+}
+.at-perspective-head { margin-bottom: 1rem; }
+.at-perspective-eyebrow {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.at-perspective-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+}
+.at-perspective-badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+  margin-bottom: 0.75rem;
+}
+.at-perspective-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.at-perspective-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.at-perspective-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.at-perspective-block {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+}
+.at-perspective-block-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+.at-perspective-block-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.at-perspective-footnote {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  line-height: 1.6;
+}
+@media (max-width: 640px) {
+  .at-perspective { padding: 1.25rem 1.25rem; }
+  .at-perspective-grid { grid-template-columns: 1fr; }
 }

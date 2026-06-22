@@ -118,4 +118,14 @@ export const COMPARISON: ComparisonRow[] = [
     detail:
       "这一项必须诚实承认：16Personalities 多年积累的本地化资源 MindNest 短期内无法追上。我们目前的策略是把中文这一种语言做到极致——题目原创、描述原创、配色与排版都为中文阅读优化——而不是急着铺英文版。未来如果引入英文，会以同样的「原创撰写」标准而非翻译输出。多语言会出现在 roadmap 上，但不会是 v1 的承诺。",
   },
+  {
+    dimension: "题目数量与信度",
+    mindNest:
+      "BFI-10 仅 10 题（+ MBTI 28 题），短量表信度系数低于长量表。",
+    sixteenP:
+      "NERIS 量表 60 题，题量更大，测量误差理论上更小。",
+    highlight: "behind",
+    detail:
+      "这是 MindNest 刻意做的 trade-off：BFI-10 是国际学术界验证过的短量表，优点是 2 分钟就能完成，缺点是 Cronbach α 系数天然低于 60 题版本。我们目前的策略是「先让你进来，再邀请你深入」——如果你愿意，可以连续做 MBTI 28 题 + BFI-10 两套量表，用交叉验证弥补单套题量不足。",
+  },
 ];

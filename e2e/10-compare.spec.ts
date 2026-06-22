@@ -11,11 +11,11 @@ test.describe("CompareSection — 我们 vs 16Personalities", () => {
     );
   });
 
-  test("表格有 10 行对比数据（桌面端 viewport）", async ({ page }) => {
+  test("表格有 11 行对比数据（桌面端 viewport）", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     const rows = page.locator(".compare-table tbody tr");
-    await expect(rows).toHaveCount(10);
+    await expect(rows).toHaveCount(11);
     // 表头三列存在并具有 scope="col"
     const cols = page.locator(".compare-table thead th[scope='col']");
     await expect(cols).toHaveCount(3);
@@ -29,17 +29,17 @@ test.describe("CompareSection — 我们 vs 16Personalities", () => {
     await expect(navLink).toHaveText("对比");
   });
 
-  test("/compare 独立页面返回 200 且渲染完整 10 项", async ({ page }) => {
+  test("/compare 独立页面返回 200 且渲染完整 11 项", async ({ page }) => {
     const resp = await page.goto("/compare");
     expect(resp?.status()).toBe(200);
     await expect(page.locator("h1")).toContainText(
       "我们与 16Personalities 的不同"
     );
     const items = page.locator(".compare-page-item");
-    await expect(items).toHaveCount(10);
+    await expect(items).toHaveCount(11);
     // 每一项都有一个 details 展开
     const details = page.locator(".compare-page-detail");
-    await expect(details).toHaveCount(10);
+    await expect(details).toHaveCount(11);
   });
 
   test("移动端不出现横向滚动（卡片堆叠）", async ({ page }) => {
@@ -50,7 +50,7 @@ test.describe("CompareSection — 我们 vs 16Personalities", () => {
     // 移动端表格隐藏、卡片显示
     await expect(page.locator(".compare-table-wrap")).toBeHidden();
     const cards = page.locator(".compare-cards .compare-card");
-    await expect(cards).toHaveCount(10);
+    await expect(cards).toHaveCount(11);
     // body 不应横向溢出
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth
