@@ -4,7 +4,7 @@ test.describe("类型详情页", () => {
   test("从首页点击 INTJ 卡片跳转到详情页", async ({ page }) => {
     await page.goto("/");
     await page.locator("#types").scrollIntoViewIfNeeded();
-    await page.click("text=INTJ");
+    await page.locator("#types a[href='/types/INTJ']").click();
     await expect(page).toHaveURL(/\/types\/INTJ/);
   });
 

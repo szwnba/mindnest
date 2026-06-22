@@ -22,9 +22,6 @@ test.describe("HEXACO 六大人格维度测试", () => {
 
     // 每页 5 题，共 12 页
     for (let p = 0; p < 12; p++) {
-      // 等待当前页的问题出现
-      await page.waitForSelector(".hexaco-question-text", { timeout: 10000 });
-
       // 回答当前页的 5 个问题（每题选第三个选项：中立）
       const buttons = page.locator(".hexaco-likert-btn");
       const count = await buttons.count();
@@ -33,10 +30,10 @@ test.describe("HEXACO 六大人格维度测试", () => {
         await page.waitForTimeout(50);
       }
 
-      // 如果不是最后一页，等待页面切换
-      if (p < 11) {
-        await page.waitForTimeout(300);
-      }
+      // 点击下一页
+      const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
+      await nextBtn.click();
+      await page.waitForTimeout(200);
     }
 
     // 结果页应该出现
@@ -57,7 +54,9 @@ test.describe("HEXACO 六大人格维度测试", () => {
         await buttons.nth(i).click();
         await page.waitForTimeout(50);
       }
-      if (p < 11) await page.waitForTimeout(300);
+      const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
+      await nextBtn.click();
+      await page.waitForTimeout(200);
     }
 
     await page.waitForSelector(".dim-bars", { timeout: 15000 });
@@ -76,7 +75,9 @@ test.describe("HEXACO 六大人格维度测试", () => {
         await buttons.nth(i).click();
         await page.waitForTimeout(50);
       }
-      if (p < 11) await page.waitForTimeout(300);
+      const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
+      await nextBtn.click();
+      await page.waitForTimeout(200);
     }
 
     await page.waitForSelector(".radar-chart-wrapper svg", { timeout: 15000 });
@@ -95,7 +96,9 @@ test.describe("HEXACO 六大人格维度测试", () => {
         await buttons.nth(i).click();
         await page.waitForTimeout(50);
       }
-      if (p < 11) await page.waitForTimeout(300);
+      const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
+      await nextBtn.click();
+      await page.waitForTimeout(200);
     }
 
     await page.waitForSelector(".quiz-result-actions", { timeout: 15000 });

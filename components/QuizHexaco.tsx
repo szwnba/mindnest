@@ -109,27 +109,23 @@ export default function QuizHexaco() {
   function pickAnswer(qId: number, score: HexacoLikert) {
     const next: HexacoAnswers = { ...answers, [qId]: score };
     setAnswers(next);
+  }
 
-    const currentPageQuestions = getPageQuestions(page);
-    const allAnswered = currentPageQuestions.every((q) => next[q.id] !== undefined);
-
-    if (allAnswered) {
-      if (page < TOTAL_PAGES - 1) {
-        setTimeout(() => {
-          setPage((p) => p + 1);
-          queueMicrotask(() => {
-            cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
-        }, 220);
-      } else {
-        const r = scoreHexaco(next);
-        setTimeout(() => {
-          setResult(r);
-          setPhase("result");
-          saveQuizHistory({ type: "hexaco", completedAt: Date.now(), result: r });
-          cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 220);
-      }
+  function goNextPage() {
+    if (page < TOTAL_PAGES - 1) {
+      setPage((p) => p + 1);
+      queueMicrotask(() => {
+        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } else {
+      // 最后一页，完成测评
+      const r = scoreHexaco(answers);
+      setResult(r);
+      setPhase("result");
+      saveQuizHistory({ type: "hexaco", completedAt: Date.now(), result: r });
+      queueMicrotask(() => {
+        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     }
   }
 
@@ -201,6 +197,7 @@ export default function QuizHexaco() {
               answers={answers}
               onPick={pickAnswer}
               onPrev={goPrevPage}
+              onNext={goNextPage}
             />
           )}
           {phase === "result" && result && (
@@ -259,11 +256,13 @@ function HexacoAnswering({
   answers,
   onPick,
   onPrev,
+  onNext,
 }: {
   page: number;
   answers: HexacoAnswers;
   onPick: (qId: number, s: HexacoLikert) => void;
   onPrev: () => void;
+  onNext: () => void;
 }) {
   const questions = getPageQuestions(page);
   const progress = Math.round(((page + 1) / TOTAL_PAGES) * 100);
@@ -332,9 +331,14 @@ function HexacoAnswering({
         >
           ← 上一页
         </button>
-        <span className="quiz-skip-hint">
-          选择即自动进入下一页。
-        </span>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onNext}
+          aria-label={page === TOTAL_PAGES - 1 ? "完成测评" : "下一页"}
+        >
+          {page === TOTAL_PAGES - 1 ? "查看结果 →" : "下一页 →"}
+        </button>
       </div>
     </div>
   );
