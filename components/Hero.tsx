@@ -62,6 +62,19 @@ export default function Hero() {
               了解科学依据
             </Link>
           </div>
+          <div style={{ marginTop: "0.75rem" }}>
+            <Link
+              href="/hexaco"
+              style={{
+                fontSize: "0.875rem",
+                color: "var(--text-muted)",
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              或测 HEXACO 六维人格 →
+            </Link>
+          </div>
           <div className="hero-trust">
             <div className="hero-trust-avatars" aria-hidden="true">
               <div className="hero-trust-avatar">🌿</div>

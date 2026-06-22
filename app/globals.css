@@ -587,7 +587,7 @@ body::before {
   z-index: 2;
 }
 
-.hero-text { max-width: 580px; }
+.hero-text { max-width: 580px; min-width: 0; }
 
 .hero-greeting {
   display: inline-flex;
@@ -2675,6 +2675,8 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   gap: 0.75rem;
   margin: 1.5rem 0;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
   mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
 }
@@ -4028,4 +4030,53 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
 @media (max-width: 640px) {
   .at-perspective { padding: 1.25rem 1.25rem; }
   .at-perspective-grid { grid-template-columns: 1fr; }
+}
+
+/* ──────────────── HEXACO 量表（与 BFI-10 / MBTI Quiz 视觉一致） ──────────────── */
+.hexaco-question-text {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 1rem 0 1.25rem;
+}
+.hexaco-intro .hexaco-question-text {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.hexaco-page-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.hexaco-question-block {
+  padding: 1rem 0;
+  border-bottom: 1px dashed var(--border-light);
+}
+.hexaco-question-block:last-child {
+  border-bottom: none;
+}
+.hexaco-question-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+}
+.hexaco-question-dim {
+  font-family: var(--font-mono);
+  color: var(--sage-dark);
+  letter-spacing: 0.04em;
+}
+.hexaco-question-num {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.hexaco-likert-row {
+  /* 复用 .likert-row 基础布局 */
+}
+@media (max-width: 640px) {
+  .hexaco-page-questions { gap: 1.25rem; }
+  .hexaco-question-block { padding: 0.75rem 0; }
 }

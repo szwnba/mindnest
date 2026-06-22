@@ -10,10 +10,20 @@ import {
 } from "@/lib/quiz-storage";
 import { getTypeByCode } from "@/lib/data/personality-types";
 import { BIG_FIVE_DIMENSIONS, BIG_FIVE_ORDER } from "@/lib/data/big-five-dimensions";
+import { HEXACO_DIMENSIONS, HEXACO_ORDER } from "@/lib/data/hexaco-questions";
 import type { BFI10Result } from "@/lib/bfi10-scoring";
+import type { HexacoResult } from "@/lib/hexaco-scoring";
 
 function isMBTIResult(r: QuizHistoryEntry["result"]): r is MBTIHistoryResult {
   return (r as MBTIHistoryResult).code !== undefined;
+}
+
+function isBFI10Result(r: QuizHistoryEntry["result"]): r is BFI10Result {
+  return (r as BFI10Result).O !== undefined && (r as BFI10Result).N !== undefined;
+}
+
+function isHexacoResult(r: QuizHistoryEntry["result"]): r is HexacoResult {
+  return (r as HexacoResult).H !== undefined && (r as HexacoResult).X !== undefined;
 }
 
 function fmtTime(ts: number): string {
@@ -80,9 +90,11 @@ export default function QuizHistory() {
             <li key={e.id} className="quiz-history-item">
               {isMBTIResult(e.result) ? (
                 <MBTIHistoryRow entry={e} result={e.result} />
-              ) : (
+              ) : isBFI10Result(e.result) ? (
                 <BFI10HistoryRow entry={e} result={e.result} />
-              )}
+              ) : isHexacoResult(e.result) ? (
+                <HexacoHistoryRow entry={e} result={e.result} />
+              ) : null}
             </li>
           ))}
         </ul>
@@ -144,6 +156,34 @@ function BFI10HistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: B
         </div>
       </div>
       <Link href="/#quiz-bfi10" className="btn btn-ghost btn-sm">再测</Link>
+    </>
+  );
+}
+
+function HexacoHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: HexacoResult }) {
+  // 找最高维度
+  let topDim = HEXACO_ORDER[0];
+  let topVal = -1;
+  for (const d of HEXACO_ORDER) {
+    if (result[d] > topVal) {
+      topVal = result[d];
+      topDim = d;
+    }
+  }
+  const topMeta = HEXACO_DIMENSIONS[topDim];
+  return (
+    <>
+      <div className="quiz-history-icon" aria-hidden="true">{topMeta.icon}</div>
+      <div className="quiz-history-body">
+        <div className="quiz-history-head">
+          <span className="quiz-history-type">HEXACO 六维</span>
+          <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
+        </div>
+        <div className="quiz-history-desc">
+          主导维度「{topMeta.name}」{topVal} · H{result.H} E{result.E} X{result.X} A{result.A} C{result.C} O{result.O}
+        </div>
+      </div>
+      <Link href="/hexaco" className="btn btn-ghost btn-sm">再测</Link>
     </>
   );
 }

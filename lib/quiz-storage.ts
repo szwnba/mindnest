@@ -8,9 +8,10 @@
  */
 
 import type { BFI10Result } from "./bfi10-scoring";
+import type { HexacoResult } from "./hexaco-scoring";
 import type { QuizResult } from "./scoring";
 
-export type QuizType = "mbti" | "bfi10";
+export type QuizType = "mbti" | "bfi10" | "hexaco";
 
 export interface MBTIHistoryResult {
   code: string;
@@ -27,7 +28,7 @@ export interface QuizHistoryEntry {
   id: string;
   type: QuizType;
   completedAt: number;
-  result: MBTIHistoryResult | BFI10Result;
+  result: MBTIHistoryResult | BFI10Result | HexacoResult;
 }
 
 const HISTORY_KEY = "mindnest_quiz_history";

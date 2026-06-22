@@ -10,6 +10,7 @@ import HowItWorks from "@/components/HowItWorks";
 import PersonalityTypes from "@/components/PersonalityTypes";
 import Quiz from "@/components/Quiz";
 import QuizBFI10 from "@/components/QuizBFI10";
+import QuizHexaco from "@/components/QuizHexaco";
 import QuizHistory from "@/components/QuizHistory";
 import { RevealObserver } from "@/components/RevealObserver";
 import Resources from "@/components/Resources";
@@ -34,6 +35,8 @@ export default function Home() {
         <Quiz />
         <div className="divider" aria-hidden="true" />
         <QuizBFI10 />
+        <div className="divider" aria-hidden="true" />
+        <QuizHexaco />
         <div className="divider" aria-hidden="true" />
         <QuizHistory />
         <HowItWorks />

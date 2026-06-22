@@ -13,6 +13,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/#frameworks", label: "理论基础" },
   { href: "/#types", label: "人格类型" },
   { href: "/#quiz", label: "开始测评" },
+  { href: "/hexaco", label: "HEXACO 六维" },
   { href: "/#resources", label: "资料库" },
   { href: "/#compare", label: "对比" },
   { href: "/#faq", label: "常见问题" },
