@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("HEXACO 六大人格维度测试", () => {
-  test.beforeEach(async ({ page }) => {
-    // 清理可能的测试污染
-    await page.addInitScript(() => {
+  async function clearHexacoStorage(page) {
+    await page.evaluate(() => {
       try {
         window.sessionStorage.removeItem("mindnest:hexaco-result-v1");
         window.sessionStorage.removeItem("mindnest:hexaco-answers-v1");
@@ -11,7 +10,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
         // ignore
       }
     });
-  });
+  }
 
   test("首页能点击进入 HEXACO", async ({ page }) => {
     await page.goto("/");
@@ -23,6 +22,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
 
   test("HEXACO 页面显示 intro 和开始按钮", async ({ page }) => {
     await page.goto("/hexaco");
+    await clearHexacoStorage(page);
     const startBtn = page.locator(".hexaco-intro .btn-primary");
     await expect(startBtn).toBeVisible({ timeout: 10000 });
     await expect(startBtn).toContainText("开始 HEXACO");
@@ -30,6 +30,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
 
   test("60 题流程完成并显示结果", async ({ page }) => {
     await page.goto("/hexaco");
+    await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
     // 每页 5 题，共 12 页
@@ -56,6 +57,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
 
   test("结果页显示 6 个维度", async ({ page }) => {
     await page.goto("/hexaco");
+    await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
     // 快速回答所有题
@@ -78,6 +80,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
 
   test("雷达图渲染", async ({ page }) => {
     await page.goto("/hexaco");
+    await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
     for (let p = 0; p < 12; p++) {
@@ -129,6 +132,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
     page.on("pageerror", (err) => errors.push(err.message));
 
     await page.goto("/hexaco");
+    await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
     // 回答前 2 页
