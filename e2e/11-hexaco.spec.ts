@@ -14,9 +14,8 @@ test.describe.serial("HEXACO 六大人格维度测试", () => {
 
   test("首页能点击进入 HEXACO", async ({ page }) => {
     await page.goto("/");
-    const hexacoLink = page.locator('a[href="/hexaco"]');
-    await expect(hexacoLink.first()).toBeVisible({ timeout: 10000 });
-    await hexacoLink.first().click();
+    await page.locator("#quiz-hexaco").scrollIntoViewIfNeeded();
+    await page.getByText("开始 HEXACO 测评").first().click();
     await expect(page).toHaveURL(/\/hexaco/);
   });
 
