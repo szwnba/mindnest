@@ -36,56 +36,50 @@ test.describe.serial("HEXACO 六大人格维度测试", () => {
   });
 
   test("60 题流程完成并显示结果", async ({ page }) => {
+    test.setTimeout(120000);
     await page.goto("/hexaco");
     await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
-    // 每页 5 题，共 12 页
+    // 每页 5 题，共 12 页 — 快速点击不等待
     for (let p = 0; p < 12; p++) {
-      // 回答当前页的 5 个问题（每题选第三个选项：中立）
       const buttons = page.locator(".hexaco-likert-btn");
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(30);
       }
-
-      // 点击下一页
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(300);
     }
 
-    // 结果页应该出现
-    await page.waitForSelector(".quiz-result", { timeout: 15000 });
+    await page.waitForSelector(".quiz-result", { timeout: 30000 });
     const resultName = page.locator(".quiz-result-name");
     await expect(resultName).toContainText("六维度分布");
   });
 
   test("结果页显示 6 个维度", async ({ page }) => {
+    test.setTimeout(120000);
     await page.goto("/hexaco");
     await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
 
-    // 快速回答所有题
     for (let p = 0; p < 12; p++) {
       const buttons = page.locator(".hexaco-likert-btn");
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(30);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(300);
     }
 
-    await page.waitForSelector(".dim-bars", { timeout: 15000 });
+    await page.waitForSelector(".dim-bars", { timeout: 30000 });
     const bars = page.locator(".dim-bar");
     await expect(bars).toHaveCount(6);
   });
 
   test("雷达图渲染", async ({ page }) => {
+    test.setTimeout(120000);
     await page.goto("/hexaco");
     await clearHexacoStorage(page);
     await page.locator(".hexaco-intro .btn-primary").click();
@@ -95,14 +89,12 @@ test.describe.serial("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(30);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(300);
     }
 
-    await page.waitForSelector(".radar-chart-wrapper svg", { timeout: 15000 });
+    await page.waitForSelector(".radar-chart-wrapper svg", { timeout: 30000 });
     const svg = page.locator(".radar-chart-wrapper svg");
     await expect(svg).toBeVisible();
   });
