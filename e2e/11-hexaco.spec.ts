@@ -114,6 +114,14 @@ test.describe("HEXACO 六大人格维度测试", () => {
     await page.reload();
 
     await page.waitForSelector(".quiz-result-actions", { timeout: 10000 });
+    // Mock clipboard API 确保复制成功
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, "clipboard", {
+        value: { writeText: () => Promise.resolve() },
+        writable: true,
+        configurable: true,
+      });
+    });
     const copyBtn = page.locator("button", { hasText: "复制结果链接" });
     await expect(copyBtn).toBeVisible();
     await copyBtn.click();
