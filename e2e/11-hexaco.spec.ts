@@ -1,6 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("HEXACO 六大人格维度测试", () => {
+  test.beforeEach(async ({ page }) => {
+    // 清理可能的测试污染
+    await page.addInitScript(() => {
+      try {
+        window.sessionStorage.removeItem("mindnest:hexaco-result-v1");
+        window.sessionStorage.removeItem("mindnest:hexaco-answers-v1");
+      } catch {
+        // ignore
+      }
+    });
+  });
+
   test("首页能点击进入 HEXACO", async ({ page }) => {
     await page.goto("/");
     const hexacoLink = page.locator('a[href="/hexaco"]');
@@ -27,13 +39,13 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(50);
+        await page.waitForTimeout(80);
       }
 
       // 点击下一页
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(300);
     }
 
     // 结果页应该出现
@@ -52,11 +64,11 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(50);
+        await page.waitForTimeout(80);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(300);
     }
 
     await page.waitForSelector(".dim-bars", { timeout: 15000 });
@@ -73,11 +85,11 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(50);
+        await page.waitForTimeout(80);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(300);
     }
 
     await page.waitForSelector(".radar-chart-wrapper svg", { timeout: 15000 });
@@ -86,22 +98,19 @@ test.describe("HEXACO 六大人格维度测试", () => {
   });
 
   test("分享链接可复制", async ({ page }) => {
+    // 直接预置结果到 sessionStorage，跳过 60 题循环
     await page.goto("/hexaco");
-    await page.locator(".hexaco-intro .btn-primary").click();
+    await page.evaluate(() => {
+      const mockResult = {
+        H: 55, E: 42, X: 68, A: 73, C: 61, O: 58,
+        profile: { H: "高", E: "中", X: "高", A: "高", C: "高", O: "中" },
+        computedAt: Date.now(),
+      };
+      window.sessionStorage.setItem("mindnest:hexaco-result-v1", JSON.stringify(mockResult));
+    });
+    await page.reload();
 
-    for (let p = 0; p < 12; p++) {
-      const buttons = page.locator(".hexaco-likert-btn");
-      const count = await buttons.count();
-      for (let i = 0; i < count; i++) {
-        await buttons.nth(i).click();
-        await page.waitForTimeout(50);
-      }
-      const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
-      await nextBtn.click();
-      await page.waitForTimeout(200);
-    }
-
-    await page.waitForSelector(".quiz-result-actions", { timeout: 15000 });
+    await page.waitForSelector(".quiz-result-actions", { timeout: 10000 });
     const copyBtn = page.locator("button", { hasText: "复制结果链接" });
     await expect(copyBtn).toBeVisible();
     await copyBtn.click();

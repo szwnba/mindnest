@@ -38,6 +38,7 @@ export default function QuizHexaco() {
   const [phase, setPhase] = useState<Phase>("intro");
   const [page, setPage] = useState(0);
   const [answers, setAnswers] = useState<HexacoAnswers>({});
+  const answersRef = useRef<HexacoAnswers>({});
   const [result, setResult] = useState<HexacoResult | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
@@ -70,7 +71,10 @@ export default function QuizHexaco() {
     }
     /* eslint-disable react-hooks/set-state-in-effect */
     if (nextResult) setResult(nextResult);
-    if (nextAnswers) setAnswers(nextAnswers);
+    if (nextAnswers) {
+      setAnswers(nextAnswers);
+      answersRef.current = nextAnswers;
+    }
     if (nextPage !== null) setPage(nextPage);
     if (nextPhase) setPhase(nextPhase);
     setHydrated(true);
@@ -98,6 +102,7 @@ export default function QuizHexaco() {
 
   function startQuiz() {
     setAnswers({});
+    answersRef.current = {};
     setResult(null);
     setPage(0);
     setPhase("answering");
@@ -107,7 +112,8 @@ export default function QuizHexaco() {
   }
 
   function pickAnswer(qId: number, score: HexacoLikert) {
-    const next: HexacoAnswers = { ...answers, [qId]: score };
+    const next: HexacoAnswers = { ...answersRef.current, [qId]: score };
+    answersRef.current = next;
     setAnswers(next);
   }
 
@@ -118,8 +124,8 @@ export default function QuizHexaco() {
         cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     } else {
-      // 最后一页，完成测评
-      const r = scoreHexaco(answers);
+      // 最后一页，完成测评（使用 ref 确保获取最新 answers）
+      const r = scoreHexaco(answersRef.current);
       setResult(r);
       setPhase("result");
       saveQuizHistory({ type: "hexaco", completedAt: Date.now(), result: r });
@@ -140,6 +146,7 @@ export default function QuizHexaco() {
 
   function reset() {
     setAnswers({});
+    answersRef.current = {};
     setResult(null);
     setPage(0);
     setPhase("intro");
@@ -189,7 +196,9 @@ export default function QuizHexaco() {
           </p>
         </div>
 
-        <div ref={cardRef} className="quiz-wrapper reveal">
+        {/* 交互阶段（answering/result）直接 visible，避免 IntersectionObserver
+            与 scrollIntoView(smooth) 竞态导致内容空白 */}
+        <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
           {phase === "intro" && <HexacoIntro onStart={startQuiz} />}
           {phase === "answering" && (
             <HexacoAnswering
