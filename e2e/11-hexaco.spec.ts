@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("HEXACO 六大人格维度测试", () => {
+test.describe.serial("HEXACO 六大人格维度测试", () => {
   async function clearHexacoStorage(page) {
     await page.evaluate(() => {
       try {
@@ -40,7 +40,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(80);
+        await page.waitForTimeout(30);
       }
 
       // 点击下一页
@@ -66,7 +66,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(80);
+        await page.waitForTimeout(30);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
@@ -88,7 +88,7 @@ test.describe("HEXACO 六大人格维度测试", () => {
       const count = await buttons.count();
       for (let i = 0; i < count; i++) {
         await buttons.nth(i).click();
-        await page.waitForTimeout(80);
+        await page.waitForTimeout(30);
       }
       const nextBtn = page.locator("button", { hasText: p === 11 ? "查看结果" : "下一页" });
       await nextBtn.click();
