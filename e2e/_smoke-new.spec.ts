@@ -70,7 +70,8 @@ test.describe("新功能 smoke：BFI-10 + history + 分享 banner", () => {
   });
 
   test("URL ?result=bfi10:O72-C58-E33-A65-N42 显示分享 banner", async ({ page }) => {
-    await page.goto("/?result=bfi10:O72-C58-E33-A65-N42");
+    await page.goto("/?result=bfi10:O72-C58-E33-A65-N42", { waitUntil: "networkidle" });
+    await page.waitForTimeout(1500); // 等待 React hydrate + banner 渲染
     const banner = page.locator(".shared-result-banner");
     await expect(banner).toBeVisible({ timeout: 5000 });
     await expect(banner).toContainText("主导维度");

@@ -4,7 +4,8 @@ test.describe("类型详情页", () => {
   test("从首页点击 INTJ 卡片跳转到详情页", async ({ page }) => {
     await page.goto("/");
     await page.locator("#types").scrollIntoViewIfNeeded();
-    await page.locator("#types a[href='/types/INTJ']").click();
+    // 点击第一个 INTJ 文本（在 #types 区域内的卡片）
+    await page.locator("#types").getByText("INTJ").first().click();
     await expect(page).toHaveURL(/\/types\/INTJ/);
   });
 
