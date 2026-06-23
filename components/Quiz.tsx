@@ -205,7 +205,8 @@ export default function Quiz() {
           </p>
         </div>
 
-        <div ref={cardRef} className="quiz-wrapper reveal">
+        {/* 交互阶段（answering/result）直接 visible，避免 IntersectionObserver 与 scrollIntoView(smooth) 竞态 */}
+        <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
           {phase === "intro" && <IntroPanel onStart={startQuiz} />}
           {phase === "answering" && (
             <AnsweringPanel

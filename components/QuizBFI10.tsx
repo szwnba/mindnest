@@ -180,7 +180,8 @@ export default function QuizBFI10() {
           </p>
         </div>
 
-        <div ref={cardRef} className="quiz-wrapper reveal">
+        {/* 交互阶段（answering/result）直接 visible，避免 IntersectionObserver 与 scrollIntoView(smooth) 竞态 */}
+        <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
           {phase === "intro" && <Bfi10Intro onStart={startQuiz} />}
           {phase === "answering" && (
             <Bfi10Answering
