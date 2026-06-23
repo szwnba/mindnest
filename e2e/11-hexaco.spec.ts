@@ -14,9 +14,17 @@ test.describe.serial("HEXACO 六大人格维度测试", () => {
 
   test("首页能点击进入 HEXACO", async ({ page }) => {
     await page.goto("/");
+    // 确保没有残留的 HEXACO 答题状态
+    await page.evaluate(() => {
+      window.sessionStorage.removeItem("mindnest:hexaco-result-v1");
+      window.sessionStorage.removeItem("mindnest:hexaco-answers-v1");
+    });
     await page.locator("#quiz-hexaco").scrollIntoViewIfNeeded();
     await page.getByText("开始 HEXACO 测评").first().click();
-    await expect(page).toHaveURL(/\/hexaco/);
+    // 点击后应在首页内展开答题界面（出现第一题）
+    await page.waitForSelector(".hexaco-question-block", { timeout: 10000 });
+    const q1 = page.locator(".hexaco-question-text").first();
+    await expect(q1).toBeVisible();
   });
 
   test("HEXACO 页面显示 intro 和开始按钮", async ({ page }) => {
