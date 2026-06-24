@@ -6,7 +6,7 @@ export type Locale = "zh" | "en";
 export const defaultLocale: Locale = "zh";
 export const locales: Locale[] = ["zh", "en"];
 
-const messagesMap: Record<Locale, typeof zh> = {
+const messagesMap: Record<Locale, Record<string, any>> = {
   zh,
   en,
 };
