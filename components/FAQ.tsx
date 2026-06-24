@@ -1,6 +1,11 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { FAQS } from "@/lib/data/faqs";
 
 export default function FAQ() {
+  const t = useTranslations("faq");
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -23,10 +28,10 @@ export default function FAQ() {
             style={{ justifyContent: "center" }}
           >
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">常见问题</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="faq-title">
-            关于人格测评，你可能想了解
+            {t("title")}
           </h2>
         </div>
 
@@ -48,7 +53,6 @@ export default function FAQ() {
         </div>
       </div>
 
-      {/* FAQPage JSON-LD（结构化数据） */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

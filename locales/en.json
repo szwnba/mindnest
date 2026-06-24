@@ -1,0 +1,327 @@
+{
+  "common": {
+    "siteName": "MindNest",
+    "skipToContent": "Skip to main content"
+  },
+  "nav": {
+    "theory": "Theory",
+    "types": "Personality Types",
+    "startQuiz": "Start Assessment",
+    "hexaco": "HEXACO",
+    "resources": "Resources",
+    "compare": "Compare",
+    "faq": "FAQ",
+    "freeQuiz": "Free Assessment",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "homeAria": "MindNest homepage"
+  },
+  "hero": {
+    "greeting": "Professional Personality Assessment Platform",
+    "title": "Know yourself,<br/>the starting point of all <em>growth</em>",
+    "desc": "Based on classic frameworks such as Jungian psychological type theory and the Big Five model, we help you understand your thinking preferences, emotional patterns, and behavioral tendencies through scientific methods. Not to label you, but to open a window for self-understanding.",
+    "quote": "You are not a type, you are a possibility.",
+    "pullText": "Just 5 minutes to start your exploration",
+    "ctaPrimary": "Start Free Assessment",
+    "ctaSecondary": "Learn the Science",
+    "hexacoLink": "Or try the HEXACO six-dimensional personality →",
+    "trustTitle": "28-item Likert Assessment",
+    "trustSubtitle": "Integrating 6 authoritative psychology frameworks · Respecting every uniqueness",
+    "cardExample": "Example · INFP",
+    "cardTypeName": "Mediator",
+    "cardTraits": ["Idealistic", "Empathetic", "Creative", "Introspective"],
+    "cardDimensions": ["E / I", "S / N", "T / F", "J / P"],
+    "miniStat1Label": "Core Dimensions",
+    "miniStat2Label": "Personality Types"
+  },
+  "trustBar": {
+    "title": "Platform Features",
+    "items": [
+      { "title": "Academic Foundation", "desc": "Based on Jungian psychological type theory" },
+      { "title": "Multi-dimensional Evaluation", "desc": "Integrating multiple professional assessment systems" },
+      { "title": "Continuously Updated", "desc": "Regularly收录 latest research literature" },
+      { "title": "Privacy First", "desc": "Assessment data is only used for personal analysis" }
+    ]
+  },
+  "frameworks": {
+    "eyebrow": "Theoretical Foundation",
+    "title": "Authoritative Assessment Systems",
+    "subtitle": "We have integrated the most recognized personality assessment frameworks in psychology to help you build a complete map of self-understanding from different angles."
+  },
+  "howItWorks": {
+    "eyebrow": "User Guide",
+    "tag": "User Guide",
+    "title": "Three Steps to Self-Knowledge",
+    "subtitle": "Simple, gentle, and profound. No psychology background needed, just your honest self-reflection.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Answer Questions",
+        "desc": "In a quiet environment, select your agreement level from 1-5 for each statement based on intuition. There are no right answers; authenticity matters most."
+      },
+      {
+        "number": "2",
+        "title": "Get Your Report",
+        "desc": "The system calculates your preference distribution across 4 core dimensions, generating a personal report with type description, strength analysis, and growth suggestions."
+      },
+      {
+        "number": "3",
+        "title": "Explore Deeper",
+        "desc": "Browse details of all 16 personality types and our resource library, turning self-awareness into practical actions in daily life."
+      }
+    ]
+  },
+  "personalityTypes": {
+    "eyebrow": "Personality Atlas",
+    "tag": "Personality Atlas",
+    "title": "Explore 16 Personality Types",
+    "subtitle": "Each personality has a unique way of thinking and behavioral preference. Understanding these differences is not for categorization, but for appreciating the richness of human psychology.",
+    "tabs": {
+      "all": "All Types",
+      "analyst": "Analysts",
+      "diplomat": "Diplomats",
+      "sentinel": "Sentinels",
+      "explorer": "Explorers"
+    },
+    "viewAll": "View all 16 types →",
+    "ariaLabel": "View detailed introduction of {code} {name}"
+  },
+  "quiz": {
+    "eyebrow": "Interactive Assessment",
+    "tag": "Interactive Assessment",
+    "title": "Start Your Personality Exploration Journey",
+    "subtitle": "Please choose based on your most natural response; there is no right or wrong. Answer authentically for the most accurate results.",
+    "intro": {
+      "ready": "Ready?",
+      "heading": "28 questions, about 6-8 minutes, see a more立体 yourself",
+      "desc": "This assessment is based on 4 core dimensions of Jungian typology (energy orientation, information processing, decision style, life rhythm), with 7 questions per dimension (including reverse-scored items for lie detection), using a 5-point Likert scale. Please choose the option that best matches your daily state in a quiet environment, based on intuition.",
+      "stats": [
+        { "value": "28", "label": "Questions" },
+        { "value": "4", "label": "Core Dimensions" },
+        { "value": "5", "label": "Point Likert" },
+        { "value": "~ 7", "label": "Minutes" }
+      ],
+      "start": "Start Assessment",
+      "privacyNote": "Results are only saved in your browser's sessionStorage; they persist on refresh but are cleared when you close the tab or retake the assessment."
+    },
+    "answering": {
+      "dimLabel": "{dim} · Question {nth} / 7",
+      "progressLabel": "Assessment progress: Question {current} of {total}",
+      "prev": "← Previous",
+      "prevAria": "Go back to previous question",
+      "skipHint": "Selection automatically advances to the next question. Results appear after the last question."
+    },
+    "likert": [
+      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
+      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
+      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
+      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
+      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+    ],
+    "result": {
+      "portrait": "Your Personality Portrait",
+      "ambiguous": "· Ambiguous",
+      "ambiguousAria": "With ambiguous dimensions",
+      "dimLabel": "Four-dimension Distribution",
+      "dimBarLabel": "{dim}: leaning toward {letter} {percent}%",
+      "strengths": "Your Natural Strengths",
+      "growth": "Growth Directions",
+      "readFull": "Read full {code} report →",
+      "browseAll": "Browse all 16 types",
+      "copyLink": "📋 Copy result link",
+      "copied": "✓ Link copied",
+      "share": "Share result",
+      "retake": "Retake assessment",
+      "confidenceNote": "Your scores on some dimensions are very close to 50%, indicating you fluctuate between these two tendencies. This doesn't mean the assessment is inaccurate—it means you genuinely possess both traits, and results may be influenced by your current context. We recommend retaking it after some time and focusing on recurring patterns.",
+      "shareText": "My personality type on MindNest is {code}. Check yours: {url}",
+      "shareTitle": "I am {code}",
+      "copyAlert": "Share text copied to clipboard"
+    }
+  },
+  "quizBFI10": {
+    "eyebrow": "Academic Scale · BFI-10",
+    "tag": "Academic Scale · BFI-10",
+    "title": "Also try the Big Five (10 questions, ~60 seconds)",
+    "subtitle": "BFI-10 is the academic standard short scale proposed by Rammstedt & John (2007), covering Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. It serves as a complementary perspective to MBTI.",
+    "intro": {
+      "ready": "Ready?",
+      "heading": "10 questions, 60 seconds, five-dimension panoramic portrait",
+      "desc": "This scale is the academic standard BFI-10 short personality assessment, with only 2 items per dimension (one positive, one reversed), minimizing response time while maintaining psychometric validity. Please answer intuitively without overthinking.",
+      "stats": [
+        { "value": "10", "label": "Questions" },
+        { "value": "5", "label": "Dimensions" },
+        { "value": "5", "label": "Point Likert" },
+        { "value": "~ 60s", "label": "" }
+      ],
+      "start": "Start Big Five Assessment",
+      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded."
+    },
+    "answering": {
+      "progressLabel": "Big Five progress: Question {current} of {total}",
+      "prev": "← Previous",
+      "prevAria": "Go back to previous question",
+      "skipHint": "Selection automatically advances to the next question."
+    },
+    "result": {
+      "portrait": "Your Big Five Portrait",
+      "distribution": "🌿 Five-dimension Distribution",
+      "tagline": "Percentile 0-100; <40 low, 40-60 moderate, >60 high. Everyone is a unique combination of five dimensions.",
+      "atTitle": "Your Emotional Stability Perspective",
+      "atEyebrow": "🎭 What is 16Personalities' -A / -T?",
+      "atStrengths": "✓ Strengths",
+      "atWatchout": "⚠ Watch Out",
+      "atFootnote": "Note: 16Personalities uses -A / -T to mark this dimension; MindNest uses the academic standard Big Five Neuroticism (N) to measure the same trait.",
+      "copyLink": "📋 Copy result link",
+      "copied": "✓ Link copied",
+      "mbtiLink": "Also take MBTI assessment",
+      "retake": "Retake assessment",
+      "footnote": "BFI-10 is from academic literature (Rammstedt & John, 2007), suitable for rapid profiling; for 60 facets, please await the BFI-2 full version launch notice."
+    }
+  },
+  "quizHexaco": {
+    "eyebrow": "Academic Scale · HEXACO-60",
+    "tag": "Academic Scale · HEXACO-60",
+    "title": "Six Personality Dimensions Test (60 questions, ~8 minutes)",
+    "subtitle": "HEXACO is one of the most academically recognized personality models today. It adds the 'Honesty-Humility' dimension on top of the Big Five and reconstructs 'Agreeableness' more precisely. Each dimension has 10 questions, covering H, E, X, A, C, O.",
+    "intro": {
+      "ready": "Ready?",
+      "heading": "60 questions, 6 dimensions, panoramic personality portrait",
+      "desc": "This scale is the simplified Chinese version of HEXACO-60, with 10 questions per dimension (including reverse-scored items). Please answer intuitively without overthinking. There are no right or wrong answers; choose the option that best matches your usual state.",
+      "stats": [
+        { "value": "60", "label": "Questions" },
+        { "value": "6", "label": "Dimensions" },
+        { "value": "5", "label": "Point Likert" },
+        { "value": "~ 8min", "label": "" }
+      ],
+      "start": "Start HEXACO Assessment",
+      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded."
+    },
+    "answering": {
+      "pageLabel": "Page {current} / {total}",
+      "answeredLabel": "{answered} / {total} questions",
+      "progressLabel": "HEXACO progress: Page {current} of {total}",
+      "prev": "← Previous page",
+      "prevAria": "Go back to previous page",
+      "next": "Next page →",
+      "finish": "View results →",
+      "finishAria": "Complete assessment"
+    },
+    "result": {
+      "portrait": "Your HEXACO Six-dimension Portrait",
+      "distribution": "🤝 Six-dimension Distribution",
+      "tagline": "Percentile 0-100; <40 low, 40-60 moderate, >60 high. Everyone is a unique combination of six dimensions.",
+      "copyLink": "📋 Copy result link",
+      "copied": "✓ Link copied",
+      "mbtiLink": "Also take MBTI assessment",
+      "retake": "Retake assessment",
+      "footnote": "Scale based on Ashton & Lee (2009) HEXACO-60, one of the most academically recognized six-dimensional personality assessment tools today."
+    }
+  },
+  "quizHistory": {
+    "eyebrow": "📜 My Journey",
+    "tag": "📜 My Journey",
+    "title": "Your Past Assessment Records",
+    "subtitle": "All results are only saved in this browser. Review the timeline and see how you've changed.",
+    "clear": "Clear history",
+    "confirmClear": "Are you sure you want to clear all assessment history? This action cannot be undone.",
+    "view": "View",
+    "retake": "Retake",
+    "mbtiLabel": "MBTI · {code}",
+    "bfi10Label": "Big Five BFI-10",
+    "hexacoLabel": "HEXACO Six-dimension"
+  },
+  "compare": {
+    "eyebrow": "Honest Comparison",
+    "tag": "Honest Comparison",
+    "title": "How We Differ from 16Personalities",
+    "subtitle": "Not a challenge, but an honest self-positioning — clarifying what we are and what we are not.",
+    "legend": {
+      "win": "🟢 Advantage",
+      "tie": "🟡 Tie",
+      "behind": "⚪ In Progress"
+    },
+    "stats": [
+      { "value": "7", "label": "Dimensions Ahead", "desc": "Core features & experience" },
+      { "value": "1", "label": "Even Match", "desc": "Comparable content depth" },
+      { "value": "4", "label": "Still Catching Up", "desc": "Brand & coverage" },
+      { "value": "12", "label": "Evaluated Dimensions", "desc": "Comprehensive benchmarking" }
+    ],
+    "socialProof": "<strong>1,200+</strong> explorers have viewed the comparison, with an average rating of <strong>4.8/5</strong>",
+    "tableCaption": "Comparison of MindNest and 16Personalities across 12 dimensions",
+    "colDim": "Dimension",
+    "colUs": "MindNest",
+    "colThem": "16Personalities",
+    "badgeWin": "Advantage",
+    "badgeBehind": "In Progress",
+    "badgeLose": "Opponent",
+    "badgeTieThem": "Tie",
+    "badgeWinThem": "Opponent Advantage",
+    "coda": "Comparison is not about winning, but about clarifying what we are and what we are not.",
+    "cta": "View full comparison & detailed breakdown →"
+  },
+  "resources": {
+    "eyebrow": "Featured Resources",
+    "tag": "Featured Resources",
+    "title": "Personality Research Library",
+    "subtitle": "Regularly收录 the latest and most professional personality psychology research and practical applications to help you continuously deepen your understanding of personality.",
+    "featuredSoon": "✦ Full version coming soon, stay tuned",
+    "comingSoon": "Coming soon"
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "tag": "FAQ",
+    "title": "About Personality Assessment, You Might Want to Know",
+    "ariaLabel": "Frequently asked questions list"
+  },
+  "ctaBanner": {
+    "title": "Make Understanding a Habit",
+    "desc": "Subscribe to our monthly newsletter for the latest personality psychology research, in-depth articles, and practical growth advice.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "submit": "Subscribe",
+    "submitted": "Recorded ✓",
+    "feedbackOk": "Thank you for your interest! The email subscription service is being built; we will notify you first when it officially launches.",
+    "feedbackIdle": "Email service not yet connected, please stay tuned — submissions are only saved in your local browser."
+  },
+  "footer": {
+    "brandText": "Dedicated to helping everyone better understand themselves and others through scientific and gentle methods. Knowing yourself is the starting point of all growth.",
+    "columns": [
+      {
+        "title": "Assessment Tools",
+        "links": [
+          { "label": "MBTI 28-question Assessment", "href": "/#quiz" },
+          { "label": "16 Personality Types", "href": "/types" },
+          { "label": "Big Five Scale", "href": "#", "placeholder": true },
+          { "label": "Enneagram Assessment", "href": "#", "placeholder": true },
+          { "label": "DISC Behavior Style", "href": "#", "placeholder": true }
+        ]
+      },
+      {
+        "title": "Learning Resources",
+        "links": [
+          { "label": "Authoritative Assessment Systems", "href": "/#frameworks" },
+          { "label": "Featured Resource Library", "href": "/#resources" },
+          { "label": "Cognitive Functions Guide", "href": "#", "placeholder": true },
+          { "label": "Recommended Reading List", "href": "#", "placeholder": true },
+          { "label": "FAQ", "href": "/#faq" }
+        ]
+      },
+      {
+        "title": "About",
+        "links": [
+          { "label": "About MindNest", "href": "/about" },
+          { "label": "Academic Advisors", "href": "/about#advisors" },
+          { "label": "Contributions & Partnerships", "href": "/contact" },
+          { "label": "Privacy Policy", "href": "/privacy" },
+          { "label": "Terms of Use", "href": "/terms" }
+        ]
+      }
+    ],
+    "bottom": {
+      "copyright": "© 2025 MindNest · Personality Exploration Lab",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "contact": "Contact Us"
+    }
+  }
+}

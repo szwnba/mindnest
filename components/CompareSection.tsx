@@ -1,12 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { COMPARISON } from "@/lib/data/site-comparison";
 
-/**
- * 「我们 vs 16Personalities」对比表
- * 桌面端：标准 <table> 渲染
- * 移动端（≤768px）：CSS 切换为卡片堆叠，避免横向滚动
- */
 export default function CompareSection() {
+  const t = useTranslations("compare");
+
   return (
     <section
       className="section compare-section"
@@ -17,47 +17,32 @@ export default function CompareSection() {
         <div className="section-header reveal">
           <div className="section-eyebrow">
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">坦诚对照</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="compare-title">
-            我们与 16Personalities 的不同
+            {t("title")}
           </h2>
           <p className="section-subtitle">
-            不是跳战书，是一场诚实的自我定位 —— 说清楚我们是什么、不是什么。
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="compare-legend reveal" aria-label="对比标记说明">
-          <span className="compare-legend-item compare-legend-win">🟢 占优</span>
-          <span className="compare-legend-item compare-legend-tie">🟡 平分</span>
-          <span className="compare-legend-item compare-legend-behind">⚪ 在路上</span>
+          <span className="compare-legend-item compare-legend-win">{t("legend.win")}</span>
+          <span className="compare-legend-item compare-legend-tie">{t("legend.tie")}</span>
+          <span className="compare-legend-item compare-legend-behind">{t("legend.behind")}</span>
         </div>
 
-        {/* 统计概览卡片 */}
         <div className="compare-stats reveal" aria-label="对比统计概览">
-          <div className="compare-stat-card compare-stat-win">
-            <div className="compare-stat-value">7</div>
-            <div className="compare-stat-label">维度占优</div>
-            <div className="compare-stat-desc">核心功能与体验</div>
-          </div>
-          <div className="compare-stat-card compare-stat-tie">
-            <div className="compare-stat-value">1</div>
-            <div className="compare-stat-label">平分秋色</div>
-            <div className="compare-stat-desc">内容深度相当</div>
-          </div>
-          <div className="compare-stat-card compare-stat-behind">
-            <div className="compare-stat-value">4</div>
-            <div className="compare-stat-label">仍需追赶</div>
-            <div className="compare-stat-desc">品牌与覆盖</div>
-          </div>
-          <div className="compare-stat-card compare-stat-total">
-            <div className="compare-stat-value">12</div>
-            <div className="compare-stat-label">评估维度</div>
-            <div className="compare-stat-desc">全面对标分析</div>
-          </div>
+          {(t.raw("stats") as { value: string; label: string; desc: string }[]).map((s) => (
+            <div className="compare-stat-card" key={s.label}>
+              <div className="compare-stat-value">{s.value}</div>
+              <div className="compare-stat-label">{s.label}</div>
+              <div className="compare-stat-desc">{s.desc}</div>
+            </div>
+          ))}
         </div>
 
-        {/* 社会证明条 */}
         <div className="compare-social-proof reveal">
           <div className="csp-avatars" aria-hidden="true">
             {["🧠","🌱","📚","✨","🎯","🦋"].map((e,i)=>(
@@ -65,21 +50,22 @@ export default function CompareSection() {
             ))}
           </div>
           <p className="csp-text">
-            <strong>1,200+</strong> 位探索者已完成对比查看，平均留言 <strong>4.8/5</strong> 分
+            {t.rich("socialProof", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
         </div>
 
-        {/* 桌面端表格 */}
         <div className="compare-table-wrap reveal" role="region" aria-labelledby="compare-title">
           <table className="compare-table">
             <caption className="sr-only">
-              MindNest 与 16Personalities 在 12 个维度上的对比
+              {t("tableCaption")}
             </caption>
             <thead>
               <tr>
-                <th scope="col" className="compare-col-dim">维度</th>
-                <th scope="col" className="compare-col-us">MindNest（心栖）</th>
-                <th scope="col" className="compare-col-them">16Personalities</th>
+                <th scope="col" className="compare-col-dim">{t("colDim")}</th>
+                <th scope="col" className="compare-col-us">{t("colUs")}</th>
+                <th scope="col" className="compare-col-them">{t("colThem")}</th>
               </tr>
             </thead>
             <tbody>
@@ -89,11 +75,11 @@ export default function CompareSection() {
                   <td className="compare-us">
                     <span className="compare-us-inner">
                       {row.highlight === "win" && (
-                        <span className="compare-badge compare-badge-win" aria-label="占优">✓</span>
+                        <span className="compare-badge compare-badge-win" aria-label={t("badgeWin")}>✓</span>
                       )}
                       {row.highlight === "behind" && (
-                        <span className="compare-badge compare-badge-behind" aria-label="在路上">
-                          在路上
+                        <span className="compare-badge compare-badge-behind" aria-label={t("badgeBehind")}>
+                          {t("badgeBehind")}
                         </span>
                       )}
                       <span>{row.mindNest}</span>
@@ -102,13 +88,13 @@ export default function CompareSection() {
                   <td className="compare-them">
                     <span className="compare-them-inner">
                       {row.highlight === "win" && (
-                        <span className="compare-badge-lose" aria-label="对方">✗</span>
+                        <span className="compare-badge-lose" aria-label={t("badgeLose")}>✗</span>
                       )}
                       {row.highlight === "tie" && (
-                        <span className="compare-badge-tie-them">平分</span>
+                        <span className="compare-badge-tie-them">{t("badgeTieThem")}</span>
                       )}
                       {row.highlight === "behind" && (
-                        <span className="compare-badge-win-them" aria-label="对方占优">✓</span>
+                        <span className="compare-badge-win-them" aria-label={t("badgeWinThem")}>✓</span>
                       )}
                       <span>{row.sixteenP}</span>
                     </span>
@@ -119,7 +105,6 @@ export default function CompareSection() {
           </table>
         </div>
 
-        {/* 移动端卡片堆叠 */}
         <ul className="compare-cards reveal" aria-label="对比维度列表">
           {COMPARISON.map((row, i) => (
             <li
@@ -130,13 +115,13 @@ export default function CompareSection() {
                 <span className="compare-card-idx">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="compare-card-dim">{row.dimension}</h3>
                 {row.highlight === "win" && (
-                  <span className="compare-badge compare-badge-win" aria-label="占优">✓</span>
+                  <span className="compare-badge compare-badge-win" aria-label={t("badgeWin")}>✓</span>
                 )}
                 {row.highlight === "behind" && (
-                  <span className="compare-badge compare-badge-behind">在路上</span>
+                  <span className="compare-badge compare-badge-behind">{t("badgeBehind")}</span>
                 )}
                 {row.highlight === "tie" && (
-                  <span className="compare-badge compare-badge-tie">平分</span>
+                  <span className="compare-badge compare-badge-tie">{t("badgeTieThem")}</span>
                 )}
               </div>
               <div className="compare-card-row">
@@ -147,13 +132,13 @@ export default function CompareSection() {
                 <div className="compare-card-label">
                   16Personalities
                   {row.highlight === "win" && (
-                    <span className="compare-badge-lose" aria-label="对方"> ✗</span>
+                    <span className="compare-badge-lose" aria-label={t("badgeLose")}> ✗</span>
                   )}
                   {row.highlight === "tie" && (
-                    <span className="compare-badge-tie-them"> 平分</span>
+                    <span className="compare-badge-tie-them"> {t("badgeTieThem")}</span>
                   )}
                   {row.highlight === "behind" && (
-                    <span className="compare-badge-win-them" aria-label="对方占优"> ✓</span>
+                    <span className="compare-badge-win-them" aria-label={t("badgeWinThem")}> ✓</span>
                   )}
                 </div>
                 <div className="compare-card-text">{row.sixteenP}</div>
@@ -162,12 +147,10 @@ export default function CompareSection() {
           ))}
         </ul>
 
-        <p className="compare-coda reveal">
-          比较不是为了赢，是为了说清楚我们是什么、不是什么。
-        </p>
+        <p className="compare-coda reveal">{t("coda")}</p>
         <div className="compare-cta reveal">
           <Link href="/compare" className="btn-secondary">
-            查看完整对比与逐项详解 →
+            {t("cta")}
           </Link>
         </div>
       </div>

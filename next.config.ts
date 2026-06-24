@@ -1,11 +1,13 @@
 import type { NextConfig } from "next";
 import path from "node:path";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 const nextConfig: NextConfig = {
-  // Pin Turbopack root to the project directory to silence multi-lockfile warning
   turbopack: {
     root: path.resolve(__dirname),
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

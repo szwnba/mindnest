@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 interface NavLink {
@@ -9,20 +10,21 @@ interface NavLink {
   cta?: boolean;
 }
 
-const NAV_LINKS: NavLink[] = [
-  { href: "/#frameworks", label: "理论基础" },
-  { href: "/#types", label: "人格类型" },
-  { href: "/#quiz", label: "开始测评" },
-  { href: "/hexaco", label: "HEXACO 六维" },
-  { href: "/#resources", label: "资料库" },
-  { href: "/#compare", label: "对比" },
-  { href: "/#faq", label: "常见问题" },
-  { href: "/#quiz", label: "免费测评", cta: true },
-];
-
 export default function Header() {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const NAV_LINKS: NavLink[] = [
+    { href: "/#frameworks", label: t("theory") },
+    { href: "/#types", label: t("types") },
+    { href: "/#quiz", label: t("startQuiz") },
+    { href: "/hexaco", label: t("hexaco") },
+    { href: "/#resources", label: t("resources") },
+    { href: "/#compare", label: t("compare") },
+    { href: "/#faq", label: t("faq") },
+    { href: "/#quiz", label: t("freeQuiz"), cta: true },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -31,7 +33,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // 桌面端 resize 后重置 mobile 菜单状态，避免关闭后样式残留（修复 QA §2.3）
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 768 && open) setOpen(false);
@@ -43,7 +44,7 @@ export default function Header() {
   return (
     <header>
       <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="主导航">
-        <Link href="/" className="nav-brand" aria-label="心栖 MindNest 首页">
+        <Link href="/" className="nav-brand" aria-label={t("homeAria")}>
           <div className="nav-logo" aria-hidden="true" />
           <div className="nav-title">
             心栖 <small>MindNest</small>
@@ -70,7 +71,7 @@ export default function Header() {
         <button
           type="button"
           className="nav-mobile-btn"
-          aria-label={open ? "关闭菜单" : "打开菜单"}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           aria-controls="primaryNav"
           onClick={() => setOpen((v) => !v)}

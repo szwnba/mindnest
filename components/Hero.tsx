@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
-import HeroParticles from "./HeroParticles";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
-      <HeroParticles />
       <div className="hero-deco hero-deco-1" aria-hidden="true" />
       <div className="hero-deco hero-deco-2" aria-hidden="true" />
       <div className="hero-deco hero-deco-3" aria-hidden="true" />
@@ -15,12 +18,13 @@ export default function Hero() {
         <div className="hero-text">
           <div className="hero-greeting">
             <span className="hero-greeting-line" aria-hidden="true" />
-            专业人格心理测评平台
+            {t("greeting")}
           </div>
           <h1 id="hero-title" className="hero-title">
-            认识你自己，
-            <br />
-            是一切<em>成长</em>的起点
+            {t.rich("title", {
+              br: () => <br />,
+              em: (chunks) => <em>{chunks}</em>,
+            })}
           </h1>
           <div className="hero-type-wheel" aria-hidden="true">
             {[
@@ -36,32 +40,28 @@ export default function Hero() {
               { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
               { code: "INFJ", name: "提倩", color: "var(--sage)" },
               { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
-            ].map((t, i) => (
-              <span key={`${t.code}-${i}`} className="hero-type-chip" style={{ animationDelay: `${(i % 6) * 0.15}s` }}>
-                <span className="hero-type-chip-code">{t.code}</span>
-                <span className="hero-type-chip-name">{t.name}</span>
+            ].map((tChip, i) => (
+              <span key={`${tChip.code}-${i}`} className="hero-type-chip" style={{ animationDelay: `${(i % 6) * 0.15}s` }}>
+                <span className="hero-type-chip-code">{tChip.code}</span>
+                <span className="hero-type-chip-name">{tChip.name}</span>
               </span>
             ))}
           </div>
-          <p className="hero-desc">
-            基于荣格心理类型理论、大五人格模型等经典框架，
-            用科学的方法帮你理解思维偏好、情感模式与行为倾向。
-            不是给你贴标签，而是为你打开一扇理解自己的窗。
-          </p>
+          <p className="hero-desc">{t("desc")}</p>
           <p className="hero-quote">
-            <em>你不是一种类型，你是一种可能。</em>
+            <em>{t("quote")}</em>
           </p>
           <div className="hero-pull" aria-hidden="true">
             <span className="hero-pull-line" />
-            <span className="hero-pull-text">只需 5 分钟，开始你的探索</span>
+            <span className="hero-pull-text">{t("pullText")}</span>
           </div>
           <div className="hero-actions">
             <Link href="/#quiz" className="btn btn-primary btn-lg">
-              开始免费测评
+              {t("ctaPrimary")}
               <span aria-hidden="true">→</span>
             </Link>
             <Link href="/#frameworks" className="btn btn-ghost btn-lg">
-              了解科学依据
+              {t("ctaSecondary")}
             </Link>
           </div>
           <div style={{ marginTop: "0.75rem" }}>
@@ -74,7 +74,7 @@ export default function Hero() {
                 textUnderlineOffset: "3px",
               }}
             >
-              或测 HEXACO 六维人格 →
+              {t("hexacoLink")}
             </Link>
           </div>
           <div className="hero-trust">
@@ -86,10 +86,10 @@ export default function Hero() {
               <div className="hero-trust-avatar">🎯</div>
             </div>
             <div className="hero-trust-text">
-              <strong>28 题 Likert 测评</strong>
+              <strong>{t("trustTitle")}</strong>
               <br />
               <span style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
-                整合 6 大权威心理学框架·尊重每一种独特
+                {t("trustSubtitle")}
               </span>
             </div>
           </div>
@@ -97,51 +97,30 @@ export default function Hero() {
 
         <aside className="hero-visual" aria-label="示例结果预览">
           <div className="hero-card-stack">
-            {/* 主卡：明确标注「示例」 */}
             <div className="hero-floating-card hfc-main" aria-hidden="true">
               <div className="hfc-header">
                 <div className="hfc-icon" style={{ background: "var(--sage-bg)" }}>
                   🦋
                 </div>
                 <div>
-                  <div className="hfc-type-code">示例 · INFP</div>
-                  <div className="hfc-type-name">调停者</div>
+                  <div className="hfc-type-code">{t("cardExample")}</div>
+                  <div className="hfc-type-name">{t("cardTypeName")}</div>
                 </div>
               </div>
               <div className="hfc-traits">
-                <span className="hfc-trait">理想主义</span>
-                <span className="hfc-trait">共情力强</span>
-                <span className="hfc-trait">富有创意</span>
-                <span className="hfc-trait">内省</span>
+                {(t.raw("cardTraits") as string[]).map((trait) => (
+                  <span key={trait} className="hfc-trait">{trait}</span>
+                ))}
               </div>
               <div className="hfc-bar-group">
-                <div className="hfc-bar-item">
-                  <span className="hfc-bar-label">E / I</span>
-                  <div className="hfc-bar-track">
-                    <div className="hfc-bar-fill sage" style={{ width: "78%" }} />
+                {(t.raw("cardDimensions") as string[]).map((dim) => (
+                  <div className="hfc-bar-item" key={dim}>
+                    <span className="hfc-bar-label">{dim}</span>
+                    <div className="hfc-bar-track">
+                      <div className="hfc-bar-fill sage" style={{ width: "78%" }} />
+                    </div>
                   </div>
-                </div>
-                <div className="hfc-bar-item">
-                  <span className="hfc-bar-label">S / N</span>
-                  <div className="hfc-bar-track">
-                    <div
-                      className="hfc-bar-fill terracotta"
-                      style={{ width: "65%" }}
-                    />
-                  </div>
-                </div>
-                <div className="hfc-bar-item">
-                  <span className="hfc-bar-label">T / F</span>
-                  <div className="hfc-bar-track">
-                    <div className="hfc-bar-fill gold" style={{ width: "82%" }} />
-                  </div>
-                </div>
-                <div className="hfc-bar-item">
-                  <span className="hfc-bar-label">J / P</span>
-                  <div className="hfc-bar-track">
-                    <div className="hfc-bar-fill sky" style={{ width: "70%" }} />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
             <div className="hero-floating-card hfc-mini-1" aria-hidden="true">
@@ -152,7 +131,7 @@ export default function Hero() {
                 >
                   4
                 </div>
-                <div className="hfc-mini-stat-label">核心维度</div>
+                <div className="hfc-mini-stat-label">{t("miniStat1Label")}</div>
               </div>
             </div>
             <div className="hero-floating-card hfc-mini-2" aria-hidden="true">
@@ -163,7 +142,7 @@ export default function Hero() {
                 >
                   16
                 </div>
-                <div className="hfc-mini-stat-label">人格类型</div>
+                <div className="hfc-mini-stat-label">{t("miniStat2Label")}</div>
               </div>
             </div>
           </div>

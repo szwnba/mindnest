@@ -1,15 +1,16 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 export default function CtaBanner() {
+  const t = useTranslations("ctaBanner");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email) return;
-    // 暂未对接邮件服务：仅做本地反馈，避免给用户假成功的错觉。
     console.log("[MindNest] newsletter subscribe (mock):", email);
     setSubmitted(true);
   }
@@ -19,20 +20,20 @@ export default function CtaBanner() {
       <div className="section-inner">
         <div className="cta-banner reveal">
           <div className="cta-banner-content">
-            <h2 id="newsletter-title" className="cta-banner-title">让理解成为一种习惯</h2>
+            <h2 id="newsletter-title" className="cta-banner-title">{t("title")}</h2>
             <p className="cta-banner-desc">
-              订阅我们的月度通讯，接收最新的人格心理学研究、深度解读文章与实用成长建议。
+              {t("desc")}
             </p>
             <form className="cta-form" onSubmit={handleSubmit} noValidate>
               <label htmlFor="newsletter-email" className="cta-form-label">
-                邮箱地址
+                {t("emailLabel")}
               </label>
               <input
                 id="newsletter-email"
                 name="email"
                 type="email"
                 className="cta-input"
-                placeholder="输入你的邮箱地址"
+                placeholder={t("emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -40,7 +41,7 @@ export default function CtaBanner() {
                 aria-describedby="newsletter-feedback"
               />
               <button type="submit" className="btn btn-primary">
-                {submitted ? "已记录 ✓" : "订阅通讯"}
+                {submitted ? t("submitted") : t("submit")}
               </button>
             </form>
             <div
@@ -50,8 +51,8 @@ export default function CtaBanner() {
               aria-live="polite"
             >
               {submitted
-                ? "感谢你的关注！邮件订阅服务正在搭建中，正式开放后我们会优先通知你。"
-                : "暂未对接邮件服务，敬请期待 — 提交后只会保存在你本地的浏览器中。"}
+                ? t("feedbackOk")
+                : t("feedbackIdle")}
             </div>
           </div>
         </div>

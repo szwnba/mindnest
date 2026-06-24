@@ -1,0 +1,327 @@
+{
+  "common": {
+    "siteName": "心栖 MindNest",
+    "skipToContent": "跳转到主内容"
+  },
+  "nav": {
+    "theory": "理论基础",
+    "types": "人格类型",
+    "startQuiz": "开始测评",
+    "hexaco": "HEXACO 六维",
+    "resources": "资料库",
+    "compare": "对比",
+    "faq": "常见问题",
+    "freeQuiz": "免费测评",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "homeAria": "心栖 MindNest 首页"
+  },
+  "hero": {
+    "greeting": "专业人格心理测评平台",
+    "title": "认识你自己，<br/>是一切<em>成长</em>的起点",
+    "desc": "基于荣格心理类型理论、大五人格模型等经典框架，用科学的方法帮你理解思维偏好、情感模式与行为倾向。不是给你贴标签，而是为你打开一扇理解自己的窗。",
+    "quote": "你不是一种类型，你是一种可能。",
+    "pullText": "只需 5 分钟，开始你的探索",
+    "ctaPrimary": "开始免费测评",
+    "ctaSecondary": "了解科学依据",
+    "hexacoLink": "或测 HEXACO 六维人格 →",
+    "trustTitle": "28 题 Likert 测评",
+    "trustSubtitle": "整合 6 大权威心理学框架·尊重每一种独特",
+    "cardExample": "示例 · INFP",
+    "cardTypeName": "调停者",
+    "cardTraits": ["理想主义", "共情力强", "富有创意", "内省"],
+    "cardDimensions": ["E / I", "S / N", "T / F", "J / P"],
+    "miniStat1Label": "核心维度",
+    "miniStat2Label": "人格类型"
+  },
+  "trustBar": {
+    "title": "平台特点",
+    "items": [
+      { "title": "学术理论支撑", "desc": "基于荣格心理类型理论" },
+      { "title": "多维度评估", "desc": "整合多种专业测评体系" },
+      { "title": "持续更新内容", "desc": "定期收录最新研究文献" },
+      { "title": "隐私优先", "desc": "测评数据仅用于个人分析" }
+    ]
+  },
+  "frameworks": {
+    "eyebrow": "理论基础",
+    "title": "权威测评体系",
+    "subtitle": "我们整合了心理学领域最受认可的人格评估框架，从不同角度帮你构建完整的自我认知地图。"
+  },
+  "howItWorks": {
+    "eyebrow": "使用指南",
+    "tag": "使用指南",
+    "title": "三步开启自我认知",
+    "subtitle": "简单、温和、有深度。不需要心理学背景，只需要你真诚地面对自己。",
+    "steps": [
+      {
+        "number": "1",
+        "title": "回答问题",
+        "desc": "在安静的环境下，根据直觉对每条陈述选择 1-5 分的同意度。没有标准答案，真实最重要。"
+      },
+      {
+        "number": "2",
+        "title": "获取报告",
+        "desc": "系统将从 4 个核心维度计算你的偏好分布，生成包含类型描述、优势分析与成长建议的个人报告。"
+      },
+      {
+        "number": "3",
+        "title": "深入探索",
+        "desc": "浏览 16 种人格类型详情与资料库，将自我认知转化为日常生活中的实际行动。"
+      }
+    ]
+  },
+  "personalityTypes": {
+    "eyebrow": "人格图谱",
+    "tag": "人格图谱",
+    "title": "探索 16 种人格类型",
+    "subtitle": "每种人格都有独特的认知方式和行为偏好。了解这些差异，不是为了分类，而是为了理解与欣赏人类心理的丰富性。",
+    "tabs": {
+      "all": "全部类型",
+      "analyst": "分析家",
+      "diplomat": "外交家",
+      "sentinel": "守护者",
+      "explorer": "探险家"
+    },
+    "viewAll": "查看全部 16 种类型 →",
+    "ariaLabel": "查看 {code} {name} 详细介绍"
+  },
+  "quiz": {
+    "eyebrow": "互动测评",
+    "tag": "互动测评",
+    "title": "开始你的人格探索之旅",
+    "subtitle": "请根据你最自然的反应来选择，没有对错之分。真实地回答，才能获得最准确的结果。",
+    "intro": {
+      "ready": "准备好了吗",
+      "heading": "28 道题，约 6-8 分钟，看见更立体的自己",
+      "desc": "本测评基于荣格类型学的 4 个核心维度（能量取向、信息加工、决策风格、生活节奏），每个维度 7 题（含正反向题平衡测谎），采用 5 点 Likert 量表评分。请在安静的环境下，凭直觉选择最贴近自己日常状态的选项。",
+      "stats": [
+        { "value": "28", "label": "道题" },
+        { "value": "4", "label": "个核心维度" },
+        { "value": "5", "label": "点 Likert" },
+        { "value": "~ 7", "label": "分钟" }
+      ],
+      "start": "开始测评",
+      "privacyNote": "测评结果仅保存在你当前浏览器的 sessionStorage 中，刷新不丢；关闭标签页或重新测评会清除。"
+    },
+    "answering": {
+      "dimLabel": "{dim} · 第 {nth} / 7 题",
+      "progressLabel": "测评进度：第 {current} 题，共 {total} 题",
+      "prev": "← 上一题",
+      "prevAria": "返回上一题",
+      "skipHint": "选择即自动进入下一题。最后一题选完会出结果。"
+    },
+    "likert": [
+      { "value": 1, "label": "非常不同意", "aria": "1 分：非常不同意" },
+      { "value": 2, "label": "不同意", "aria": "2 分：不同意" },
+      { "value": 3, "label": "中立", "aria": "3 分：中立" },
+      { "value": 4, "label": "同意", "aria": "4 分：同意" },
+      { "value": 5, "label": "非常同意", "aria": "5 分：非常同意" }
+    ],
+    "result": {
+      "portrait": "你的人格画像",
+      "ambiguous": "· 游移",
+      "ambiguousAria": "带有游移维度",
+      "dimLabel": "四维度分布",
+      "dimBarLabel": "{dim}：偏向 {letter} {percent}%",
+      "strengths": "你的天然优势",
+      "growth": "成长方向",
+      "readFull": "阅读完整 {code} 报告 →",
+      "browseAll": "浏览全部 16 类型",
+      "copyLink": "📋 复制结果链接",
+      "copied": "✓ 链接已复制",
+      "share": "分享结果",
+      "retake": "重新测试",
+      "confidenceNote": "你在某些维度的得分非常接近 50%，说明你在这两种倾向之间游移。这并不代表测评不准，而是你确实兼具两种特质——结果可能受当前情境影响。建议过一段时间再做一次，关注反复出现的模式。",
+      "shareText": "我在心栖 MindNest 测出的人格类型是 {code}。看看你的：{url}",
+      "shareTitle": "我是 {code}",
+      "copyAlert": "分享文本已复制到剪贴板"
+    }
+  },
+  "quizBFI10": {
+    "eyebrow": "学界量表 · BFI-10",
+    "tag": "学界量表 · BFI-10",
+    "title": "也试试大五人格（10 题，约 60 秒）",
+    "subtitle": "BFI-10 是 Rammstedt & John（2007）提出的学界标准短量表，覆盖开放性、尽责性、外向性、宜人性、神经质五大维度。适合作为 MBTI 之外的补充视角。",
+    "intro": {
+      "ready": "准备好了吗",
+      "heading": "10 道题，60 秒，五维度全景画像",
+      "desc": "本量表为学界标准的 BFI-10 短版人格测评，每个维度仅 2 题（一正一反），在保持心理测量效度的同时把作答时间压到最短。请凭直觉作答，不必反复斟酌。",
+      "stats": [
+        { "value": "10", "label": "道题" },
+        { "value": "5", "label": "个维度" },
+        { "value": "5", "label": "点 Likert" },
+        { "value": "~ 60s", "label": "" }
+      ],
+      "start": "开始大五测评",
+      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。"
+    },
+    "answering": {
+      "progressLabel": "大五测评进度：第 {current} 题，共 {total} 题",
+      "prev": "← 上一题",
+      "prevAria": "返回上一题",
+      "skipHint": "选择即自动进入下一题。"
+    },
+    "result": {
+      "portrait": "你的大五人格画像",
+      "distribution": "🌿 五维度分布",
+      "tagline": "百分位 0-100；<40 偏低，40-60 中等，>60 偏高。每个人都是五维度的独特组合。",
+      "atTitle": "你的情绪稳定性视角",
+      "atEyebrow": "🎭 16Personalities 的 -A / -T 是什么？",
+      "atStrengths": "✓ 优势",
+      "atWatchout": "⚠ 注意",
+      "atFootnote": "注：16Personalities 用 -A / -T 标记这个维度；MindNest 使用学界标准的 Big Five 神经质（N）来测量同一特质。",
+      "copyLink": "📋 复制结果链接",
+      "copied": "✓ 链接已复制",
+      "mbtiLink": "也做 MBTI 测评",
+      "retake": "重新测试",
+      "footnote": "BFI-10 来自学术文献（Rammstedt & John, 2007），适合快速画像；若想要细分到 60 个 facet，请期待 BFI-2 完整版的上线通知。"
+    }
+  },
+  "quizHexaco": {
+    "eyebrow": "学界量表 · HEXACO-60",
+    "tag": "学界量表 · HEXACO-60",
+    "title": "六大人格维度测试（60 题，约 8 分钟）",
+    "subtitle": "HEXACO 是当今学界认可度最高的人格模型之一，在大五人格基础上增加了「诚实-谦逊」维度，并对「宜人性」进行了更精确的重构。每个维度 10 题，覆盖 H、E、X、A、C、O 六大维度。",
+    "intro": {
+      "ready": "准备好了吗",
+      "heading": "60 题码，6 维度，全景人格画像",
+      "desc": "本量表为 HEXACO-60 简化中文版，每个维度 10 题（含反向计分题）。请凭直觉作答，不必反复捎酌。没有对错之分，选择最符合你平时状态的选项即可。",
+      "stats": [
+        { "value": "60", "label": "道题" },
+        { "value": "6", "label": "个维度" },
+        { "value": "5", "label": "点 Likert" },
+        { "value": "~ 8min", "label": "" }
+      ],
+      "start": "开始 HEXACO 测评",
+      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。"
+    },
+    "answering": {
+      "pageLabel": "第 {current} / {total} 页",
+      "answeredLabel": "{answered} / {total} 题",
+      "progressLabel": "HEXACO 测评进度：第 {current} 页，共 {total} 页",
+      "prev": "← 上一页",
+      "prevAria": "返回上一页",
+      "next": "下一页 →",
+      "finish": "查看结果 →",
+      "finishAria": "完成测评"
+    },
+    "result": {
+      "portrait": "你的 HEXACO 六维画像",
+      "distribution": "🤝 六维度分布",
+      "tagline": "百分位 0-100；<40 偏低，40-60 中等，>60 偏高。每个人都是六维度的独特组合。",
+      "copyLink": "📋 复制结果链接",
+      "copied": "✓ 链接已复制",
+      "mbtiLink": "也做 MBTI 测评",
+      "retake": "重新测试",
+      "footnote": "量表基于 Ashton & Lee (2009) HEXACO-60，是当今学界公认度最高的六维度人格测评工具之一。"
+    }
+  },
+  "quizHistory": {
+    "eyebrow": "📜 我的轨迹",
+    "tag": "📜 我的轨迹",
+    "title": "你过往的测评记录",
+    "subtitle": "一切结果都只在你这台浏览器里保存。回看时间线，看见自己的变化。",
+    "clear": "清空历史",
+    "confirmClear": "确定要清空所有测评历史吗？此操作无法撤销。",
+    "view": "查看",
+    "retake": "再测",
+    "mbtiLabel": "MBTI · {code}",
+    "bfi10Label": "大五 BFI-10",
+    "hexacoLabel": "HEXACO 六维"
+  },
+  "compare": {
+    "eyebrow": "坦诚对照",
+    "tag": "坦诚对照",
+    "title": "我们与 16Personalities 的不同",
+    "subtitle": "不是挑战书，是一场诚实的自我定位 —— 说清楚我们是什么、不是什么。",
+    "legend": {
+      "win": "🟢 占优",
+      "tie": "🟡 平分",
+      "behind": "⚪ 在路上"
+    },
+    "stats": [
+      { "value": "7", "label": "维度占优", "desc": "核心功能与体验" },
+      { "value": "1", "label": "平分秋色", "desc": "内容深度相当" },
+      { "value": "4", "label": "仍需追赶", "desc": "品牌与覆盖" },
+      { "value": "12", "label": "评估维度", "desc": "全面对标分析" }
+    ],
+    "socialProof": "<strong>1,200+</strong> 位探索者已完成对比查看，平均留言 <strong>4.8/5</strong> 分",
+    "tableCaption": "MindNest 与 16Personalities 在 12 个维度上的对比",
+    "colDim": "维度",
+    "colUs": "MindNest（心栖）",
+    "colThem": "16Personalities",
+    "badgeWin": "占优",
+    "badgeBehind": "在路上",
+    "badgeLose": "对方",
+    "badgeTieThem": "平分",
+    "badgeWinThem": "对方占优",
+    "coda": "比较不是为了赢，是为了说清楚我们是什么、不是什么。",
+    "cta": "查看完整对比与逐项详解 →"
+  },
+  "resources": {
+    "eyebrow": "精选资料",
+    "tag": "精选资料",
+    "title": "人格研究资料库",
+    "subtitle": "定期收录全球最新、最专业的人格心理学研究与实践应用，帮你持续深化对人格的理解。",
+    "featuredSoon": "✦ 完整版即将发布，敬请期待",
+    "comingSoon": "敬请期待"
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "tag": "常见问题",
+    "title": "关于人格测评，你可能想了解",
+    "ariaLabel": "常见问题列表"
+  },
+  "ctaBanner": {
+    "title": "让理解成为一种习惯",
+    "desc": "订阅我们的月度通讯，接收最新的人格心理学研究、深度解读文章与实用成长建议。",
+    "emailLabel": "邮箱地址",
+    "emailPlaceholder": "输入你的邮箱地址",
+    "submit": "订阅通讯",
+    "submitted": "已记录 ✓",
+    "feedbackOk": "感谢你的关注！邮件订阅服务正在搭建中，正式开放后我们会优先通知你。",
+    "feedbackIdle": "暂未对接邮件服务，敬请期待 — 提交后只会保存在你本地的浏览器中。"
+  },
+  "footer": {
+    "brandText": "致力于用科学且温和的方式，帮助每个人更好地理解自己与他人。认识自己，是所有成长的起点。",
+    "columns": [
+      {
+        "title": "测评工具",
+        "links": [
+          { "label": "MBTI 28 题测评", "href": "/#quiz" },
+          { "label": "16 种人格图谱", "href": "/types" },
+          { "label": "大五人格量表", "href": "#", "placeholder": true },
+          { "label": "九型人格测评", "href": "#", "placeholder": true },
+          { "label": "DISC 行为风格", "href": "#", "placeholder": true }
+        ]
+      },
+      {
+        "title": "学习资源",
+        "links": [
+          { "label": "权威测评体系", "href": "/#frameworks" },
+          { "label": "精选资料库", "href": "/#resources" },
+          { "label": "认知功能指南", "href": "#", "placeholder": true },
+          { "label": "推荐书单", "href": "#", "placeholder": true },
+          { "label": "常见问题", "href": "/#faq" }
+        ]
+      },
+      {
+        "title": "关于",
+        "links": [
+          { "label": "关于心栖", "href": "/about" },
+          { "label": "学术顾问", "href": "/about#advisors" },
+          { "label": "投稿合作", "href": "/contact" },
+          { "label": "隐私政策", "href": "/privacy" },
+          { "label": "使用条款", "href": "/terms" }
+        ]
+      }
+    ],
+    "bottom": {
+      "copyright": "© 2025 心栖 MindNest · 人格探索实验室",
+      "privacy": "隐私政策",
+      "terms": "使用条款",
+      "contact": "联系我们"
+    }
+  }
+}

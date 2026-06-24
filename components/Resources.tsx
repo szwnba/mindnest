@@ -1,6 +1,10 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { RESOURCES } from "@/lib/data/resources";
 
 export default function Resources() {
+  const t = useTranslations("resources");
   const featured = RESOURCES.find((r) => r.featured);
   const small = RESOURCES.filter((r) => !r.featured);
 
@@ -10,14 +14,12 @@ export default function Resources() {
         <div className="section-header reveal">
           <div className="section-eyebrow">
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">精选资料</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="resources-title">
-            人格研究资料库
+            {t("title")}
           </h2>
-          <p className="section-subtitle">
-            定期收录全球最新、最专业的人格心理学研究与实践应用，帮你持续深化对人格的理解。
-          </p>
+          <p className="section-subtitle">{t("subtitle")}</p>
         </div>
 
         <div className="resources-layout">
@@ -39,7 +41,7 @@ export default function Resources() {
                     {featured.author ?? "MindNest 编辑组"}
                   </div>
                   <div className="resource-author-date">
-                    {featured.date ?? "敬请期待"}
+                    {featured.date ?? t("comingSoon")}
                   </div>
                 </div>
               </div>
@@ -51,7 +53,7 @@ export default function Resources() {
                   fontStyle: "italic",
                 }}
               >
-                ✦ 完整版即将发布，敬请期待
+                {t("featuredSoon")}
               </div>
             </article>
           )}
@@ -66,9 +68,9 @@ export default function Resources() {
               <p className="resource-small-excerpt">{r.excerpt}</p>
               {r.tags && r.tags.length > 0 && (
                 <div className="resource-tags-row">
-                  {r.tags.map((t) => (
-                    <span key={t} className="resource-mini-tag">
-                      {t}
+                  {r.tags.map((tag) => (
+                    <span key={tag} className="resource-mini-tag">
+                      {tag}
                     </span>
                   ))}
                 </div>
@@ -80,7 +82,7 @@ export default function Resources() {
                   color: "var(--text-muted)",
                 }}
               >
-                敬请期待
+                {t("comingSoon")}
               </div>
             </article>
           ))}

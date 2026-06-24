@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   HEXACO_QUESTIONS,
@@ -22,19 +23,23 @@ import RadarChart from "@/components/RadarChart";
 
 type Phase = "intro" | "answering" | "result";
 
-const LIKERT_OPTIONS: { value: HexacoLikert; label: string; aria: string }[] = [
-  { value: 1, label: "完全不同意", aria: "1 分：完全不同意" },
-  { value: 2, label: "不同意", aria: "2 分：不同意" },
-  { value: 3, label: "中立", aria: "3 分：中立" },
-  { value: 4, label: "同意", aria: "4 分：同意" },
-  { value: 5, label: "完全同意", aria: "5 分：完全同意" },
-];
+function useLikertOptions() {
+  const t = useTranslations("quizHexaco.likert");
+  return [
+    { value: 1 as HexacoLikert, label: t("0.label"), aria: t("0.aria") },
+    { value: 2 as HexacoLikert, label: t("1.label"), aria: t("1.aria") },
+    { value: 3 as HexacoLikert, label: t("2.label"), aria: t("2.aria") },
+    { value: 4 as HexacoLikert, label: t("3.label"), aria: t("3.aria") },
+    { value: 5 as HexacoLikert, label: t("4.label"), aria: t("4.aria") },
+  ];
+}
 
 const QUESTIONS_PER_PAGE = 5;
 const TOTAL_QUESTIONS = HEXACO_QUESTIONS.length;
 const TOTAL_PAGES = Math.ceil(TOTAL_QUESTIONS / QUESTIONS_PER_PAGE);
 
 export default function QuizHexaco() {
+  const t = useTranslations("quizHexaco");
   const [phase, setPhase] = useState<Phase>("intro");
   const [page, setPage] = useState(0);
   const [answers, setAnswers] = useState<HexacoAnswers>({});
@@ -44,7 +49,6 @@ export default function QuizHexaco() {
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
 
-  // 从 sessionStorage 恢复
   useEffect(() => {
     if (hydrated) return;
     if (typeof window === "undefined") return;
@@ -67,9 +71,8 @@ export default function QuizHexaco() {
         nextPhase = "answering";
       }
     } catch {
-      // 忽略
+      // ignore
     }
-    /* eslint-disable react-hooks/set-state-in-effect */
     if (nextResult) setResult(nextResult);
     if (nextAnswers) {
       setAnswers(nextAnswers);
@@ -78,10 +81,8 @@ export default function QuizHexaco() {
     if (nextPage !== null) setPage(nextPage);
     if (nextPhase) setPhase(nextPhase);
     setHydrated(true);
-    /* eslint-enable react-hooks/set-state-in-effect */
   }, [hydrated]);
 
-  // 持久化
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (Object.keys(answers).length === 0) {
@@ -124,7 +125,6 @@ export default function QuizHexaco() {
         cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     } else {
-      // 最后一页，完成测评（使用 ref 确保获取最新 answers）
       const r = scoreHexaco(answersRef.current);
       setResult(r);
       setPhase("result");
@@ -180,24 +180,19 @@ export default function QuizHexaco() {
             style={{ justifyContent: "center" }}
           >
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">学界量表 · HEXACO-60</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="quiz-hexaco-title">
-            六大人格维度测试（60 题，约 8 分钟）
+            {t("title")}
           </h2>
           <p
             className="section-subtitle"
             style={{ marginLeft: "auto", marginRight: "auto" }}
           >
-            HEXACO 是当今学界认可度最高的人格模型之一，
-            在大五人格基础上增加了「诚实-谦逊」维度，
-            并对「宜人性」进行了更精确的重构。
-            每个维度 10 题，覆盖 H、E、X、A、C、O 六大维度。
+            {t("subtitle")}
           </p>
         </div>
 
-        {/* 交互阶段（answering/result）直接 visible，避免 IntersectionObserver
-            与 scrollIntoView(smooth) 竞态导致内容空白 */}
         <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
           {phase === "intro" && <HexacoIntro onStart={startQuiz} />}
           {phase === "answering" && (
@@ -228,38 +223,40 @@ function getPageQuestions(pageIndex: number) {
   return HEXACO_QUESTIONS.slice(start, start + QUESTIONS_PER_PAGE);
 }
 
-/* ──────────────── Intro ──────────────── */
 function HexacoIntro({ onStart }: { onStart: () => void }) {
+  const t = useTranslations("quizHexaco.intro");
+  const stats = t.raw("stats") as { value: string; label: string }[];
+
   return (
     <div className="quiz-card-shell hexaco-intro">
       <div className="quiz-meta-dim" aria-hidden="true">
-        准备好了吗
+        {t("ready")}
       </div>
       <h3 className="hexaco-question-text" style={{ marginTop: 8 }}>
-        60 题码，6 维度，全景人格画像
+        {t("heading")}
       </h3>
       <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: 560, margin: "0.75rem auto 0" }}>
-        本量表为 HEXACO-60 简化中文版，每个维度 10 题（含反向计分题）。
-        请凭直觉作答，不必反复捎酌。没有对错之分，选择最符合你平时状态的选项即可。
+        {t("desc")}
       </p>
       <div className="quiz-intro-stats">
-        <div className="quiz-intro-stat"><strong>60</strong>道题</div>
-        <div className="quiz-intro-stat"><strong>6</strong>个维度</div>
-        <div className="quiz-intro-stat"><strong>5</strong>点 Likert</div>
-        <div className="quiz-intro-stat"><strong>~ 8min</strong></div>
+        {stats.map((s) => (
+          <div className="quiz-intro-stat" key={s.label || s.value}>
+            <strong>{s.value}</strong>
+            {s.label}
+          </div>
+        ))}
       </div>
       <button type="button" className="btn btn-primary btn-lg" onClick={onStart}>
-        开始 HEXACO 测评
-        <span aria-hidden="true">→</span>
+        {t("start")}
+        <span aria-hidden="true">&#8594;</span>
       </button>
       <p style={{ marginTop: "1rem", fontSize: "0.82rem", color: "var(--text-muted)" }}>
-        测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。
+        {t("privacyNote")}
       </p>
     </div>
   );
 }
 
-/* ──────────────── Answering ──────────────── */
 function HexacoAnswering({
   page,
   answers,
@@ -273,6 +270,8 @@ function HexacoAnswering({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const ta = useTranslations("quizHexaco.answering");
+  const likert = useLikertOptions();
   const questions = getPageQuestions(page);
   const progress = Math.round(((page + 1) / TOTAL_PAGES) * 100);
 
@@ -280,10 +279,10 @@ function HexacoAnswering({
     <div className="quiz-card-shell">
       <div className="quiz-meta">
         <span className="quiz-meta-dim">
-          第 {page + 1} / {TOTAL_PAGES} 页
+          {ta("pageLabel", { current: page + 1, total: TOTAL_PAGES })}
         </span>
         <span className="quiz-meta-step">
-          {Object.keys(answers).length} / {TOTAL_QUESTIONS} 题
+          {Object.keys(answers).length} / {TOTAL_QUESTIONS} {ta("answeredLabel", { answered: Object.keys(answers).length, total: TOTAL_QUESTIONS })}
         </span>
       </div>
       <div
@@ -292,7 +291,7 @@ function HexacoAnswering({
         aria-valuenow={page + 1}
         aria-valuemin={1}
         aria-valuemax={TOTAL_PAGES}
-        aria-label={`HEXACO 测评进度：第 ${page + 1} 页，共 ${TOTAL_PAGES} 页`}
+        aria-label={ta("progressLabel", { current: page + 1, total: TOTAL_PAGES })}
       >
         <div className="quiz-progress-fill" style={{ width: `${progress}%` }} />
       </div>
@@ -307,11 +306,11 @@ function HexacoAnswering({
                 <span className="hexaco-question-dim">
                   {dimMeta.icon} {dimMeta.name}
                 </span>
-                <span className="hexaco-question-num">第 {q.id} 题</span>
+                <span className="hexaco-question-num">第 {q.id} {ta("answeredLabel", { answered: q.id, total: TOTAL_QUESTIONS })}</span>
               </div>
               <p className="hexaco-question-text">{q.text}</p>
               <div className="likert-row hexaco-likert-row" role="group" aria-label={`同意度选项 — ${q.text}`}>
-                {LIKERT_OPTIONS.map((opt) => (
+                {likert.map((opt) => (
                   <button
                     key={opt.value}
                     type="button"
@@ -336,24 +335,23 @@ function HexacoAnswering({
           className="btn btn-ghost"
           onClick={onPrev}
           disabled={page === 0}
-          aria-label="返回上一页"
+          aria-label={ta("prevAria")}
         >
-          ← 上一页
+          {ta("prev")}
         </button>
         <button
           type="button"
           className="btn btn-primary"
           onClick={onNext}
-          aria-label={page === TOTAL_PAGES - 1 ? "完成测评" : "下一页"}
+          aria-label={page === TOTAL_PAGES - 1 ? ta("finishAria") : ta("next")}
         >
-          {page === TOTAL_PAGES - 1 ? "查看结果 →" : "下一页 →"}
+          {page === TOTAL_PAGES - 1 ? ta("finish") : ta("next")}
         </button>
       </div>
     </div>
   );
 }
 
-/* ──────────────── Result ──────────────── */
 function HexacoResult({
   result,
   onReset,
@@ -365,18 +363,19 @@ function HexacoResult({
   onCopy: () => void;
   copyStatus: "idle" | "copied";
 }) {
+  const t = useTranslations("quizHexaco.result");
   const dimensions: HexacoDimension[] = useMemo(() => HEXACO_ORDER, []);
 
   return (
     <div className="quiz-result" aria-live="polite">
       <div className="quiz-meta-dim" aria-hidden="true">
-        你的 HEXACO 六维画像
+        {t("portrait")}
       </div>
       <div className="quiz-result-name" style={{ marginTop: 12 }}>
-        🤝 六维度分布
+        {t("distribution")}
       </div>
       <p className="quiz-result-tagline">
-        百分位 0-100；&lt;40 偏低，40-60 中等，&gt;60 偏高。每个人都是六维度的独特组合。
+        {t("tagline")}
       </p>
 
       <div className="dim-bars" aria-label="HEXACO 六维度分布">
@@ -391,7 +390,7 @@ function HexacoResult({
                   {meta.icon} {meta.name}
                 </span>
                 <span className="dim-bar-letters">
-                  {meta.fullName} · {level}
+                  {meta.fullName} &#183; {level}
                 </span>
               </div>
               <div
@@ -418,7 +417,6 @@ function HexacoResult({
         })}
       </div>
 
-      {/* HEXACO 六边形雷达图 */}
       <div className="radar-result-wrap" style={{ marginTop: "1.5rem" }}>
         <RadarChart
           data={dimensions.map((d) => {
@@ -438,13 +436,13 @@ function HexacoResult({
 
       <div className="quiz-result-actions">
         <button type="button" className="btn btn-primary" onClick={onCopy}>
-          {copyStatus === "copied" ? "✓ 链接已复制" : "📋 复制结果链接"}
+          {copyStatus === "copied" ? t("copied") : t("copyLink")}
         </button>
         <Link href="/#quiz" className="btn btn-ghost">
-          也做 MBTI 测评
+          {t("mbtiLink")}
         </Link>
         <button type="button" className="btn btn-ghost" onClick={onReset}>
-          重新测试
+          {t("retake")}
         </button>
       </div>
 
@@ -453,7 +451,7 @@ function HexacoResult({
         fontSize: "0.82rem",
         color: "var(--text-muted)",
       }}>
-        量表基于 Ashton &amp; Lee (2009) HEXACO-60，是当今学界公认度最高的六维度人格测评工具之一。
+        {t("footnote")}
       </p>
     </div>
   );

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Noto_Serif_SC, Noto_Sans_SC } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import {
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
@@ -23,7 +25,7 @@ const fontDisplayCJK = Noto_Serif_SC({
   weight: ["400", "600", "700"],
   variable: "--font-noto-serif-sc",
   display: "swap",
-  preload: false, // 中文字体体积大，按需加载
+  preload: false,
 });
 
 const fontBody = Noto_Sans_SC({
@@ -55,9 +57,6 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    // QA-V2 P1-NEW-3：补 og:image / twitter:image。
-    // 实际图片由 app/opengraph-image.tsx 通过 next/og 动态生成（1200×630）。
-    // 这里显式声明，避免某些抓取器忽略 file-convention 推断。
     images: [
       {
         url: "/opengraph-image",
@@ -107,29 +106,29 @@ const websiteJsonLd = {
   description: SITE_DESCRIPTION,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const messages = await getMessages();
+
   return (
     <html
       lang="zh-CN"
       className={`${fontDisplayLatin.variable} ${fontDisplayCJK.variable} ${fontBody.variable}`}
       style={
         {
-          // 把 next/font 注入的 CSS 变量绑定到原型 token，保证字体名继续生效
-          // (CSS 里的 var(--font-display) 等仍指向原型那串字符串；这里把 fallback 升级为 next/font)
           ["--font-body" as string]: `var(--font-noto-sans-sc), 'Noto Sans SC', -apple-system, sans-serif`,
           ["--font-display" as string]: `var(--font-cormorant), var(--font-noto-serif-sc), 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif`,
         } as React.CSSProperties
       }
     >
       <body>
-        {/* Skip-to-content：键盘 Tab 第一站 */}
         <a className="skip-to-content" href="#main">
           跳转到主内容
         </a>
-        {children}
-        {/* JSON-LD：Organization + WebSite */}
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

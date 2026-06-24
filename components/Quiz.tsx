@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   DIMENSION_LABELS,
@@ -21,17 +22,19 @@ import RadarChart from "@/components/RadarChart";
 
 type Phase = "intro" | "answering" | "result";
 
-const LIKERT_OPTIONS: { value: LikertScore; label: string; aria: string }[] = [
-  { value: 1, label: "非常不同意", aria: "1 分：非常不同意" },
-  { value: 2, label: "不同意", aria: "2 分：不同意" },
-  { value: 3, label: "中立", aria: "3 分：中立" },
-  { value: 4, label: "同意", aria: "4 分：同意" },
-  { value: 5, label: "非常同意", aria: "5 分：非常同意" },
-];
+function useLikertOptions() {
+  const t = useTranslations("quiz.likert");
+  return [
+    { value: 1 as LikertScore, label: t("0.label"), aria: t("0.aria") },
+    { value: 2 as LikertScore, label: t("1.label"), aria: t("1.aria") },
+    { value: 3 as LikertScore, label: t("2.label"), aria: t("2.aria") },
+    { value: 4 as LikertScore, label: t("3.label"), aria: t("3.aria") },
+    { value: 5 as LikertScore, label: t("4.label"), aria: t("4.aria") },
+  ];
+}
 
 const DIMENSION_ORDER: Dimension[] = ["EI", "SN", "TF", "JP"];
 
-/** 计算「该维度第 N / 7 题」 */
 function dimensionProgress(qIdx: number): { dim: Dimension; nth: number } {
   const q = QUIZ_QUESTIONS[qIdx];
   const sameDim = QUIZ_QUESTIONS.filter((x, i) => x.dimension === q.dimension && i <= qIdx);
@@ -47,7 +50,6 @@ export default function Quiz() {
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
 
-  // ── 从 sessionStorage 恢复（一次性 hydration；setState 是必要的） ──
   useEffect(() => {
     if (hydrated) return;
     if (typeof window === "undefined") return;
@@ -72,19 +74,15 @@ export default function Quiz() {
         }
       }
     } catch {
-      // 解析失败时忽略，重新开始
+      // ignore
     }
-    // React 19 / Next.js 16 在同一 microtask 中会 batch 这些 setState，只触发一次 re-render
-    /* eslint-disable react-hooks/set-state-in-effect */
     if (nextResult) setResult(nextResult);
     if (nextAnswers) setAnswers(nextAnswers);
     if (nextQIdx !== null) setQIdx(nextQIdx);
     if (nextPhase) setPhase(nextPhase);
     setHydrated(true);
-    /* eslint-enable react-hooks/set-state-in-effect */
   }, [hydrated]);
 
-  // ── 持久化 ──
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (Object.keys(answers).length === 0) {
@@ -108,7 +106,6 @@ export default function Quiz() {
     setResult(null);
     setQIdx(0);
     setPhase("answering");
-    // 滚动到 quiz 顶部
     queueMicrotask(() => {
       cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -120,17 +117,14 @@ export default function Quiz() {
     setAnswers(next);
 
     if (qIdx < QUIZ_QUESTIONS.length - 1) {
-      // 给用户视觉反馈：选完之后自动进入下一题（小延迟）
       setTimeout(() => {
         setQIdx((i) => i + 1);
       }, 220);
     } else {
-      // 最后一题：直接出结果
       const r = computeResult(next);
       setTimeout(() => {
         setResult(r);
         setPhase("result");
-        // 写入持久化测评历史（localStorage）
         saveQuizHistory({
           type: "mbti",
           completedAt: Date.now(),
@@ -160,12 +154,12 @@ export default function Quiz() {
     if (!result) return;
     const origin = typeof window !== "undefined" ? window.location.origin : "";
     const typeUrl = `${origin}/types/${result.code}`;
-    const text = `我在心栖 MindNest 测出的人格类型是 ${result.code}。看看你的：${typeUrl}`;
+    const text = t("result.shareText", { code: result.code, url: typeUrl });
     if (typeof navigator !== "undefined" && navigator.share) {
-      void navigator.share({ title: `我是 ${result.code}`, text, url: typeUrl }).catch(() => {});
+      void navigator.share({ title: t("result.shareTitle", { code: result.code }), text, url: typeUrl }).catch(() => {});
     } else if (typeof navigator !== "undefined" && navigator.clipboard) {
       void navigator.clipboard.writeText(text).then(() => {
-        alert("分享文本已复制到剪贴板");
+        alert(t("result.copyAlert"));
       });
     }
   }
@@ -182,6 +176,7 @@ export default function Quiz() {
   }
 
   const totalQ = QUIZ_QUESTIONS.length;
+  const t = useTranslations("quiz");
 
   return (
     <section className="section quiz-bg" id="quiz" aria-labelledby="quiz-title">
@@ -192,20 +187,19 @@ export default function Quiz() {
             style={{ justifyContent: "center" }}
           >
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">互动测评</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="quiz-title">
-            开始你的人格探索之旅
+            {t("title")}
           </h2>
           <p
             className="section-subtitle"
             style={{ marginLeft: "auto", marginRight: "auto" }}
           >
-            请根据你最自然的反应来选择，没有对错之分。真实地回答，才能获得最准确的结果。
+            {t("subtitle")}
           </p>
         </div>
 
-        {/* 交互阶段（answering/result）直接 visible，避免 IntersectionObserver 与 scrollIntoView(smooth) 竞态 */}
         <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
           {phase === "intro" && <IntroPanel onStart={startQuiz} />}
           {phase === "answering" && (
@@ -232,55 +226,40 @@ export default function Quiz() {
   );
 }
 
-/* ────────────────────────────────────────────── */
-/*  Intro Panel                                   */
-/* ────────────────────────────────────────────── */
 function IntroPanel({ onStart }: { onStart: () => void }) {
+  const t = useTranslations("quiz.intro");
+  const stats = t.raw("stats") as { value: string; label: string }[];
+
   return (
     <div className="quiz-card-shell quiz-intro">
       <div className="quiz-meta-dim" aria-hidden="true">
-        准备好了吗
+        {t("ready")}
       </div>
       <h3 className="quiz-question-text" style={{ marginTop: 8 }}>
-        28 道题，约 6-8 分钟，看见更立体的自己
+        {t("heading")}
       </h3>
       <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: 560, margin: "0.75rem auto 0" }}>
-        本测评基于荣格类型学的 4 个核心维度（能量取向、信息加工、决策风格、生活节奏），
-        每个维度 7 题（含正反向题平衡测谎），采用 5 点 Likert 量表评分。
-        请在安静的环境下，凭直觉选择最贴近自己日常状态的选项。
+        {t("desc")}
       </p>
       <div className="quiz-intro-stats">
-        <div className="quiz-intro-stat">
-          <strong>28</strong>
-          道题
-        </div>
-        <div className="quiz-intro-stat">
-          <strong>4</strong>
-          个核心维度
-        </div>
-        <div className="quiz-intro-stat">
-          <strong>5</strong>
-          点 Likert
-        </div>
-        <div className="quiz-intro-stat">
-          <strong>~ 7</strong>
-          分钟
-        </div>
+        {stats.map((s) => (
+          <div className="quiz-intro-stat" key={s.label}>
+            <strong>{s.value}</strong>
+            {s.label}
+          </div>
+        ))}
       </div>
       <button type="button" className="btn btn-primary btn-lg" onClick={onStart}>
-        开始测评
-        <span aria-hidden="true">→</span>
+        {t("start")}
+        <span aria-hidden="true">&#8594;</span>
       </button>
       <p style={{ marginTop: "1rem", fontSize: "0.82rem", color: "var(--text-muted)" }}>
-        测评结果仅保存在你当前浏览器的 sessionStorage 中，刷新不丢；关闭标签页或重新测评会清除。
+        {t("privacyNote")}
       </p>
     </div>
   );
 }
 
-/* ────────────────────────────────────────────── */
-/*  Answering Panel                                */
-/* ────────────────────────────────────────────── */
 function AnsweringPanel({
   qIdx,
   total,
@@ -294,6 +273,9 @@ function AnsweringPanel({
   onPick: (s: LikertScore) => void;
   onPrev: () => void;
 }) {
+  const t = useTranslations("quiz");
+  const ta = useTranslations("quiz.answering");
+  const likert = useLikertOptions();
   const q = QUIZ_QUESTIONS[qIdx];
   const { dim, nth } = dimensionProgress(qIdx);
   const dimLabel = DIMENSION_LABELS[dim];
@@ -304,7 +286,7 @@ function AnsweringPanel({
     <div className="quiz-card-shell">
       <div className="quiz-meta">
         <span className="quiz-meta-dim">
-          {dimLabel} · 第 {nth} / 7 题
+          {ta("dimLabel", { dim: dimLabel, nth })}
         </span>
         <span className="quiz-meta-step">
           {qIdx + 1} / {total}
@@ -316,7 +298,7 @@ function AnsweringPanel({
         aria-valuenow={qIdx + 1}
         aria-valuemin={1}
         aria-valuemax={total}
-        aria-label={`测评进度：第 ${qIdx + 1} 题，共 ${total} 题`}
+        aria-label={ta("progressLabel", { current: qIdx + 1, total })}
       >
         <div className="quiz-progress-fill" style={{ width: `${progress}%` }} />
       </div>
@@ -324,7 +306,7 @@ function AnsweringPanel({
       <p className="quiz-question-text">{q.text}</p>
 
       <div className="likert-row" role="group" aria-label="同意度选项">
-        {LIKERT_OPTIONS.map((opt) => (
+        {likert.map((opt) => (
           <button
             key={opt.value}
             type="button"
@@ -347,21 +329,18 @@ function AnsweringPanel({
           className="btn btn-ghost"
           onClick={onPrev}
           disabled={qIdx === 0}
-          aria-label="返回上一题"
+          aria-label={ta("prevAria")}
         >
-          ← 上一题
+          {ta("prev")}
         </button>
         <span className="quiz-skip-hint">
-          选择即自动进入下一题。最后一题选完会出结果。
+          {ta("skipHint")}
         </span>
       </div>
     </div>
   );
 }
 
-/* ────────────────────────────────────────────── */
-/*  Result Panel                                   */
-/* ────────────────────────────────────────────── */
 function ResultPanel({
   result,
   onReset,
@@ -375,21 +354,22 @@ function ResultPanel({
   onCopy: () => void;
   copyStatus: "idle" | "copied";
 }) {
+  const t = useTranslations("quiz.result");
   const type = useMemo(() => getTypeByCode(result.code), [result.code]);
 
   return (
     <div className="quiz-result" aria-live="polite">
       <div className="quiz-meta-dim" aria-hidden="true">
-        你的人格画像
+        {t("portrait")}
       </div>
       <div className="quiz-result-code">
         {result.code}
         {result.hasAmbiguous ? (
           <span
             style={{ fontSize: "0.4em", marginLeft: 12, color: "var(--text-muted)" }}
-            aria-label="带有游移维度"
+            aria-label={t("ambiguousAria")}
           >
-            · 游移
+            {t("ambiguous")}
           </span>
         ) : null}
       </div>
@@ -398,7 +378,7 @@ function ResultPanel({
       </div>
       {type && <p className="quiz-result-tagline">{type.shortDesc}</p>}
 
-      <div className="dim-bars" aria-label="四维度分布">
+      <div className="dim-bars" aria-label={t("dimLabel")}>
         {DIMENSION_ORDER.map((dim) => {
           const r = result.dimensions[dim];
           return (
@@ -409,7 +389,7 @@ function ResultPanel({
               <div className="dim-bar-head">
                 <span className="dim-bar-name">{DIMENSION_LABELS[dim]}</span>
                 <span className="dim-bar-letters">
-                  {dim[0]} / {dim[1]} → 偏向 {r.letter}
+                  {dim[0]} / {dim[1]} &#8594; {t("dimBarLabel", { dim: DIMENSION_LABELS[dim], letter: r.letter, percent: r.letterPercent })}
                 </span>
               </div>
               <div
@@ -418,7 +398,7 @@ function ResultPanel({
                 aria-valuenow={r.letterPercent}
                 aria-valuemin={50}
                 aria-valuemax={100}
-                aria-label={`${DIMENSION_LABELS[dim]}：偏向 ${r.letter} ${r.letterPercent}%`}
+                aria-label={t("dimBarLabel", { dim: DIMENSION_LABELS[dim], letter: r.letter, percent: r.letterPercent })}
               >
                 <div
                   className="dim-bar-fill"
@@ -431,7 +411,6 @@ function ResultPanel({
         })}
       </div>
 
-      {/* MBTI 四边形雷达图 */}
       <div className="radar-result-wrap" style={{ marginTop: "1.5rem" }}>
         <RadarChart
           data={DIMENSION_ORDER.map((dim) => {
@@ -443,7 +422,7 @@ function ResultPanel({
             };
           })}
           centerLabel={result.code}
-          ariaTitle={`MBTI 四维度雷达图（${result.code}）`}
+          ariaTitle={`MBTI ${t("dimLabel")}（${result.code}）`}
           color="--terracotta"
           size={280}
         />
@@ -451,19 +430,15 @@ function ResultPanel({
 
       {result.hasAmbiguous && (
         <div className="quiz-result-confidence" role="note">
-          <span aria-hidden="true">ℹ️</span>
-          <span>
-            你在某些维度的得分非常接近 50%，说明你在这两种倾向之间游移。
-            这并不代表测评不准，而是你确实兼具两种特质——结果可能受当前情境影响。
-            建议过一段时间再做一次，关注反复出现的模式。
-          </span>
+          <span aria-hidden="true">&#8505;&#65039;</span>
+          <span>{t("confidenceNote")}</span>
         </div>
       )}
 
       {type && (
         <div className="quiz-result-cols">
           <div>
-            <h3>你的天然优势</h3>
+            <h3>{t("strengths")}</h3>
             <ul>
               {type.strengths.map((s) => (
                 <li key={s}>{s}</li>
@@ -471,7 +446,7 @@ function ResultPanel({
             </ul>
           </div>
           <div>
-            <h3>成长方向</h3>
+            <h3>{t("growth")}</h3>
             <ul>
               {type.growth.map((g) => (
                 <li key={g}>{g}</li>
@@ -484,56 +459,22 @@ function ResultPanel({
       <div className="quiz-result-actions">
         {type && (
           <Link href={`/types/${type.code}`} className="btn btn-primary">
-            阅读完整 {type.code} 报告 →
+            {t("readFull", { code: type.code })}
           </Link>
         )}
         <Link href="/types" className="btn btn-ghost">
-          浏览全部 16 类型
+          {t("browseAll")}
         </Link>
         <button type="button" className="btn btn-ghost" onClick={onCopy}>
-          {copyStatus === "copied" ? "✓ 链接已复制" : "📋 复制结果链接"}
+          {copyStatus === "copied" ? t("copied") : t("copyLink")}
         </button>
         <button type="button" className="btn btn-ghost" onClick={onShare}>
-          分享结果
+          {t("share")}
         </button>
         <button type="button" className="btn btn-ghost" onClick={onReset}>
-          重新测试
+          {t("retake")}
         </button>
       </div>
-
-      <div
-        style={{
-          marginTop: "1.5rem",
-          padding: "1.1rem 1.25rem",
-          borderRadius: 14,
-          background: "var(--bg-elev-1, rgba(168, 184, 168, 0.08))",
-          border: "1px solid var(--border-soft, rgba(110, 130, 110, 0.18))",
-          textAlign: "center",
-        }}
-      >
-        <strong style={{ color: "var(--sage-dark)" }}>🌿 继续做大五人格测评</strong>
-        <span style={{ color: "var(--text-secondary)" }}>
-          {" "}— 用学界 BFI-10 量表，再花 60 秒补一个互补视角。{" "}
-        </span>
-        <Link href="/#quiz-bfi10" className="btn btn-primary btn-sm" style={{ marginTop: "0.6rem" }}>
-          继续做大五人格测评 →
-        </Link>
-      </div>
-
-      <p
-        style={{
-          marginTop: "1.25rem",
-          fontSize: "0.82rem",
-          color: "var(--text-muted)",
-        }}
-      >
-        想要更深的认知功能拆解、压力反应模式与职业地图？
-        我们正在打磨「深度报告」服务，
-        <Link href="/#cta-newsletter" style={{ color: "var(--sage-dark)" }}>
-          点击订阅通讯
-        </Link>{" "}
-        在它上线时第一时间收到通知。
-      </p>
     </div>
   );
 }

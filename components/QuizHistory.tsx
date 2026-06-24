@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   clearQuizHistory,
@@ -36,6 +37,7 @@ function fmtTime(ts: number): string {
 }
 
 export default function QuizHistory() {
+  const t = useTranslations("quizHistory");
   const [hydrated, setHydrated] = useState(false);
   const [entries, setEntries] = useState<QuizHistoryEntry[]>([]);
 
@@ -44,7 +46,6 @@ export default function QuizHistory() {
     setHydrated(true);
   }, []);
 
-  // 监听跨标签更新
   useEffect(() => {
     if (typeof window === "undefined") return;
     const onStorage = (e: StorageEvent) => {
@@ -59,7 +60,7 @@ export default function QuizHistory() {
 
   function onClear() {
     if (typeof window === "undefined") return;
-    const ok = window.confirm("确定要清空所有测评历史吗？此操作无法撤销。");
+    const ok = window.confirm(t("confirmClear"));
     if (!ok) return;
     clearQuizHistory();
     setEntries([]);
@@ -75,13 +76,13 @@ export default function QuizHistory() {
         <div className="section-header reveal" style={{ marginBottom: "2rem" }}>
           <div className="section-eyebrow">
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">📜 我的轨迹</span>
+            <span className="tag">{t("tag")}</span>
           </div>
           <h2 className="section-title" id="quiz-history-title">
-            你过往的测评记录
+            {t("title")}
           </h2>
           <p className="section-subtitle">
-            一切结果都只在你这台浏览器里保存。回看时间线，看见自己的变化。
+            {t("subtitle")}
           </p>
         </div>
 
@@ -101,7 +102,7 @@ export default function QuizHistory() {
 
         <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
           <button type="button" className="btn btn-ghost btn-sm" onClick={onClear}>
-            清空历史
+            {t("clear")}
           </button>
         </div>
       </div>
@@ -110,13 +111,14 @@ export default function QuizHistory() {
 }
 
 function MBTIHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: MBTIHistoryResult }) {
+  const t = useTranslations("quizHistory");
   const type = getTypeByCode(result.code);
   return (
     <>
-      <div className="quiz-history-icon" aria-hidden="true">{type?.icon ?? "🧭"}</div>
+      <div className="quiz-history-icon" aria-hidden="true">{type?.icon ?? "🫐"}</div>
       <div className="quiz-history-body">
         <div className="quiz-history-head">
-          <span className="quiz-history-type">MBTI · {result.code}</span>
+          <span className="quiz-history-type">{t("mbtiLabel", { code: result.code })}</span>
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
@@ -125,7 +127,7 @@ function MBTIHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: MB
       </div>
       {type && (
         <Link href={`/types/${type.code}`} className="btn btn-ghost btn-sm">
-          查看
+          {t("view")}
         </Link>
       )}
     </>
@@ -133,7 +135,6 @@ function MBTIHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: MB
 }
 
 function BFI10HistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: BFI10Result }) {
-  // 找最高维度
   let topDim = BIG_FIVE_ORDER[0];
   let topVal = -1;
   for (const d of BIG_FIVE_ORDER) {
@@ -143,25 +144,25 @@ function BFI10HistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: B
     }
   }
   const topMeta = BIG_FIVE_DIMENSIONS[topDim];
+  const t = useTranslations("quizHistory");
   return (
     <>
       <div className="quiz-history-icon" aria-hidden="true">{topMeta.icon}</div>
       <div className="quiz-history-body">
         <div className="quiz-history-head">
-          <span className="quiz-history-type">大五 BFI-10</span>
+          <span className="quiz-history-type">{t("bfi10Label")}</span>
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
           主导维度「{topMeta.name}」{topVal} · O{result.O} C{result.C} E{result.E} A{result.A} N{result.N}
         </div>
       </div>
-      <Link href="/#quiz-bfi10" className="btn btn-ghost btn-sm">再测</Link>
+      <Link href="/#quiz-bfi10" className="btn btn-ghost btn-sm">{t("retake")}</Link>
     </>
   );
 }
 
 function HexacoHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: HexacoResult }) {
-  // 找最高维度
   let topDim = HEXACO_ORDER[0];
   let topVal = -1;
   for (const d of HEXACO_ORDER) {
@@ -171,19 +172,20 @@ function HexacoHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: 
     }
   }
   const topMeta = HEXACO_DIMENSIONS[topDim];
+  const t = useTranslations("quizHistory");
   return (
     <>
       <div className="quiz-history-icon" aria-hidden="true">{topMeta.icon}</div>
       <div className="quiz-history-body">
         <div className="quiz-history-head">
-          <span className="quiz-history-type">HEXACO 六维</span>
+          <span className="quiz-history-type">{t("hexacoLabel")}</span>
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
           主导维度「{topMeta.name}」{topVal} · H{result.H} E{result.E} X{result.X} A{result.A} C{result.C} O{result.O}
         </div>
       </div>
-      <Link href="/hexaco" className="btn btn-ghost btn-sm">再测</Link>
+      <Link href="/hexaco" className="btn btn-ghost btn-sm">{t("retake")}</Link>
     </>
   );
 }

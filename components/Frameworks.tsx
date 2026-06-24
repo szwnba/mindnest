@@ -1,20 +1,23 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { FRAMEWORKS } from "@/lib/data/frameworks";
 
 export default function Frameworks() {
+  const t = useTranslations("frameworks");
+
   return (
     <section className="section" id="frameworks" aria-labelledby="frameworks-title">
       <div className="section-inner">
         <div className="section-header reveal">
           <div className="section-eyebrow">
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">理论基础</span>
+            <span className="tag">{t("eyebrow")}</span>
           </div>
           <h2 className="section-title" id="frameworks-title">
-            权威测评体系
+            {t("title")}
           </h2>
-          <p className="section-subtitle">
-            我们整合了心理学领域最受认可的人格评估框架，从不同角度帮你构建完整的自我认知地图。
-          </p>
+          <p className="section-subtitle">{t("subtitle")}</p>
         </div>
 
         <div className="methods-grid">
