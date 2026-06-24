@@ -21,10 +21,12 @@ export default function Hero() {
             {t("greeting")}
           </div>
           <h1 id="hero-title" className="hero-title">
-            {t.rich("title", {
-              br: () => <br />,
-              em: (chunks) => <em>{chunks}</em>,
-            })}
+            {t("title").split("\\n").map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h1>
           <div className="hero-type-wheel" aria-hidden="true">
             {[
