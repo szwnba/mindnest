@@ -37,10 +37,10 @@
   "trustBar": {
     "title": "平台特点",
     "items": [
-      { "title": "学术理论支撑", "desc": "基于荣格心理类型理论" },
-      { "title": "多维度评估", "desc": "整合多种专业测评体系" },
-      { "title": "持续更新内容", "desc": "定期收录最新研究文献" },
-      { "title": "隐私优先", "desc": "测评数据仅用于个人分析" }
+      { "icon": "🧠", "bgVar": "--accent-blue", "title": "学术理论支撑", "desc": "基于荣格心理类型理论" },
+      { "icon": "📊", "bgVar": "--accent-purple", "title": "多维度评估", "desc": "整合多种专业测评体系" },
+      { "icon": "🔄", "bgVar": "--accent-green", "title": "持续更新内容", "desc": "定期收录最新研究文献" },
+      { "icon": "🔒", "bgVar": "--accent-amber", "title": "隐私优先", "desc": "测评数据仅用于个人分析" }
     ]
   },
   "frameworks": {

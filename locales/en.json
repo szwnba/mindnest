@@ -37,10 +37,10 @@
   "trustBar": {
     "title": "Platform Features",
     "items": [
-      { "title": "Academic Foundation", "desc": "Based on Jungian psychological type theory" },
-      { "title": "Multi-dimensional Evaluation", "desc": "Integrating multiple professional assessment systems" },
-      { "title": "Continuously Updated", "desc": "Regularly收录 latest research literature" },
-      { "title": "Privacy First", "desc": "Assessment data is only used for personal analysis" }
+      { "icon": "🧠", "bgVar": "--accent-blue", "title": "Academic Foundation", "desc": "Based on Jungian psychological type theory" },
+      { "icon": "📊", "bgVar": "--accent-purple", "title": "Multi-dimensional Evaluation", "desc": "Integrating multiple professional assessment systems" },
+      { "icon": "🔄", "bgVar": "--accent-green", "title": "Continuously Updated", "desc": "Regularly收录 latest research literature" },
+      { "icon": "🔒", "bgVar": "--accent-amber", "title": "Privacy First", "desc": "Assessment data is only used for personal analysis" }
     ]
   },
   "frameworks": {
