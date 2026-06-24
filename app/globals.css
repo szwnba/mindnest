@@ -757,9 +757,20 @@ body::before {
   animation: floatCard 7s ease-in-out infinite reverse;
 }
 
+/* 主卡也加入微强浮动 */
+.hfc-main {
+  animation: floatCardMain 10s ease-in-out infinite;
+}
+
 @keyframes floatCard {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(0.5deg); }
+  50% { transform: translateY(-14px) rotate(0deg); }
+  75% { transform: translateY(-6px) rotate(-0.5deg); }
+}
+@keyframes floatCardMain {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-6px); }
 }
 
 .hfc-header {
@@ -2690,7 +2701,14 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   border: 1px solid var(--border);
   font-size: 0.85rem;
   white-space: nowrap;
-  animation: hero-chip-slide 12s linear infinite;
+  animation: hero-chip-slide 12s linear infinite, hero-chip-float 3s ease-in-out infinite;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: default;
+}
+.hero-type-chip:hover {
+  box-shadow: 0 0 20px rgba(90,126,96,0.2), 0 4px 12px rgba(44,36,23,0.08);
+  transform: scale(1.05);
+  z-index: 2;
 }
 .hero-type-chip-code {
   font-weight: 700;
@@ -2703,6 +2721,10 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
 @keyframes hero-chip-slide {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+@keyframes hero-chip-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-type-chip { animation: none; }
@@ -3289,6 +3311,91 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   font-size: 0.85rem;
 }
 .compare-legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+/* 统计概览卡片 */
+.compare-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+.compare-stat-card {
+  text-align: center;
+  padding: 1.25rem 0.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s;
+}
+.compare-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.compare-stat-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.compare-stat-win .compare-stat-value { color: var(--sage-dark); }
+.compare-stat-tie .compare-stat-value { color: var(--warm-gold); }
+.compare-stat-behind .compare-stat-value { color: var(--text-muted); }
+.compare-stat-total .compare-stat-value { color: var(--sky-dark); }
+.compare-stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  color: var(--text-primary);
+}
+.compare-stat-desc {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  margin-top: 0.15rem;
+}
+
+/* 社会证明条 */
+.compare-social-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, var(--sage-bg), var(--sky-bg));
+  border-radius: var(--radius-full);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.csp-avatars {
+  display: flex;
+}
+.csp-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  margin-left: -8px;
+  border: 2px solid var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+}
+.csp-avatar:first-child { margin-left: 0; }
+.csp-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.csp-text strong { color: var(--sage-dark); }
+
+@media (max-width: 640px) {
+  .compare-stats { grid-template-columns: repeat(2, 1fr); }
+  .compare-social-proof { flex-direction: column; text-align: center; gap: 0.5rem; }
+}
 
 /* 桌面端行色条 */
 .compare-table tbody tr.compare-win { border-left: 4px solid var(--sage); }

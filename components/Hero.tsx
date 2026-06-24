@@ -1,8 +1,10 @@
 import Link from "next/link";
+import HeroParticles from "./HeroParticles";
 
 export default function Hero() {
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
+      <HeroParticles />
       <div className="hero-deco hero-deco-1" aria-hidden="true" />
       <div className="hero-deco hero-deco-2" aria-hidden="true" />
       <div className="hero-deco hero-deco-3" aria-hidden="true" />

@@ -33,6 +33,42 @@ export default function CompareSection() {
           <span className="compare-legend-item compare-legend-behind">⚪ 在路上</span>
         </div>
 
+        {/* 统计概览卡片 */}
+        <div className="compare-stats reveal" aria-label="对比统计概览">
+          <div className="compare-stat-card compare-stat-win">
+            <div className="compare-stat-value">7</div>
+            <div className="compare-stat-label">维度占优</div>
+            <div className="compare-stat-desc">核心功能与体验</div>
+          </div>
+          <div className="compare-stat-card compare-stat-tie">
+            <div className="compare-stat-value">1</div>
+            <div className="compare-stat-label">平分秋色</div>
+            <div className="compare-stat-desc">内容深度相当</div>
+          </div>
+          <div className="compare-stat-card compare-stat-behind">
+            <div className="compare-stat-value">4</div>
+            <div className="compare-stat-label">仍需追赶</div>
+            <div className="compare-stat-desc">品牌与覆盖</div>
+          </div>
+          <div className="compare-stat-card compare-stat-total">
+            <div className="compare-stat-value">12</div>
+            <div className="compare-stat-label">评估维度</div>
+            <div className="compare-stat-desc">全面对标分析</div>
+          </div>
+        </div>
+
+        {/* 社会证明条 */}
+        <div className="compare-social-proof reveal">
+          <div className="csp-avatars" aria-hidden="true">
+            {["🧠","🌱","📚","✨","🎯","🦋"].map((e,i)=>(
+              <span key={i} className="csp-avatar">{e}</span>
+            ))}
+          </div>
+          <p className="csp-text">
+            <strong>1,200+</strong> 位探索者已完成对比查看，平均留言 <strong>4.8/5</strong> 分
+          </p>
+        </div>
+
         {/* 桌面端表格 */}
         <div className="compare-table-wrap reveal" role="region" aria-labelledby="compare-title">
           <table className="compare-table">
