@@ -410,7 +410,7 @@ function HexacoResult({
                 marginTop: "0.4rem",
                 lineHeight: 1.6,
               }}>
-                {level === "高" ? meta.high : level === "低" ? meta.low : `${meta.description}（处于平衡区）`}
+                {level === "高" ? meta.high : level === "低" ? meta.low : meta.medium}
               </p>
             </div>
           );

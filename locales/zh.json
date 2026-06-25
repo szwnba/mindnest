@@ -253,7 +253,7 @@
       { "value": "5", "label": "仍需追赶", "desc": "品牌、覆盖与社区" },
       { "value": "13", "label": "评估维度", "desc": "全面对标分析" }
     ],
-    "socialProof": "<strong>1,200+</strong> 位探索者已完成对比查看，平均留言 <strong>4.8/5</strong> 分",
+    "socialProof": "这份对比由创始团队亲手撰写，不是市场部门的产物。我们宁可把弱点也摊开给你看。",
     "tableCaption": "MindNest 与 16Personalities 在 13 个维度上的对比",
     "colDim": "维度",
     "colUs": "MindNest（心栖）",
