@@ -243,11 +243,11 @@
     "stats": [
       { "value": "7", "label": "Dimensions Ahead", "desc": "Core features & experience" },
       { "value": "1", "label": "Even Match", "desc": "Comparable content depth" },
-      { "value": "4", "label": "Still Catching Up", "desc": "Brand & coverage" },
-      { "value": "12", "label": "Evaluated Dimensions", "desc": "Comprehensive benchmarking" }
+      { "value": "5", "label": "Still Catching Up", "desc": "Brand, coverage & community" },
+      { "value": "13", "label": "Evaluated Dimensions", "desc": "Comprehensive benchmarking" }
     ],
     "socialProof": "<strong>1,200+</strong> explorers have viewed the comparison, with an average rating of <strong>4.8/5</strong>",
-    "tableCaption": "Comparison of MindNest and 16Personalities across 12 dimensions",
+    "tableCaption": "Comparison of MindNest and 16Personalities across 13 dimensions",
     "colDim": "Dimension",
     "colUs": "MindNest",
     "colThem": "16Personalities",
@@ -263,7 +263,7 @@
     "eyebrow": "Featured Resources",
     "tag": "Featured Resources",
     "title": "Personality Research Library",
-    "subtitle": "Regularly收录 the latest and most professional personality psychology research and practical applications to help you continuously deepen your understanding of personality.",
+    "subtitle": "Regularly includes the latest and most professional personality psychology research and practical applications to help you continuously deepen your understanding of personality.",
     "featuredSoon": "✦ Full version coming soon, stay tuned",
     "comingSoon": "Coming soon"
   },
