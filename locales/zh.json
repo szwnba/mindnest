@@ -185,7 +185,7 @@
     "subtitle": "HEXACO 是当今学界认可度最高的人格模型之一，在大五人格基础上增加了「诚实-谦逊」维度，并对「宜人性」进行了更精确的重构。每个维度 10 题，覆盖 H、E、X、A、C、O 六大维度。",
     "intro": {
       "ready": "准备好了吗",
-      "heading": "60 题码，6 维度，全景人格画像",
+      "heading": "60 道题，6 维度，全景人格画像",
       "desc": "本量表为 HEXACO-60 简化中文版，每个维度 10 题（含反向计分题）。请凭直觉作答，不必反复捎酌。没有对错之分，选择最符合你平时状态的选项即可。",
       "stats": [
         { "value": "60", "label": "道题" },
@@ -250,11 +250,11 @@
     "stats": [
       { "value": "7", "label": "维度占优", "desc": "核心功能与体验" },
       { "value": "1", "label": "平分秋色", "desc": "内容深度相当" },
-      { "value": "4", "label": "仍需追赶", "desc": "品牌与覆盖" },
-      { "value": "12", "label": "评估维度", "desc": "全面对标分析" }
+      { "value": "5", "label": "仍需追赶", "desc": "品牌、覆盖与社区" },
+      { "value": "13", "label": "评估维度", "desc": "全面对标分析" }
     ],
     "socialProof": "<strong>1,200+</strong> 位探索者已完成对比查看，平均留言 <strong>4.8/5</strong> 分",
-    "tableCaption": "MindNest 与 16Personalities 在 12 个维度上的对比",
+    "tableCaption": "MindNest 与 16Personalities 在 13 个维度上的对比",
     "colDim": "维度",
     "colUs": "MindNest（心栖）",
     "colThem": "16Personalities",
