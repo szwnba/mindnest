@@ -23,6 +23,10 @@ import {
 } from "@/lib/bfi10-scoring";
 import { saveQuizHistory } from "@/lib/quiz-storage";
 import RadarChart from "@/components/RadarChart";
+import InsightSection from "@/components/InsightSection";
+import CareerSection from "@/components/CareerSection";
+import { getBfi10Insights } from "@/lib/personality-insights";
+import { getBfi10Careers } from "@/lib/career-matches";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -325,6 +329,8 @@ function Bfi10Result({
 }) {
   const t = useTranslations("quizBFI10.result");
   const dimensions: BigFiveDimension[] = useMemo(() => BIG_FIVE_ORDER, []);
+  const insight = useMemo(() => getBfi10Insights(result), [result]);
+  const careers = useMemo(() => getBfi10Careers(result), [result]);
 
   return (
     <div className="quiz-result" aria-live="polite">
@@ -337,6 +343,12 @@ function Bfi10Result({
       <p className="quiz-result-tagline">
         {t("tagline")}
       </p>
+
+      {/* 洞察叙事引擎 */}
+      <InsightSection insight={insight} />
+
+      {/* 职业匹配引擎 */}
+      <CareerSection careers={careers} />
 
       <div className="dim-bars" aria-label="大五人格五维度分布">
         {dimensions.map((d) => {

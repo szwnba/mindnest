@@ -255,9 +255,9 @@
       "behind": "⚪ 在路上"
     },
     "stats": [
-      { "value": "7", "label": "维度占优", "desc": "核心功能与体验" },
+      { "value": "8", "label": "维度占优", "desc": "核心功能与体验" },
       { "value": "1", "label": "平分秋色", "desc": "内容深度相当" },
-      { "value": "5", "label": "仍需追赶", "desc": "品牌、覆盖与社区" },
+      { "value": "4", "label": "仍需追赶", "desc": "品牌、覆盖与社区" },
       { "value": "13", "label": "评估维度", "desc": "全面对标分析" }
     ],
     "socialProof": "这份对比由创始团队亲手撰写，不是市场部门的产物。我们宁可把弱点也摊开给你看。",
@@ -332,11 +332,22 @@
       }
     ],
     "bottom": {
-      "copyright": "© 2025 心栖 MindNest · 人格探索实验室",
+      "copyright": "© 2026 心栖 MindNest · 人格探索实验室",
       "privacy": "隐私政策",
       "terms": "使用条款",
       "contact": "联系我们"
     }
+  },
+  "insights": {
+    "standoutTitle": "🌟 突出数据",
+    "strengthsTitle": "💪 核心优势",
+    "blindSpotTitle": "💡 自我盲区",
+    "driversTitle": "⚡ 能量来源",
+    "drainersTitle": "🌀 能量消耗"
+  },
+  "careers": {
+    "title": "💼 推荐职业方向",
+    "topPick": "🥇 最匹配"
   },
   "share": {
     "resultFor": "{type} 测评结果",

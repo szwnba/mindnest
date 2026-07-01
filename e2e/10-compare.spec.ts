@@ -29,7 +29,7 @@ test.describe("CompareSection — 我们 vs 16Personalities", () => {
     await expect(navLink).toHaveText("对比");
   });
 
-  test("/compare 独立页面返回 200 且渲染完整 12 项", async ({ page }) => {
+  test("/compare 独立页面返回 200 且渲染完整 13 项", async ({ page }) => {
     const resp = await page.goto("/compare");
     expect(resp?.status()).toBe(200);
     await expect(page.locator("h1")).toContainText(

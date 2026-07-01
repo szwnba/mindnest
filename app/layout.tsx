@@ -9,7 +9,7 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from "@/lib/site";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
 /* ─── Fonts via next/font (自动子集化 + self-host，修复 QA §5.2) ─── */

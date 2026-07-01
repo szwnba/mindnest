@@ -20,6 +20,10 @@ import {
 } from "@/lib/hexaco-scoring";
 import { saveQuizHistory } from "@/lib/quiz-storage";
 import RadarChart from "@/components/RadarChart";
+import InsightSection from "@/components/InsightSection";
+import CareerSection from "@/components/CareerSection";
+import { getHexacoInsights } from "@/lib/personality-insights";
+import { getHexacoCareers } from "@/lib/career-matches";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -365,6 +369,8 @@ function HexacoResult({
 }) {
   const t = useTranslations("quizHexaco.result");
   const dimensions: HexacoDimension[] = useMemo(() => HEXACO_ORDER, []);
+  const insight = useMemo(() => getHexacoInsights(result), [result]);
+  const careers = useMemo(() => getHexacoCareers(result), [result]);
 
   return (
     <div className="quiz-result" aria-live="polite">
@@ -377,6 +383,12 @@ function HexacoResult({
       <p className="quiz-result-tagline">
         {t("tagline")}
       </p>
+
+      {/* 洞察叙事引擎 */}
+      <InsightSection insight={insight} />
+
+      {/* 职业匹配引擎 */}
+      <CareerSection careers={careers} />
 
       <div className="dim-bars" aria-label="HEXACO 六维度分布">
         {dimensions.map((d) => {

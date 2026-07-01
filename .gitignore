@@ -8,3 +8,5 @@ playwright/.cache/
 .vercel
 *.log
 .DS_Store
+coverage/
+.turbo/

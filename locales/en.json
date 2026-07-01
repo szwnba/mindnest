@@ -255,9 +255,9 @@
       "behind": "⚪ In Progress"
     },
     "stats": [
-      { "value": "7", "label": "Dimensions Ahead", "desc": "Core features & experience" },
+      { "value": "8", "label": "Dimensions Ahead", "desc": "Core features & experience" },
       { "value": "1", "label": "Even Match", "desc": "Comparable content depth" },
-      { "value": "5", "label": "Still Catching Up", "desc": "Brand, coverage & community" },
+      { "value": "4", "label": "Still Catching Up", "desc": "Brand, coverage & community" },
       { "value": "13", "label": "Evaluated Dimensions", "desc": "Comprehensive benchmarking" }
     ],
     "socialProof": "This comparison was written by the founding team, not a marketing department. We'd rather show you our weaknesses too.",
@@ -332,15 +332,26 @@
       }
     ],
     "bottom": {
-      "copyright": "© 2025 MindNest · Personality Exploration Lab",
+      "copyright": "© 2026 MindNest · Personality Exploration Lab",
       "privacy": "Privacy Policy",
       "terms": "Terms of Use",
       "contact": "Contact Us"
     }
   },
+  "insights": {
+    "standoutTitle": "🌟 Standout Stats",
+    "strengthsTitle": "💪 Signature Strengths",
+    "blindSpotTitle": "💡 Blind Spot",
+    "driversTitle": "⚡ Energy Drivers",
+    "drainersTitle": "🌀 Energy Drainers"
+  },
+  "careers": {
+    "title": "💼 Recommended Career Paths",
+    "topPick": "🥇 Top Match"
+  },
   "share": {
-    "resultFor": "{type} Result",
-    "ogDescription": "My {type} personality type is {code}. Discover yours!",
+    "resultFor": "{type} Test Result",
+    "ogDescription": "My {type} personality type is {code}. Take the free test to find yours.",
     "shareOnX": "Share on X",
     "takeTest": "Take the test"
   }
