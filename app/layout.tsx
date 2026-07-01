@@ -9,6 +9,7 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from "@/lib/site";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./globals.css";
 
 /* ─── Fonts via next/font (自动子集化 + self-host，修复 QA §5.2) ─── */
@@ -85,7 +86,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
+    apple: "/icon-192.png",
   },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "心栖",
+  },
+  category: "lifestyle",
 };
 
 const orgJsonLd = {
@@ -127,7 +136,7 @@ export default async function RootLayout({
           跳转到主内容
         </a>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
         </NextIntlClientProvider>
         <script
           type="application/ld+json"

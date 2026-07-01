@@ -1,0 +1,24 @@
+{
+  "name": "心栖 MindNest — 专业人格心理测评平台",
+  "short_name": "心栖",
+  "description": "基于 MBTI、大五人格等经典科学量表的人格分析、自我探索与成长建议",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF7F1",
+  "theme_color": "#7C9A82",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["lifestyle", "education"],
+  "lang": "zh-CN"
+}
