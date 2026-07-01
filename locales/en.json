@@ -337,5 +337,11 @@
       "terms": "Terms of Use",
       "contact": "Contact Us"
     }
+  },
+  "share": {
+    "resultFor": "{type} Result",
+    "ogDescription": "My {type} personality type is {code}. Discover yours!",
+    "shareOnX": "Share on X",
+    "takeTest": "Take the test"
   }
 }

@@ -337,5 +337,11 @@
       "terms": "使用条款",
       "contact": "联系我们"
     }
+  },
+  "share": {
+    "resultFor": "{type} 测评结果",
+    "ogDescription": "我的 {type} 人格类型是 {code}。来测测你的是什么？",
+    "shareOnX": "分享到 X",
+    "takeTest": "我也测一下"
   }
 }
