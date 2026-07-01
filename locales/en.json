@@ -14,7 +14,8 @@
     "freeQuiz": "Free Assessment",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "homeAria": "MindNest homepage"
+    "homeAria": "MindNest homepage",
+    "profile": "My Profile"
   },
   "hero": {
     "greeting": "Professional Personality Assessment Platform",
@@ -201,7 +202,10 @@
         { "value": "~ 8min", "label": "" }
       ],
       "start": "Start HEXACO Assessment",
-      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded."
+      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded.",
+      "resumeTitle": "You have a saved session",
+      "resumeProgress": "{answered} questions already answered",
+      "resumeBtn": "Resume"
     },
     "answering": {
       "pageLabel": "Page {current} / {total}",
@@ -337,6 +341,19 @@
       "terms": "Terms of Use",
       "contact": "Contact Us"
     }
+  },
+  "profile": {
+    "title": "🧬 My Personality Profile",
+    "loading": "Loading...",
+    "emptySubtitle": "Complete at least one test to generate your profile.",
+    "subtitle": "You've completed {count} tests — here's a unified view of all results",
+    "emptyHint": "Once you finish a test, this space will populate with your cross-framework personality portrait.",
+    "startFirstTest": "Start your first test",
+    "dimCount": "{count} dimensions",
+    "viewResult": "View result",
+    "startTest": "Start test",
+    "continueTest": "Continue",
+    "inProgress": "In progress"
   },
   "insights": {
     "standoutTitle": "🌟 Standout Stats",

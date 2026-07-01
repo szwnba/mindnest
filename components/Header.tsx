@@ -20,6 +20,7 @@ export default function Header() {
     { href: "/#types", label: t("types") },
     { href: "/#quiz", label: t("startQuiz") },
     { href: "/hexaco", label: t("hexaco") },
+    { href: "/profile", label: t("profile") },
     { href: "/#resources", label: t("resources") },
     { href: "/#compare", label: t("compare") },
     { href: "/#faq", label: t("faq") },

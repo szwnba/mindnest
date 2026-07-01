@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
 import {
   HEXACO_QUESTIONS,
   HEXACO_DIMENSIONS,
@@ -198,7 +198,15 @@ export default function QuizHexaco() {
         </div>
 
         <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
-          {phase === "intro" && <HexacoIntro onStart={startQuiz} />}
+          {phase === "intro" && (
+            <HexacoIntro
+              onStart={startQuiz}
+              answersRef={answersRef}
+              setAnswers={setAnswers}
+              setPage={setPage}
+              setPhase={setPhase}
+            />
+          )}
           {phase === "answering" && (
             <HexacoAnswering
               page={page}
@@ -227,12 +235,67 @@ function getPageQuestions(pageIndex: number) {
   return HEXACO_QUESTIONS.slice(start, start + QUESTIONS_PER_PAGE);
 }
 
-function HexacoIntro({ onStart }: { onStart: () => void }) {
+function HexacoIntro({
+  onStart,
+  answersRef: ref,
+  setAnswers: setAns,
+  setPage: setPg,
+  setPhase: setPh,
+}: {
+  onStart: () => void;
+  answersRef: MutableRefObject<HexacoAnswers>;
+  setAnswers: Dispatch<SetStateAction<HexacoAnswers>>;
+  setPage: Dispatch<SetStateAction<number>>;
+  setPhase: Dispatch<SetStateAction<Phase>>;
+}) {
   const t = useTranslations("quizHexaco.intro");
   const stats = t.raw("stats") as { value: string; label: string }[];
+  const savedAnswers = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = window.sessionStorage.getItem("mindnest:hexaco-answers-v1");
+      if (raw) return Object.keys(JSON.parse(raw)).length;
+    } catch { /* ignore */ }
+    return null;
+  }, []);
+  const hasSaved = savedAnswers && savedAnswers > 0;
 
   return (
     <div className="quiz-card-shell hexaco-intro">
+      {hasSaved && (
+        <div className="resume-banner">
+          <div className="resume-banner-text">
+            <span className="resume-banner-title">{t("resumeTitle")}</span>
+            <span className="resume-banner-progress">
+              {t("resumeProgress", { answered: savedAnswers })}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={() => {
+              // Load saved answers and jump to next unanswered
+              try {
+                const raw = window.sessionStorage.getItem("mindnest:hexaco-answers-v1");
+                if (raw) {
+                  const parsed = JSON.parse(raw) as HexacoAnswers;
+                  ref.current = parsed;
+                  setAns(parsed);
+                  const answeredCount = Object.keys(parsed).length;
+                  const pageIndex = Math.min(
+                    Math.floor(answeredCount / QUESTIONS_PER_PAGE),
+                    TOTAL_PAGES - 1
+                  );
+                  setPg(pageIndex);
+                  setPh("answering");
+                }
+              } catch { /* ignore */ }
+            }}
+          >
+            {t("resumeBtn")}
+          </button>
+        </div>
+      )}
       <div className="quiz-meta-dim" aria-hidden="true">
         {t("ready")}
       </div>

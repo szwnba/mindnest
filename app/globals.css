@@ -4184,6 +4184,200 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
   /* 复用 .likert-row 基础布局 */
 }
 
+/* ─── Profile Page ──────────────────────────────────────────────── */
+
+.profile-loading {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4rem 0;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.profile-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.profile-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.profile-empty {
+  text-align: center;
+  padding: 3rem 0;
+}
+.profile-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+.profile-empty p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.profile-card {
+  background: #fff;
+  border: 1px solid var(--mist);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+[data-theme="dark"] .profile-card,
+.dark .profile-card {
+  background: rgba(255, 255, 255, 0.04);
+}
+.profile-card.is-pending {
+  opacity: 0.7;
+}
+
+.profile-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.profile-card-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+.profile-card-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.profile-card-dims {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.profile-card-dims-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.profile-dim-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.profile-dim-letter {
+  width: 16px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.profile-dim-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+[data-theme="dark"] .profile-dim-bar,
+.dark .profile-dim-bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+.profile-dim-fill {
+  height: 100%;
+  background: var(--sage, #5a9c7f);
+  border-radius: 999px;
+}
+.profile-dim-level {
+  width: 16px;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.profile-dim-level--高, .profile-dim-level--high { color: var(--sage); }
+.profile-dim-level--中, .profile-dim-level--medium { color: var(--gold, #d4a853); }
+.profile-dim-level--低, .profile-dim-level--low { color: var(--text-muted); }
+
+.profile-card-mbti-code {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--sage);
+  padding: 0.5rem;
+}
+
+.profile-card-action {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.profile-inprogress-badge {
+  font-size: 0.7rem;
+  color: var(--gold, #b8860b);
+  font-weight: 600;
+  background: rgba(212, 168, 83, 0.12);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.btn-sm {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Resume Banner (Plum 式) ──────────────────────────────────── */
+
+.resume-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(245, 235, 210, 0.35) 0%, rgba(230, 220, 200, 0.25) 100%);
+  border: 1px solid var(--mist);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+[data-theme="dark"] .resume-banner,
+.dark .resume-banner {
+  background: rgba(255, 255, 255, 0.04);
+}
+.resume-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.resume-banner-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.resume-banner-progress {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
 /* ─── Insight & Career Sections ─────────────────────────────────── */
 
 /* Narrative block */

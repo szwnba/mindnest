@@ -14,7 +14,8 @@
     "freeQuiz": "免费测评",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
-    "homeAria": "心栖 MindNest 首页"
+    "homeAria": "心栖 MindNest 首页",
+    "profile": "我的档案"
   },
   "hero": {
     "greeting": "专业人格心理测评平台",
@@ -201,7 +202,10 @@
         { "value": "~ 8min", "label": "" }
       ],
       "start": "开始 HEXACO 测评",
-      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。"
+      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。",
+      "resumeTitle": "已保存部分进度",
+      "resumeProgress": "已作答 {answered} 题",
+      "resumeBtn": "继续测评"
     },
     "answering": {
       "pageLabel": "第 {current} / {total} 页",
@@ -337,6 +341,19 @@
       "terms": "使用条款",
       "contact": "联系我们"
     }
+  },
+  "profile": {
+    "title": "🧬 我的人格档案",
+    "loading": "加载中...",
+    "emptySubtitle": "完成至少一项测试后，档案将自动出现。",
+    "subtitle": "你已完成 {count} 项测评，以下是全部结果的汇总视图",
+    "emptyHint": "完成一项测试后，这里会显示你的完整跨框架人格画像。",
+    "startFirstTest": "开始第一项测评",
+    "dimCount": "{count} 维度",
+    "viewResult": "查看详情",
+    "startTest": "开始测评",
+    "continueTest": "继续测评",
+    "inProgress": "未完成"
   },
   "insights": {
     "standoutTitle": "🌟 突出数据",
