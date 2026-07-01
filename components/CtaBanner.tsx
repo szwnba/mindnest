@@ -11,7 +11,6 @@ export default function CtaBanner() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email) return;
-    console.log("[MindNest] newsletter subscribe (mock):", email);
     setSubmitted(true);
   }
 

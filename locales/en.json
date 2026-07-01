@@ -93,7 +93,7 @@
     "subtitle": "Please choose based on your most natural response; there is no right or wrong. Answer authentically for the most accurate results.",
     "intro": {
       "ready": "Ready?",
-      "heading": "28 questions, about 6-8 minutes, see a more立体 yourself",
+      "heading": "28 questions, about 6-8 minutes, see a more complete version of yourself",
       "desc": "This assessment is based on 4 core dimensions of Jungian typology (energy orientation, information processing, decision style, life rhythm), with 7 questions per dimension (including reverse-scored items for lie detection), using a 5-point Likert scale. Please choose the option that best matches your daily state in a quiet environment, based on intuition.",
       "stats": [
         { "value": "28", "label": "Questions" },
@@ -162,6 +162,13 @@
       "prevAria": "Go back to previous question",
       "skipHint": "Selection automatically advances to the next question."
     },
+    "likert": [
+      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
+      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
+      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
+      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
+      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+    ],
     "result": {
       "portrait": "Your Big Five Portrait",
       "distribution": "🌿 Five-dimension Distribution",
@@ -206,6 +213,13 @@
       "finish": "View results →",
       "finishAria": "Complete assessment"
     },
+    "likert": [
+      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
+      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
+      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
+      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
+      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+    ],
     "result": {
       "portrait": "Your HEXACO Six-dimension Portrait",
       "distribution": "🤝 Six-dimension Distribution",

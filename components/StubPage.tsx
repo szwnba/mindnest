@@ -19,7 +19,7 @@ export default function StubPage({
     <>
       <Header />
       <main id="main">
-        <section className="section">
+        <section className="section" aria-labelledby="stub-title">
           <div
             className="section-inner"
             style={{
@@ -37,6 +37,7 @@ export default function StubPage({
               <span className="tag">{eyebrow}</span>
             </div>
             <h1
+              id="stub-title"
               className="section-title"
               style={{ marginLeft: "auto", marginRight: "auto" }}
             >

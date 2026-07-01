@@ -35,13 +35,13 @@ export default function SharedResultBanner() {
     return (
       <div className="shared-result-banner" role="region" aria-label="朋友分享的测评结果">
         <div className="shared-result-banner-inner">
-          <span className="shared-result-banner-icon" aria-hidden="true">{(type as unknown as Record<string, string>).icon}</span>
+          <span className="shared-result-banner-icon" aria-hidden="true">{type.icon}</span>
           <div className="shared-result-banner-text">
-            <strong>你的朋友是 {(type as unknown as Record<string, string>).code} · {(type as unknown as Record<string, string>).nameZh}</strong>
-            <span>{(type as unknown as Record<string, string>).shortDesc}</span>
+            <strong>你的朋友是 {type.code} · {type.nameZh}</strong>
+            <span>{type.shortDesc}</span>
           </div>
           <div className="shared-result-banner-actions">
-            <Link href={`/types/${(type as unknown as Record<string, string>).code}`} className="btn btn-primary btn-sm">
+            <Link href={`/types/${type.code}`} className="btn btn-primary btn-sm">
               查看类型详情
             </Link>
             <Link href="/#quiz" className="btn btn-ghost btn-sm">

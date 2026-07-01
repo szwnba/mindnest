@@ -162,6 +162,13 @@
       "prevAria": "返回上一题",
       "skipHint": "选择即自动进入下一题。"
     },
+    "likert": [
+      { "value": 1, "label": "非常不同意", "aria": "1 分：非常不同意" },
+      { "value": 2, "label": "不同意", "aria": "2 分：不同意" },
+      { "value": 3, "label": "中立", "aria": "3 分：中立" },
+      { "value": 4, "label": "同意", "aria": "4 分：同意" },
+      { "value": 5, "label": "非常同意", "aria": "5 分：非常同意" }
+    ],
     "result": {
       "portrait": "你的大五人格画像",
       "distribution": "🌿 五维度分布",
