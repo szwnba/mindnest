@@ -155,7 +155,10 @@
         { "value": "~ 60s", "label": "" }
       ],
       "start": "开始大五测评",
-      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。"
+      "privacyNote": "测评结果保存在你浏览器本地（localStorage 历史 + sessionStorage 当前进度），不会上传。",
+      "resumeTitle": "已保存部分进度",
+      "resumeProgress": "已作答 {answered} 题",
+      "resumeBtn": "继续测评"
     },
     "answering": {
       "progressLabel": "大五测评进度：第 {current} 题，共 {total} 题",

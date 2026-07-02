@@ -183,7 +183,14 @@ export default function QuizBFI10() {
         </div>
 
         <div ref={cardRef} className={`quiz-wrapper reveal ${phase !== "intro" ? "visible" : ""}`}>
-          {phase === "intro" && <Bfi10Intro onStart={startQuiz} />}
+          {phase === "intro" && (
+            <Bfi10Intro
+              onStart={startQuiz}
+              setAnswers={setAnswers}
+              setQIdx={setQIdx}
+              setPhase={setPhase}
+            />
+          )}
           {phase === "answering" && (
             <Bfi10Answering
               qIdx={qIdx}
@@ -207,12 +214,58 @@ export default function QuizBFI10() {
   );
 }
 
-function Bfi10Intro({ onStart }: { onStart: () => void }) {
+function Bfi10Intro({
+  onStart,
+  setAnswers: setAns,
+  setQIdx: setQ,
+  setPhase: setPh,
+}: {
+  onStart: () => void;
+  setAnswers: (a: BFI10Answers) => void;
+  setQIdx: (n: number) => void;
+  setPhase: (p: Phase) => void;
+}) {
   const t = useTranslations("quizBFI10.intro");
   const stats = t.raw("stats") as { value: string; label: string }[];
+  const savedAnswers = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = window.sessionStorage.getItem("mindnest:bfi10-answers-v1");
+      if (raw) return Object.keys(JSON.parse(raw)).length;
+    } catch { /* ignore */ }
+    return null;
+  }, []);
+  const hasSaved = savedAnswers && savedAnswers > 0;
 
   return (
     <div className="quiz-card-shell bfi10-intro">
+      {hasSaved && (
+        <div className="resume-banner">
+          <div className="resume-banner-text">
+            <span className="resume-banner-title">{t("resumeTitle")}</span>
+            <span className="resume-banner-progress">
+              {t("resumeProgress", { answered: savedAnswers })}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={() => {
+              try {
+                const raw = window.sessionStorage.getItem("mindnest:bfi10-answers-v1");
+                if (raw) {
+                  const parsed = JSON.parse(raw) as BFI10Answers;
+                  setAns(parsed);
+                  setQ(Object.keys(parsed).length);
+                  setPh("answering");
+                }
+              } catch { /* ignore */ }
+            }}
+          >
+            {t("resumeBtn")}
+          </button>
+        </div>
+      )}
       <div className="quiz-meta-dim" aria-hidden="true">
         {t("ready")}
       </div>

@@ -155,7 +155,10 @@
         { "value": "~ 60s", "label": "" }
       ],
       "start": "Start Big Five Assessment",
-      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded."
+      "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded.",
+      "resumeTitle": "You have a saved session",
+      "resumeProgress": "{answered} questions already answered",
+      "resumeBtn": "Resume"
     },
     "answering": {
       "progressLabel": "Big Five progress: Question {current} of {total}",
