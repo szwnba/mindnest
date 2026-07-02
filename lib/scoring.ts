@@ -169,37 +169,3 @@ export function computeResult(answers: Answers): QuizResult {
 
 export const STORAGE_KEY = "mindnest:quiz-result-v1";
 export const ANSWERS_STORAGE_KEY = "mindnest:quiz-answers-v1";
-
-/* ──────────────────────────────────────────────────────────
- * dev-only 自检：启动时打印 all-5 / all-1 / all-3 三个用例，
- * 用于回归 P0 计分修复（QA-V2 P0-NEW-1）。
- * 仅在 NODE_ENV === "development" 时执行（生产环境会被 dead-code 消除）。
- * ────────────────────────────────────────────────────────── */
-if (process.env.NODE_ENV === "development") {
-  const cases: { name: string; answers: Answers }[] = [
-    {
-      name: "all-5",
-      answers: Object.fromEntries(
-        QUIZ_QUESTIONS.map((q) => [q.id, 5 as LikertScore]),
-      ) as Answers,
-    },
-    {
-      name: "all-1",
-      answers: Object.fromEntries(
-        QUIZ_QUESTIONS.map((q) => [q.id, 1 as LikertScore]),
-      ) as Answers,
-    },
-    {
-      name: "all-3",
-      answers: Object.fromEntries(
-        QUIZ_QUESTIONS.map((q) => [q.id, 3 as LikertScore]),
-      ) as Answers,
-    },
-  ];
-  for (const c of cases) {
-    const r = computeResult(c.answers);
-    console.log(
-      `[scoring-test] ${c.name}: code=${r.code} hasAmbiguous=${r.hasAmbiguous} pct=${r.dimensions.EI.letterPercent}/${r.dimensions.SN.letterPercent}/${r.dimensions.TF.letterPercent}/${r.dimensions.JP.letterPercent}`,
-    );
-  }
-}

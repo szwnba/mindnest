@@ -11,7 +11,7 @@ test.describe("CompareSection — 我们 vs 16Personalities", () => {
     );
   });
 
-  test("表格有 11 行对比数据（桌面端 viewport）", async ({ page }) => {
+  test("表格有 13 行对比数据（桌面端 viewport）", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     const rows = page.locator(".compare-table tbody tr");

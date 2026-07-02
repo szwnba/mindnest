@@ -243,10 +243,10 @@ function HexacoIntro({
   setPhase: setPh,
 }: {
   onStart: () => void;
-  answersRef: MutableRefObject<HexacoAnswers>;
-  setAnswers: Dispatch<SetStateAction<HexacoAnswers>>;
-  setPage: Dispatch<SetStateAction<number>>;
-  setPhase: Dispatch<SetStateAction<Phase>>;
+  answersRef: { current: HexacoAnswers };
+  setAnswers: (a: HexacoAnswers) => void;
+  setPage: (n: number) => void;
+  setPhase: (p: Phase) => void;
 }) {
   const t = useTranslations("quizHexaco.intro");
   const stats = t.raw("stats") as { value: string; label: string }[];
