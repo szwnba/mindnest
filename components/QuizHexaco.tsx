@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   HEXACO_QUESTIONS,
   HEXACO_DIMENSIONS,

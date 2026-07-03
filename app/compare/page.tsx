@@ -19,6 +19,30 @@ const HIGHLIGHT_BADGE: Record<string, { text: string; cls: string }> = {
 export default function ComparePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "我们与 16Personalities 的不同 · 完整对比",
+            "description": "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
+            "author": {
+              "@type": "Organization",
+              "name": "心栖 MindNest"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "心栖 MindNest",
+              "url": "https://mindnest-six.vercel.app"
+            },
+            "about": {
+              "@type": "CreativeWork",
+              "name": "人格心理测评平台对比"
+            }
+          })
+        }}
+      />
       <Header />
       <main id="main" className="compare-page">
         <nav className="compare-page-breadcrumb" aria-label="面包屑">

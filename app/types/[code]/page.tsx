@@ -63,7 +63,33 @@ export default async function TypeDetailPage({ params }: PageProps) {
   return (
     <>
       <Header />
-      <main id="main" className="type-detail">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "name": `${type.code} · ${type.nameZh}（${type.nameEn}）`,
+            "description": `心栖 MindNest - ${type.code} ${type.nameZh} 人格类型详解：${type.description.slice(0, 100)}`,
+            "mainEntity": {
+              "@type": "Person",
+              "name": `${type.code} ${type.nameZh}`,
+              "description": type.description.slice(0, 200),
+              "additionalProperty": [
+                { "@type": "PropertyValue", "name": "类型代码", "value": type.code },
+                { "@type": "PropertyValue", "name": "英文名", "value": type.nameEn },
+                { "@type": "PropertyValue", "name": "一句话简介", "value": type.shortDesc || "" }
+              ]
+            },
+            "isPartOf": {
+              "@type": "WebSite",
+              "name": SITE_NAME,
+              "url": "https://mindnest-six.vercel.app"
+            }
+          })
+        }}
+      />
+      <main id="main" className="container type-detail">
         <Link href="/types" className="type-detail-back">
           ← 返回 16 类型
         </Link>
