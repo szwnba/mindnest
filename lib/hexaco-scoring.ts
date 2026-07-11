@@ -2,7 +2,7 @@ import { HEXACO_QUESTIONS, type HexacoDimension } from "./data/hexaco-questions"
 
 export type HexacoLikert = 1 | 2 | 3 | 4 | 5;
 export type HexacoAnswers = Record<number, HexacoLikert>;
-export type HexacoLevel = "高" | "中" | "低";
+export type HexacoLevel = "high" | "medium" | "low";
 
 export interface HexacoResult {
   H: number;
@@ -35,9 +35,9 @@ export function scoreHexaco(answers: HexacoAnswers): HexacoResult {
     return Math.max(0, Math.min(100, Math.round(v)));
   }
   function level(pct: number): HexacoLevel {
-    if (pct < 40) return "低";
-    if (pct > 60) return "高";
-    return "中";
+    if (pct < 40) return "low";
+    if (pct > 60) return "high";
+    return "medium";
   }
   const H = normalize(sums.H);
   const E = normalize(sums.E);

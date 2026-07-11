@@ -19,7 +19,7 @@ export default function Footer() {
         <Link
           href="/"
           aria-disabled="true"
-          title="敬请期待"
+          title={t("comingSoon")}
           tabIndex={-1}
         >
           {l.label}
@@ -38,7 +38,7 @@ export default function Footer() {
               href="/"
               className="nav-brand"
               style={{ marginBottom: 0 }}
-              aria-label="心栖 MindNest 首页"
+              aria-label={t("homeAria")}
             >
               <div className="nav-logo" aria-hidden="true" />
               <div className="nav-title">

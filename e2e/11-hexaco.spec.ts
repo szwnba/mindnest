@@ -105,7 +105,7 @@ test.describe.serial("HEXACO 六大人格维度测试", () => {
     await page.evaluate(() => {
       const mockResult = {
         H: 55, E: 42, X: 68, A: 73, C: 61, O: 58,
-        profile: { H: "高", E: "中", X: "高", A: "高", C: "高", O: "中" },
+        profile: { H: "high", E: "medium", X: "high", A: "high", C: "high", O: "medium" },
         computedAt: Date.now(),
       };
       window.sessionStorage.setItem("mindnest:hexaco-result-v1", JSON.stringify(mockResult));

@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="主导航">
+      <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label={t("mainNavAria")}>
         <Link href="/" className="nav-brand" aria-label={t("homeAria")}>
           <div className="nav-logo" aria-hidden="true" />
           <div className="nav-title">

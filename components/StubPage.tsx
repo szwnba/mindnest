@@ -1,20 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-/**
- * 占位页面（about / privacy / terms / contact 等）共用的"建设中"骨架。
- * 保留 Header / Footer 与全站一致；中央一个 hero 卡片，提示 + 返回首页按钮。
- */
-export default function StubPage({
-  eyebrow,
-  title,
-  body,
-}: {
+interface StubPageProps {
   eyebrow: string;
   title: string;
   body: string;
-}) {
+}
+
+export default function StubPage({ eyebrow, title, body }: StubPageProps) {
+  const t = useTranslations("stubPage");
+
   return (
     <>
       <Header />
@@ -55,7 +54,7 @@ export default function StubPage({
             </p>
             <div style={{ marginTop: "2.5rem" }}>
               <Link href="/" className="btn btn-primary btn-lg">
-                返回首页
+                {t("homeBtn")}
                 <span aria-hidden="true">→</span>
               </Link>
             </div>

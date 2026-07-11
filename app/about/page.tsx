@@ -60,6 +60,17 @@ export default function AboutPage() {
             如果你对计分逻辑有疑问，可以直接查看源码验证。
           </p>
 
+          <h2 id="advisors">学术顾问</h2>
+          <p>
+            心栖 MindNest 的内容与量表设计参考了以下学者与机构的研究成果：
+          </p>
+          <ul>
+            <li><strong>Rammstedt & John (2007)</strong> — BFI-10 短量表开发者，其量表为本平台大五测评的基础</li>
+            <li><strong>Ashton & Lee (2009)</strong> — HEXACO 六维人格模型提出者，其 HEXACO-60 量表为本平台 HEXACO 测评的基础</li>
+            <li><strong>王登峰、崔红</strong> — 中国人大格心理学研究者，其本土化 Big Five 研究为中文语境下的维度描述提供参考</li>
+            <li><strong>Isabel Briggs Myers & Katharine Cook Briggs</strong> — MBTI 量表开发者，其类型学框架为本平台 MBTI 测评的基础</li>
+          </ul>
+
           <h2>联系我们</h2>
           <p>
             如果你有任何问题、建议或反馈，欢迎通过以下方式联系我们：

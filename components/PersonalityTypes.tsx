@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRef, useState, type KeyboardEvent } from "react";
 import {
   PERSONALITY_TYPES,
@@ -13,6 +13,7 @@ type FilterValue = "all" | TypeGroup;
 
 export default function PersonalityTypes() {
   const t = useTranslations("personalityTypes");
+  const locale = useLocale();
   const [active, setActive] = useState<FilterValue>("all");
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -67,7 +68,7 @@ export default function PersonalityTypes() {
         <div
           className="types-tabs reveal"
           role="tablist"
-          aria-label="按人格族群筛选"
+          aria-label={t("tabsAriaLabel")}
         >
           {TABS.map((tab, i) => {
             const selected = active === tab.value;
@@ -97,7 +98,7 @@ export default function PersonalityTypes() {
               key={type.code}
               href={`/types/${type.code}`}
               className={`type-card-link reveal${i % 4 ? ` reveal-d${i % 4}` : ""}`}
-              aria-label={t("ariaLabel", { code: type.code, name: type.nameZh })}
+              aria-label={t("ariaLabel", { code: type.code, name: locale === "en" ? type.nameEn : type.nameZh })}
             >
               <article
                 className="type-card"

@@ -349,7 +349,7 @@ function HexacoAnswering({
           {ta("pageLabel", { current: page + 1, total: TOTAL_PAGES })}
         </span>
         <span className="quiz-meta-step">
-          {Object.keys(answers).length} / {TOTAL_QUESTIONS} {ta("answeredLabel", { answered: Object.keys(answers).length, total: TOTAL_QUESTIONS })}
+          {ta("answeredLabel", { answered: Object.keys(answers).length, total: TOTAL_QUESTIONS })}
         </span>
       </div>
       <div
@@ -373,10 +373,10 @@ function HexacoAnswering({
                 <span className="hexaco-question-dim">
                   {dimMeta.icon} {dimMeta.name}
                 </span>
-                <span className="hexaco-question-num">第 {q.id} {ta("answeredLabel", { answered: q.id, total: TOTAL_QUESTIONS })}</span>
+                <span className="hexaco-question-num">{ta("answeredLabel", { answered: q.id, total: TOTAL_QUESTIONS })}</span>
               </div>
               <p className="hexaco-question-text">{q.text}</p>
-              <div className="likert-row hexaco-likert-row" role="group" aria-label={`同意度选项 — ${q.text}`}>
+              <div className="likert-row hexaco-likert-row" role="group" aria-label={ta("likertGroupAria", { text: q.text })}>
                 {likert.map((opt) => (
                   <button
                     key={opt.value}
@@ -453,7 +453,7 @@ function HexacoResult({
       {/* 职业匹配引擎 */}
       <CareerSection careers={careers} />
 
-      <div className="dim-bars" aria-label="HEXACO 六维度分布">
+      <div className="dim-bars" aria-label={t("dimBarsAria")}>
         {dimensions.map((d) => {
           const pct = result[d];
           const meta = HEXACO_DIMENSIONS[d];
@@ -465,7 +465,7 @@ function HexacoResult({
                   {meta.icon} {meta.name}
                 </span>
                 <span className="dim-bar-letters">
-                  {meta.fullName} &#183; {level}
+                  {meta.fullName} &#183; {t(`level${level.charAt(0).toUpperCase() + level.slice(1)}`)}
                 </span>
               </div>
               <div
@@ -474,7 +474,7 @@ function HexacoResult({
                 aria-valuenow={pct}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-label={`${meta.name}：${pct} 分（${level}）`}
+                aria-label={t("dimBarAria", { name: meta.name, pct, level: t(`level${level.charAt(0).toUpperCase() + level.slice(1)}`) })}
               >
                 <div className="dim-bar-fill" style={{ width: `${pct}%` }} />
               </div>
@@ -485,7 +485,7 @@ function HexacoResult({
                 marginTop: "0.4rem",
                 lineHeight: 1.6,
               }}>
-                {level === "高" ? meta.high : level === "低" ? meta.low : meta.medium}
+                {level === "high" ? meta.high : level === "low" ? meta.low : meta.medium}
               </p>
             </div>
           );
@@ -503,7 +503,7 @@ function HexacoResult({
               emoji: meta.icon,
             };
           })}
-          ariaTitle="HEXACO 六维度雷达图"
+          ariaTitle={t("radarAria")}
           color="--sage"
           size={320}
         />

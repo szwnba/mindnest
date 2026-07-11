@@ -15,7 +15,8 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "homeAria": "MindNest homepage",
-    "profile": "My Profile"
+    "profile": "My Profile",
+    "mainNavAria": "Main Navigation"
   },
   "hero": {
     "greeting": "Professional Personality Assessment Platform",
@@ -28,20 +29,51 @@
     "hexacoLink": "Or try the HEXACO six-dimensional personality →",
     "trustTitle": "28-item Likert Assessment",
     "trustSubtitle": "Integrating 6 authoritative psychology frameworks · Respecting every uniqueness",
+    "visualAria": "Example Result Preview",
     "cardExample": "Example · INFP",
     "cardTypeName": "Mediator",
-    "cardTraits": ["Idealistic", "Empathetic", "Creative", "Introspective"],
-    "cardDimensions": ["E / I", "S / N", "T / F", "J / P"],
+    "cardTraits": [
+      "Idealistic",
+      "Empathetic",
+      "Creative",
+      "Introspective"
+    ],
+    "cardDimensions": [
+      "E / I",
+      "S / N",
+      "T / F",
+      "J / P"
+    ],
     "miniStat1Label": "Core Dimensions",
     "miniStat2Label": "Personality Types"
   },
   "trustBar": {
     "title": "Platform Features",
     "items": [
-      { "icon": "🧠", "bgVar": "--accent-blue", "title": "Academic Foundation", "desc": "Based on Jungian psychological type theory" },
-      { "icon": "📊", "bgVar": "--accent-purple", "title": "Multi-dimensional Evaluation", "desc": "Integrating multiple professional assessment systems" },
-      { "icon": "🔄", "bgVar": "--accent-green", "title": "Continuously Updated", "desc": "Regularly includes latest research literature" },
-      { "icon": "🔒", "bgVar": "--accent-amber", "title": "Privacy First", "desc": "Assessment data is only used for personal analysis" }
+      {
+        "icon": "🧠",
+        "bgVar": "--accent-blue",
+        "title": "Academic Foundation",
+        "desc": "Based on Jungian psychological type theory"
+      },
+      {
+        "icon": "📊",
+        "bgVar": "--accent-purple",
+        "title": "Multi-dimensional Evaluation",
+        "desc": "Integrating multiple professional assessment systems"
+      },
+      {
+        "icon": "🔄",
+        "bgVar": "--accent-green",
+        "title": "Continuously Updated",
+        "desc": "Regularly includes latest research literature"
+      },
+      {
+        "icon": "🔒",
+        "bgVar": "--accent-amber",
+        "title": "Privacy First",
+        "desc": "Assessment data is only used for personal analysis"
+      }
     ]
   },
   "frameworks": {
@@ -85,7 +117,8 @@
       "explorer": "Explorers"
     },
     "viewAll": "View all 16 types →",
-    "ariaLabel": "View detailed introduction of {code} {name}"
+    "ariaLabel": "View detailed introduction of {code} {name}",
+    "tabsAriaLabel": "Filter by personality tribe"
   },
   "quiz": {
     "eyebrow": "Interactive Assessment",
@@ -97,10 +130,22 @@
       "heading": "28 questions, about 6-8 minutes, see a more complete version of yourself",
       "desc": "This assessment is based on 4 core dimensions of Jungian typology (energy orientation, information processing, decision style, life rhythm), with 7 questions per dimension (including reverse-scored items for lie detection), using a 5-point Likert scale. Please choose the option that best matches your daily state in a quiet environment, based on intuition.",
       "stats": [
-        { "value": "28", "label": "Questions" },
-        { "value": "4", "label": "Core Dimensions" },
-        { "value": "5", "label": "Point Likert" },
-        { "value": "~ 7", "label": "Minutes" }
+        {
+          "value": "28",
+          "label": "Questions"
+        },
+        {
+          "value": "4",
+          "label": "Core Dimensions"
+        },
+        {
+          "value": "5",
+          "label": "Point Likert"
+        },
+        {
+          "value": "~ 7",
+          "label": "Minutes"
+        }
       ],
       "start": "Start Assessment",
       "privacyNote": "Results are only saved in your browser's sessionStorage; they persist on refresh but are cleared when you close the tab or retake the assessment."
@@ -110,14 +155,35 @@
       "progressLabel": "Assessment progress: Question {current} of {total}",
       "prev": "← Previous",
       "prevAria": "Go back to previous question",
-      "skipHint": "Selection automatically advances to the next question. Results appear after the last question."
+      "skipHint": "Selection automatically advances to the next question. Results appear after the last question.",
+      "likertGroupAria": "Agreement Options"
     },
     "likert": [
-      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
-      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
-      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
-      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
-      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+      {
+        "value": 1,
+        "label": "Strongly Disagree",
+        "aria": "1 point: Strongly Disagree"
+      },
+      {
+        "value": 2,
+        "label": "Disagree",
+        "aria": "2 points: Disagree"
+      },
+      {
+        "value": 3,
+        "label": "Neutral",
+        "aria": "3 points: Neutral"
+      },
+      {
+        "value": 4,
+        "label": "Agree",
+        "aria": "4 points: Agree"
+      },
+      {
+        "value": 5,
+        "label": "Strongly Agree",
+        "aria": "5 points: Strongly Agree"
+      }
     ],
     "result": {
       "portrait": "Your Personality Portrait",
@@ -149,10 +215,22 @@
       "heading": "10 questions, 60 seconds, five-dimension panoramic portrait",
       "desc": "This scale is the academic standard BFI-10 short personality assessment, with only 2 items per dimension (one positive, one reversed), minimizing response time while maintaining psychometric validity. Please answer intuitively without overthinking.",
       "stats": [
-        { "value": "10", "label": "Questions" },
-        { "value": "5", "label": "Dimensions" },
-        { "value": "5", "label": "Point Likert" },
-        { "value": "~ 60s", "label": "" }
+        {
+          "value": "10",
+          "label": "Questions"
+        },
+        {
+          "value": "5",
+          "label": "Dimensions"
+        },
+        {
+          "value": "5",
+          "label": "Point Likert"
+        },
+        {
+          "value": "~ 60s",
+          "label": ""
+        }
       ],
       "start": "Start Big Five Assessment",
       "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded.",
@@ -164,14 +242,35 @@
       "progressLabel": "Big Five progress: Question {current} of {total}",
       "prev": "← Previous",
       "prevAria": "Go back to previous question",
-      "skipHint": "Selection automatically advances to the next question."
+      "skipHint": "Selection automatically advances to the next question.",
+      "likertGroupAria": "Agreement Options"
     },
     "likert": [
-      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
-      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
-      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
-      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
-      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+      {
+        "value": 1,
+        "label": "Strongly Disagree",
+        "aria": "1 point: Strongly Disagree"
+      },
+      {
+        "value": 2,
+        "label": "Disagree",
+        "aria": "2 points: Disagree"
+      },
+      {
+        "value": 3,
+        "label": "Neutral",
+        "aria": "3 points: Neutral"
+      },
+      {
+        "value": 4,
+        "label": "Agree",
+        "aria": "4 points: Agree"
+      },
+      {
+        "value": 5,
+        "label": "Strongly Agree",
+        "aria": "5 points: Strongly Agree"
+      }
     ],
     "result": {
       "portrait": "Your Big Five Portrait",
@@ -186,7 +285,14 @@
       "copied": "✓ Link copied",
       "mbtiLink": "Also take MBTI assessment",
       "retake": "Retake assessment",
-      "footnote": "BFI-10 is from academic literature (Rammstedt & John, 2007), suitable for rapid profiling; for 60 facets, please await the BFI-2 full version launch notice."
+      "footnote": "BFI-10 is from academic literature (Rammstedt & John, 2007), suitable for rapid profiling; for 60 facets, please await the BFI-2 full version launch notice.",
+      "dimBarsAria": "Big Five Distribution",
+      "dimBarAria": "{name}: {pct} points ({level})",
+      "radarAria": "Big Five Radar Chart",
+      "balancedZone": "balanced zone",
+      "levelHigh": "High",
+      "levelMedium": "Medium",
+      "levelLow": "Low"
     }
   },
   "quizHexaco": {
@@ -199,10 +305,22 @@
       "heading": "60 questions, 6 dimensions, panoramic personality portrait",
       "desc": "This scale is the simplified Chinese version of HEXACO-60, with 10 questions per dimension (including reverse-scored items). Please answer intuitively without overthinking. There are no right or wrong answers; choose the option that best matches your usual state.",
       "stats": [
-        { "value": "60", "label": "Questions" },
-        { "value": "6", "label": "Dimensions" },
-        { "value": "5", "label": "Point Likert" },
-        { "value": "~ 8min", "label": "" }
+        {
+          "value": "60",
+          "label": "Questions"
+        },
+        {
+          "value": "6",
+          "label": "Dimensions"
+        },
+        {
+          "value": "5",
+          "label": "Point Likert"
+        },
+        {
+          "value": "~ 8min",
+          "label": ""
+        }
       ],
       "start": "Start HEXACO Assessment",
       "privacyNote": "Results are saved locally in your browser (localStorage history + sessionStorage current progress) and are not uploaded.",
@@ -212,20 +330,41 @@
     },
     "answering": {
       "pageLabel": "Page {current} / {total}",
-      "answeredLabel": "{answered} / {total} questions",
+      "answeredLabel": "Question {answered} / {total}",
       "progressLabel": "HEXACO progress: Page {current} of {total}",
       "prev": "← Previous page",
       "prevAria": "Go back to previous page",
       "next": "Next page →",
       "finish": "View results →",
-      "finishAria": "Complete assessment"
+      "finishAria": "Complete assessment",
+      "likertGroupAria": "Agreement options — {text}"
     },
     "likert": [
-      { "value": 1, "label": "Strongly Disagree", "aria": "1 point: Strongly Disagree" },
-      { "value": 2, "label": "Disagree", "aria": "2 points: Disagree" },
-      { "value": 3, "label": "Neutral", "aria": "3 points: Neutral" },
-      { "value": 4, "label": "Agree", "aria": "4 points: Agree" },
-      { "value": 5, "label": "Strongly Agree", "aria": "5 points: Strongly Agree" }
+      {
+        "value": 1,
+        "label": "Strongly Disagree",
+        "aria": "1 point: Strongly Disagree"
+      },
+      {
+        "value": 2,
+        "label": "Disagree",
+        "aria": "2 points: Disagree"
+      },
+      {
+        "value": 3,
+        "label": "Neutral",
+        "aria": "3 points: Neutral"
+      },
+      {
+        "value": 4,
+        "label": "Agree",
+        "aria": "4 points: Agree"
+      },
+      {
+        "value": 5,
+        "label": "Strongly Agree",
+        "aria": "5 points: Strongly Agree"
+      }
     ],
     "result": {
       "portrait": "Your HEXACO Six-dimension Portrait",
@@ -235,7 +374,170 @@
       "copied": "✓ Link copied",
       "mbtiLink": "Also take MBTI assessment",
       "retake": "Retake assessment",
-      "footnote": "Scale based on Ashton & Lee (2009) HEXACO-60, one of the most academically recognized six-dimensional personality assessment tools today."
+      "footnote": "Scale based on Ashton & Lee (2009) HEXACO-60, one of the most academically recognized six-dimensional personality assessment tools today.",
+      "dimBarsAria": "HEXACO Six-Dimension Distribution",
+      "dimBarAria": "{name}: {pct} points ({level})",
+      "radarAria": "HEXACO Six-Dimension Radar Chart",
+      "levelHigh": "High",
+      "levelMedium": "Medium",
+      "levelLow": "Low"
+    }
+  },
+  "quizEnneagram": {
+    "intro": {
+      "title": "Enneagram Personality Test",
+      "tagline": "Explore your core motivations, fears, and desires. 9 types, one path to self-understanding.",
+      "stats": [
+        {
+          "value": "36Q",
+          "label": "~5 min"
+        },
+        {
+          "value": "9 Types",
+          "label": "Full Coverage"
+        },
+        {
+          "value": "Free",
+          "label": "Forever"
+        }
+      ],
+      "start": "Start Enneagram Test",
+      "privacyNote": "Results stay in your browser (localStorage history + sessionStorage progress). Nothing is uploaded.",
+      "resumeTitle": "You have a saved session",
+      "resumeProgress": "{answered} questions already answered",
+      "resumeBtn": "Resume"
+    },
+    "answering": {
+      "title": "Enneagram Assessment",
+      "progressLabel": "Question {current} of {total}",
+      "prev": "← Previous",
+      "next": "Next →",
+      "pageIndicator": "Page {current} of {total}"
+    },
+    "likert": [
+      {
+        "label": "Strongly Disagree",
+        "aria": "1: Strongly Disagree"
+      },
+      {
+        "label": "Disagree",
+        "aria": "2: Disagree"
+      },
+      {
+        "label": "Neutral",
+        "aria": "3: Neutral"
+      },
+      {
+        "label": "Agree",
+        "aria": "4: Agree"
+      },
+      {
+        "label": "Strongly Agree",
+        "aria": "5: Strongly Agree"
+      }
+    ],
+    "questions": {
+      "1": "I feel uncomfortable about wrongdoing and want to correct it.",
+      "2": "I set very high standards for myself.",
+      "3": "I often worry I'm not good enough.",
+      "4": "I feel deeply unsettled when things aren't done the right way.",
+      "5": "Helping others brings me genuine happiness.",
+      "6": "I can often sense what others need before they say it.",
+      "7": "I'm willing to sacrifice for the people I care about.",
+      "8": "I find it hard to say no to people's requests.",
+      "9": "I care a lot about how others perceive me.",
+      "10": "I enjoy being recognized and appreciated.",
+      "11": "I tend to measure my worth by external achievements.",
+      "12": "I present different versions of myself in different contexts.",
+      "13": "I often feel different from others around me.",
+      "14": "I tend to dwell on and amplify negative emotions.",
+      "15": "I have a deep sensitivity to beauty and emotional depth.",
+      "16": "There's always a sense that something is missing in my life.",
+      "17": "I need plenty of alone time to recharge and think.",
+      "18": "I enjoy understanding how things work at a fundamental level.",
+      "19": "I don't like being the center of attention.",
+      "20": "I prefer observing to participating.",
+      "21": "I think through what could go wrong in advance.",
+      "22": "I often find myself feeling anxious or worried.",
+      "23": "I actively seek safety and certainty.",
+      "24": "I second-guess my decisions long after making them.",
+      "25": "I love experiencing new things and new environments.",
+      "26": "I'm always looking forward to the next exciting thing.",
+      "27": "I don't like being tied down or restricted.",
+      "28": "I have more ideas and plans than I can ever execute.",
+      "29": "I like being in charge and taking control.",
+      "30": "I rarely show vulnerability in front of others.",
+      "31": "I'll fight for what I believe is right, no matter what.",
+      "32": "I express my opinions directly and forcefully.",
+      "33": "I actively avoid conflict and confrontation.",
+      "34": "I look for common ground between different viewpoints.",
+      "35": "I easily adapt my pace to match others' needs.",
+      "36": "I sometimes suppress my own opinions to keep the peace."
+    },
+    "result": {
+      "portrait": "Your Enneagram Profile",
+      "distribution": "9-Type Match Distribution",
+      "coreFear": "Core Fear",
+      "coreDesire": "Core Desire",
+      "copyLink": "📋 Copy Result Link",
+      "copied": "✓ Link Copied",
+      "retake": "Retake Test",
+      "types": {
+        "1": {
+          "name": "The Reformer (Type 1)",
+          "subtitle": "Principled, self-disciplined, strive for excellence",
+          "coreFear": "Fear of being corrupt or defective",
+          "coreDesire": "To be good, balanced, and upright"
+        },
+        "2": {
+          "name": "The Helper (Type 2)",
+          "subtitle": "Generous, warm,people-pleasing",
+          "coreFear": "Fear of being unwanted or unloved",
+          "coreDesire": "To feel loved and needed"
+        },
+        "3": {
+          "name": "The Achiever (Type 3)",
+          "subtitle": "Adaptable, driven, image-conscious",
+          "coreFear": "Fear of being worthless without value",
+          "coreDesire": "To feel worthwhile and valued"
+        },
+        "4": {
+          "name": "The Individualist (Type 4)",
+          "subtitle": "Expressive, dramatic, self-absorbed",
+          "coreFear": "Fear of having no unique identity",
+          "coreDesire": "To find themselves and their significance"
+        },
+        "5": {
+          "name": "The Investigator (Type 5)",
+          "subtitle": "Perceptive, innovative, detached",
+          "coreFear": "Fear of being helpless, incompetent, or invaded",
+          "coreDesire": "To be capable and knowledgeable"
+        },
+        "6": {
+          "name": "The Loyalist (Type 6)",
+          "subtitle": "Engaged, responsible, anxious",
+          "coreFear": "Fear of being without support or guidance",
+          "coreDesire": "To have security and certainty"
+        },
+        "7": {
+          "name": "The Enthusiast (Type 7)",
+          "subtitle": "Spontaneous, versatile, acquisitive",
+          "coreFear": "Fear of being trapped or deprived of experiences",
+          "coreDesire": "To be satisfied and content"
+        },
+        "8": {
+          "name": "The Challenger (Type 8)",
+          "subtitle": "Self-confident, decisive, confrontational",
+          "coreFear": "Fear of being controlled or harmed",
+          "coreDesire": "To be in control of their own life"
+        },
+        "9": {
+          "name": "The Peacemaker (Type 9)",
+          "subtitle": "Receptive, reassuring, complacent",
+          "coreFear": "Fear of fragmentation and disconnection",
+          "coreDesire": "To have inner peace and harmony"
+        }
+      }
     }
   },
   "quizHistory": {
@@ -245,11 +547,17 @@
     "subtitle": "All results are only saved in this browser. Review the timeline and see how you've changed.",
     "clear": "Clear history",
     "confirmClear": "Are you sure you want to clear all assessment history? This action cannot be undone.",
+    "dominantDim": "Dominant dimension: {name} ({value})",
     "view": "View",
     "retake": "Retake",
     "mbtiLabel": "MBTI · {code}",
     "bfi10Label": "Big Five BFI-10",
-    "hexacoLabel": "HEXACO Six-dimension"
+    "hexacoLabel": "HEXACO Six-dimension",
+    "enneagramLabel": "Enneagram",
+    "mbtiFallback": "MBTI Assessment Result"
+  },
+  "stubPage": {
+    "homeBtn": "Return to home"
   },
   "compare": {
     "eyebrow": "Honest Comparison",
@@ -262,10 +570,26 @@
       "behind": "⚪ In Progress"
     },
     "stats": [
-      { "value": "8", "label": "Dimensions Ahead", "desc": "Core features & experience" },
-      { "value": "1", "label": "Even Match", "desc": "Comparable content depth" },
-      { "value": "4", "label": "Still Catching Up", "desc": "Brand, coverage & community" },
-      { "value": "13", "label": "Evaluated Dimensions", "desc": "Comprehensive benchmarking" }
+      {
+        "value": "8",
+        "label": "Dimensions Ahead",
+        "desc": "Core features & experience"
+      },
+      {
+        "value": "1",
+        "label": "Even Match",
+        "desc": "Comparable content depth"
+      },
+      {
+        "value": "4",
+        "label": "Still Catching Up",
+        "desc": "Brand, coverage & community"
+      },
+      {
+        "value": "13",
+        "label": "Evaluated Dimensions",
+        "desc": "Comprehensive benchmarking"
+      }
     ],
     "socialProof": "This comparison was written by the founding team, not a marketing department. We'd rather show you our weaknesses too.",
     "tableCaption": "Comparison of MindNest and 16Personalities across 13 dimensions",
@@ -278,7 +602,12 @@
     "badgeTieThem": "Tie",
     "badgeWinThem": "Opponent Advantage",
     "coda": "Comparison is not about winning, but about clarifying what we are and what we are not.",
-    "cta": "View full comparison & detailed breakdown →"
+    "cta": "View full comparison & detailed breakdown →",
+    "ariaLabel": {
+      "legend": "Comparison Legend",
+      "stats": "Comparison Stats Overview",
+      "dimensions": "Comparison Dimensions"
+    }
   },
   "resources": {
     "eyebrow": "Featured Resources",
@@ -306,35 +635,86 @@
   },
   "footer": {
     "brandText": "Dedicated to helping everyone better understand themselves and others through scientific and gentle methods. Knowing yourself is the starting point of all growth.",
+    "homeAria": "MindNest homepage",
+    "comingSoon": "Coming soon",
     "columns": [
       {
         "title": "Assessment Tools",
         "links": [
-          { "label": "MBTI 28-question Assessment", "href": "/#quiz" },
-          { "label": "16 Personality Types", "href": "/types" },
-          { "label": "Big Five Scale", "href": "#", "placeholder": true },
-          { "label": "Enneagram Assessment", "href": "#", "placeholder": true },
-          { "label": "DISC Behavior Style", "href": "#", "placeholder": true }
+          {
+            "label": "MBTI 28-question Assessment",
+            "href": "/#quiz"
+          },
+          {
+            "label": "16 Personality Types",
+            "href": "/types"
+          },
+          {
+            "label": "Big Five Scale",
+            "href": "#",
+            "placeholder": true
+          },
+          {
+            "label": "Enneagram Assessment",
+            "href": "/enneagram"
+          },
+          {
+            "label": "DISC Behavior Style",
+            "href": "#",
+            "placeholder": true
+          }
         ]
       },
       {
         "title": "Learning Resources",
         "links": [
-          { "label": "Authoritative Assessment Systems", "href": "/#frameworks" },
-          { "label": "Featured Resource Library", "href": "/#resources" },
-          { "label": "Cognitive Functions Guide", "href": "#", "placeholder": true },
-          { "label": "Recommended Reading List", "href": "#", "placeholder": true },
-          { "label": "FAQ", "href": "/#faq" }
+          {
+            "label": "Authoritative Assessment Systems",
+            "href": "/#frameworks"
+          },
+          {
+            "label": "Featured Resource Library",
+            "href": "/#resources"
+          },
+          {
+            "label": "Cognitive Functions Guide",
+            "href": "#",
+            "placeholder": true
+          },
+          {
+            "label": "Recommended Reading List",
+            "href": "#",
+            "placeholder": true
+          },
+          {
+            "label": "FAQ",
+            "href": "/#faq"
+          }
         ]
       },
       {
         "title": "About",
         "links": [
-          { "label": "About MindNest", "href": "/about" },
-          { "label": "Academic Advisors", "href": "/about#advisors" },
-          { "label": "Contributions & Partnerships", "href": "/contact" },
-          { "label": "Privacy Policy", "href": "/privacy" },
-          { "label": "Terms of Use", "href": "/terms" }
+          {
+            "label": "About MindNest",
+            "href": "/about"
+          },
+          {
+            "label": "Academic Advisors",
+            "href": "/about#advisors"
+          },
+          {
+            "label": "Contributions & Partnerships",
+            "href": "/contact"
+          },
+          {
+            "label": "Privacy Policy",
+            "href": "/privacy"
+          },
+          {
+            "label": "Terms of Use",
+            "href": "/terms"
+          }
         ]
       }
     ],
@@ -356,7 +736,10 @@
     "viewResult": "View result",
     "startTest": "Start test",
     "continueTest": "Continue",
-    "inProgress": "In progress"
+    "inProgress": "In progress",
+    "levelHigh": "High",
+    "levelMedium": "Medium",
+    "levelLow": "Low"
   },
   "insights": {
     "standoutTitle": "🌟 Standout Stats",
@@ -374,5 +757,23 @@
     "ogDescription": "My {type} personality type is {code}. Take the free test to find yours.",
     "shareOnX": "Share on X",
     "takeTest": "Take the test"
+  },
+  "sharedResultBanner": {
+    "ariaSharedResult": "Shared result from a friend",
+    "mbtiText": "Your friend is {code} · {name}",
+    "viewDetail": "View type detail",
+    "retake": "Take the test too",
+    "dismiss": "Dismiss",
+    "ariaBfi10Result": "Shared Big Five result from a friend",
+    "bfi10TopLabel": "Your friend's Big Five profile",
+    "bfi10TopDim": "Dominant dimension: {name} ({value})",
+    "ariaHexacoResult": "Shared HEXACO result from a friend",
+    "hexacoTopLabel": "Your friend's HEXACO profile",
+    "hexacoTopDim": "Dominant dimension: {name} ({value})"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "An error occurred while loading the page. Please refresh or return to the home page.",
+    "homeLink": "Return to home"
   }
 }

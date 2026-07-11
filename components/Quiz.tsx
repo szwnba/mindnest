@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   DIMENSION_LABELS,
@@ -305,7 +305,7 @@ function AnsweringPanel({
 
       <p className="quiz-question-text">{q.text}</p>
 
-      <div className="likert-row" role="group" aria-label="同意度选项">
+      <div className="likert-row" role="group" aria-label={ta("likertGroupAria")}>
         {likert.map((opt) => (
           <button
             key={opt.value}
@@ -355,6 +355,7 @@ function ResultPanel({
   copyStatus: "idle" | "copied";
 }) {
   const t = useTranslations("quiz.result");
+  const locale = useLocale();
   const type = useMemo(() => getTypeByCode(result.code), [result.code]);
 
   return (
@@ -374,7 +375,7 @@ function ResultPanel({
         ) : null}
       </div>
       <div className="quiz-result-name">
-        {type ? `${type.icon} ${type.nameZh}` : result.code}
+        {type ? `${type.icon} ${locale === "en" ? type.nameEn : type.nameZh}` : result.code}
       </div>
       {type && <p className="quiz-result-tagline">{type.shortDesc}</p>}
 

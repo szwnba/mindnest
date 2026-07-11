@@ -27,13 +27,13 @@ export default function CompareSection() {
           </p>
         </div>
 
-        <div className="compare-legend reveal" aria-label="对比标记说明">
+        <div className="compare-legend reveal" aria-label={t("ariaLabel.legend")}>
           <span className="compare-legend-item compare-legend-win">{t("legend.win")}</span>
           <span className="compare-legend-item compare-legend-tie">{t("legend.tie")}</span>
           <span className="compare-legend-item compare-legend-behind">{t("legend.behind")}</span>
         </div>
 
-        <div className="compare-stats reveal" aria-label="对比统计概览">
+        <div className="compare-stats reveal" aria-label={t("ariaLabel.stats")}>
           {(t.raw("stats") as { value: string; label: string; desc: string }[]).map((s) => (
             <div className="compare-stat-card" key={s.label}>
               <div className="compare-stat-value">{s.value}</div>
@@ -105,7 +105,7 @@ export default function CompareSection() {
           </table>
         </div>
 
-        <ul className="compare-cards reveal" aria-label="对比维度列表">
+        <ul className="compare-cards reveal" aria-label={t("ariaLabel.dimensions")}>
           {COMPARISON.map((row, i) => (
             <li
               key={row.dimension}

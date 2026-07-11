@@ -107,10 +107,10 @@ export function readUnifiedProfile(): UnifiedProfile {
   };
 }
 
-function lvl(pct: number): "高" | "中" | "低" {
-  if (pct < 40) return "低";
-  if (pct > 60) return "高";
-  return "中";
+function lvl(pct: number): "high" | "medium" | "low" {
+  if (pct < 40) return "low";
+  if (pct > 60) return "high";
+  return "medium";
 }
 
 function emptyProfile(): UnifiedProfile {

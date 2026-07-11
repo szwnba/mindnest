@@ -6,7 +6,7 @@ import {
 export type BFI10Likert = 1 | 2 | 3 | 4 | 5;
 export type BFI10Answers = Record<number, BFI10Likert>;
 
-export type BFI10Level = "高" | "中" | "低";
+export type BFI10Level = "high" | "medium" | "low";
 
 export interface BFI10Result {
   /** 0-100 百分位（每维度） */
@@ -41,9 +41,9 @@ export function scoreBFI10(answers: BFI10Answers): BFI10Result {
   }
 
   function level(pct: number): BFI10Level {
-    if (pct < 40) return "低";
-    if (pct > 60) return "高";
-    return "中";
+    if (pct < 40) return "low";
+    if (pct > 60) return "high";
+    return "medium";
   }
 
   const O = normalize(sums.O);

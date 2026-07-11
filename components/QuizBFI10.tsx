@@ -318,9 +318,11 @@ function Bfi10Answering({
     <div className="quiz-card-shell">
       <div className="quiz-meta">
         <span className="quiz-meta-dim">
-          {dimMeta.icon} {dimMeta.name} &#183; {qIdx + 1} / {total} {ta("progressLabel", { current: qIdx + 1, total })}
+          {dimMeta.icon} {dimMeta.name}
         </span>
-        <span className="quiz-meta-step">{qIdx + 1} / {total}</span>
+        <span className="quiz-meta-step">
+          {ta("progressLabel", { current: qIdx + 1, total })}
+        </span>
       </div>
       <div
         className="quiz-progress-track"
@@ -335,7 +337,7 @@ function Bfi10Answering({
 
       <p className="bfi10-question-text">{q.text}</p>
 
-      <div className="likert-row bfi10-likert-row" role="group" aria-label="同意度选项">
+      <div className="likert-row bfi10-likert-row" role="group" aria-label={ta("likertGroupAria")}>
         {likert.map((opt) => (
           <button
             key={opt.value}
@@ -403,7 +405,7 @@ function Bfi10Result({
       {/* 职业匹配引擎 */}
       <CareerSection careers={careers} />
 
-      <div className="dim-bars" aria-label="大五人格五维度分布">
+      <div className="dim-bars" aria-label={t("dimBarsAria")}>
         {dimensions.map((d) => {
           const pct = result[d];
           const meta = BIG_FIVE_DIMENSIONS[d];
@@ -415,7 +417,7 @@ function Bfi10Result({
                   {meta.icon} {meta.name}
                 </span>
                 <span className="dim-bar-letters">
-                  {meta.fullName} &#183; {level}
+                  {meta.fullName} &#183; {t(`level${level.charAt(0).toUpperCase() + level.slice(1)}`)}
                 </span>
               </div>
               <div
@@ -424,7 +426,7 @@ function Bfi10Result({
                 aria-valuenow={pct}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-label={`${meta.name}：${pct} 分（${level}）`}
+                aria-label={t("dimBarAria", { name: meta.name, pct, level: t(`level${level.charAt(0).toUpperCase() + level.slice(1)}`) })}
               >
                 <div className="dim-bar-fill" style={{ width: `${pct}%` }} />
               </div>
@@ -435,7 +437,7 @@ function Bfi10Result({
                 marginTop: "0.4rem",
                 lineHeight: 1.6,
               }}>
-                {level === "高" ? meta.high : level === "低" ? meta.low : `${meta.description}（处于平衡区）`}
+                {level === "high" ? meta.high : level === "low" ? meta.low : `${meta.description} (${t("balancedZone")})`}
               </p>
             </div>
           );
@@ -453,7 +455,7 @@ function Bfi10Result({
               emoji: meta.icon,
             };
           })}
-          ariaTitle="大五人格五维度雷达图"
+          ariaTitle={t("radarAria")}
           color="--sage"
           size={320}
         />

@@ -140,7 +140,7 @@ function ProfileCard({
                 />
               </div>
               <span className={`profile-dim-level profile-dim-level--${d.level}`}>
-                {d.level}
+                {t(`level${d.level.charAt(0).toUpperCase() + d.level.slice(1)}`)}
               </span>
             </div>
           ))}

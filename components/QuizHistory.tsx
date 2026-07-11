@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   clearQuizHistory,
@@ -112,6 +112,7 @@ export default function QuizHistory() {
 
 function MBTIHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: MBTIHistoryResult }) {
   const t = useTranslations("quizHistory");
+  const locale = useLocale();
   const type = getTypeByCode(result.code);
   return (
     <>
@@ -122,7 +123,7 @@ function MBTIHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: MB
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
-          {type ? `${type.nameZh} — ${type.shortDesc}` : "MBTI 测评结果"}
+          {type ? `${locale === "en" ? type.nameEn : type.nameZh} — ${type.shortDesc}` : t("mbtiFallback")}
         </div>
       </div>
       {type && (
@@ -145,6 +146,8 @@ function BFI10HistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: B
   }
   const topMeta = BIG_FIVE_DIMENSIONS[topDim];
   const t = useTranslations("quizHistory");
+  const locale = useLocale();
+  const dimName = locale === "en" ? topMeta.fullName : topMeta.name;
   return (
     <>
       <div className="quiz-history-icon" aria-hidden="true">{topMeta.icon}</div>
@@ -154,7 +157,7 @@ function BFI10HistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: B
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
-          主导维度「{topMeta.name}」{topVal} · O{result.O} C{result.C} E{result.E} A{result.A} N{result.N}
+          {t("dominantDim", { name: dimName, value: topVal })} · O{result.O} C{result.C} E{result.E} A{result.A} N{result.N}
         </div>
       </div>
       <Link href="/#quiz-bfi10" className="btn btn-ghost btn-sm">{t("retake")}</Link>
@@ -173,6 +176,8 @@ function HexacoHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: 
   }
   const topMeta = HEXACO_DIMENSIONS[topDim];
   const t = useTranslations("quizHistory");
+  const locale = useLocale();
+  const dimName = locale === "en" ? topMeta.fullName : topMeta.name;
   return (
     <>
       <div className="quiz-history-icon" aria-hidden="true">{topMeta.icon}</div>
@@ -182,7 +187,7 @@ function HexacoHistoryRow({ entry, result }: { entry: QuizHistoryEntry; result: 
           <span className="quiz-history-time">{fmtTime(entry.completedAt)}</span>
         </div>
         <div className="quiz-history-desc">
-          主导维度「{topMeta.name}」{topVal} · H{result.H} E{result.E} X{result.X} A{result.A} C{result.C} O{result.O}
+          {t("dominantDim", { name: dimName, value: topVal })} · H{result.H} E{result.E} X{result.X} A{result.A} C{result.C} O{result.O}
         </div>
       </div>
       <Link href="/hexaco" className="btn btn-ghost btn-sm">{t("retake")}</Link>

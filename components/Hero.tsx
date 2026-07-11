@@ -97,7 +97,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <aside className="hero-visual" aria-label="示例结果预览">
+        <aside className="hero-visual" aria-label={t("visualAria")}>
           <div className="hero-card-stack">
             <div className="hero-floating-card hfc-main" aria-hidden="true">
               <div className="hfc-header">

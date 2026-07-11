@@ -8,7 +8,7 @@ test.describe("资料库 /resources", () => {
     // Hero 区
     await expect(page.locator(".resources-title")).toBeVisible();
 
-    // 至少 20 张资料卡片
+    // 20 张资料卡片（ARTICLES.length）
     const cards = page.locator(".resource-card");
     await expect(cards).toHaveCount(20);
   });

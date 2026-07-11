@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { getTypeByCode } from "@/lib/data/personality-types";
 import { BIG_FIVE_DIMENSIONS, BIG_FIVE_ORDER } from "@/lib/data/big-five-dimensions";
 import { HEXACO_DIMENSIONS, HEXACO_ORDER } from "@/lib/data/hexaco-questions";
@@ -14,6 +15,8 @@ import { decodeHexacoFromUrl } from "@/lib/hexaco-scoring";
  * 在 hero 上方显示「你的朋友的结果」banner。
  */
 export default function SharedResultBanner() {
+  const t = useTranslations("sharedResultBanner");
+  const locale = useLocale();
   const params = useSearchParams();
   const [dismissed, setDismissed] = useState(false);
 
@@ -33,24 +36,24 @@ export default function SharedResultBanner() {
     const type = getTypeByCode(code);
     if (!type) return null;
     return (
-      <div className="shared-result-banner" role="region" aria-label="朋友分享的测评结果">
+      <div className="shared-result-banner" role="region" aria-label={t("ariaSharedResult")}>
         <div className="shared-result-banner-inner">
           <span className="shared-result-banner-icon" aria-hidden="true">{type.icon}</span>
           <div className="shared-result-banner-text">
-            <strong>你的朋友是 {type.code} · {type.nameZh}</strong>
+            <strong>{t("mbtiText", { code: type.code, name: locale === "en" ? type.nameEn : type.nameZh })}</strong>
             <span>{type.shortDesc}</span>
           </div>
           <div className="shared-result-banner-actions">
             <Link href={`/types/${type.code}`} className="btn btn-primary btn-sm">
-              查看类型详情
+              {t("viewDetail")}
             </Link>
             <Link href="/#quiz" className="btn btn-ghost btn-sm">
-              我也来测
+              {t("retake")}
             </Link>
             <button
               type="button"
               className="shared-result-banner-close"
-              aria-label="关闭"
+              aria-label={t("dismiss")}
               onClick={() => setDismissed(true)}
             >
               ×
@@ -75,25 +78,25 @@ export default function SharedResultBanner() {
     }
     const topMeta = BIG_FIVE_DIMENSIONS[topDim];
     return (
-      <div className="shared-result-banner" role="region" aria-label="朋友分享的大五测评结果">
+      <div className="shared-result-banner" role="region" aria-label={t("ariaBfi10Result")}>
         <div className="shared-result-banner-inner">
           <span className="shared-result-banner-icon" aria-hidden="true">{topMeta.icon}</span>
           <div className="shared-result-banner-text">
-            <strong>你的朋友的大五画像</strong>
+            <strong>{t("bfi10TopLabel")}</strong>
             <span>
-              主导维度是「{topMeta.name}」({topVal})
+              {t("bfi10TopDim", { name: locale === "en" ? topMeta.fullName : topMeta.name, value: topVal })}
               {" · "}
               {BIG_FIVE_ORDER.map((d) => `${d}${decoded[d]}`).join(" · ")}
             </span>
           </div>
           <div className="shared-result-banner-actions">
             <Link href="/#quiz-bfi10" className="btn btn-primary btn-sm">
-              我也来测
+              {t("retake")}
             </Link>
             <button
               type="button"
               className="shared-result-banner-close"
-              aria-label="关闭"
+              aria-label={t("dismiss")}
               onClick={() => setDismissed(true)}
             >
               ×
@@ -118,25 +121,25 @@ export default function SharedResultBanner() {
     }
     const topMeta = HEXACO_DIMENSIONS[topDim];
     return (
-      <div className="shared-result-banner" role="region" aria-label="朋友分享的 HEXACO 测评结果">
+      <div className="shared-result-banner" role="region" aria-label={t("ariaHexacoResult")}>
         <div className="shared-result-banner-inner">
           <span className="shared-result-banner-icon" aria-hidden="true">{topMeta.icon}</span>
           <div className="shared-result-banner-text">
-            <strong>你的朋友的 HEXACO 画像</strong>
+            <strong>{t("hexacoTopLabel")}</strong>
             <span>
-              主导维度是「{topMeta.name}」({topVal})
+              {t("hexacoTopDim", { name: locale === "en" ? topMeta.fullName : topMeta.name, value: topVal })}
               {" · "}
               {HEXACO_ORDER.map((d) => `${d}${decoded[d]}`).join(" · ")}
             </span>
           </div>
           <div className="shared-result-banner-actions">
             <Link href="/hexaco" className="btn btn-primary btn-sm">
-              我也来测
+              {t("retake")}
             </Link>
             <button
               type="button"
               className="shared-result-banner-close"
-              aria-label="关闭"
+              aria-label={t("dismiss")}
               onClick={() => setDismissed(true)}
             >
               ×
