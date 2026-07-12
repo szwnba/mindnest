@@ -15,43 +15,100 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
-          color: "#e0e0e0",
-          fontFamily: "system-ui, sans-serif",
+          background: "linear-gradient(135deg, #2d3e3f 0%, #1a2a2b 50%, #3d4f50 100%)",
+          fontFamily: '"Noto Sans SC", "Noto Sans", sans-serif',
         }}
       >
+        {/* Decorative circle */}
+        <div
+          style={{
+            position: "absolute",
+            top: -80,
+            right: -80,
+            width: 400,
+            height: 400,
+            borderRadius: 200,
+            background: "rgba(129, 163, 142, 0.08)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: -120,
+            left: -100,
+            width: 500,
+            height: 500,
+            borderRadius: 250,
+            background: "rgba(129, 163, 142, 0.06)",
+          }}
+        />
+
+        {/* Brand */}
         <div
           style={{
             display: "flex",
             alignItems: "baseline",
-            gap: "12px",
-            marginBottom: "16px",
+            gap: 12,
+            marginBottom: 16,
           }}
         >
-          <span style={{ fontSize: 64, fontWeight: 700, color: "#c9b458" }}>
+          <span
+            style={{
+              fontSize: 72,
+              fontWeight: 700,
+              color: "#81a38e",
+              letterSpacing: "0.02em",
+            }}
+          >
             心栖
           </span>
-          <span style={{ fontSize: 40, fontWeight: 400, color: "#8899aa" }}>
+          <span
+            style={{
+              fontSize: 36,
+              fontWeight: 400,
+              color: "#a8b5b0",
+              letterSpacing: "0.05em",
+            }}
+          >
             MindNest
           </span>
         </div>
+
+        {/* Divider */}
+        <div
+          style={{
+            width: 80,
+            height: 3,
+            background: "#81a38e",
+            borderRadius: 2,
+            marginBottom: 24,
+          }}
+        />
+
+        {/* Tagline */}
         <div
           style={{
             fontSize: 28,
-            color: "#8899aa",
-            letterSpacing: "2px",
-          }}
-        >
-          专业人格心理测评平台
-        </div>
-        <div
-          style={{
-            marginTop: 24,
-            fontSize: 18,
-            color: "#667788",
+            color: "#c8d4cc",
+            textAlign: "center",
+            lineHeight: 1.6,
+            maxWidth: 700,
+            letterSpacing: "0.03em",
           }}
         >
           认识你自己，是一切成长的起点
+        </div>
+
+        {/* Subtitle */}
+        <div
+          style={{
+            fontSize: 18,
+            color: "#889a91",
+            marginTop: 20,
+            letterSpacing: "0.04em",
+          }}
+        >
+          专业人格心理测评平台 · 免费 · 开源 · 隐私优先
         </div>
       </div>
     ),
