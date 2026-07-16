@@ -1776,20 +1776,25 @@ body::before {
 /* ═══════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════ */
-@keyframes fadeUp {
+/* ── Scroll Reveal（JS 增 .visible 触发滑入） ──
+   默认 .reveal 直接可见（opacity: 1），避免 JS 未执行/IntersectionObserver 失败时内容永久透明。
+   动画由 CSS @keyframes 在 .reveal 上自动播放（JS 可叠加 IntersectionObserver 控制时机）。 */
+@keyframes reveal-fade-in {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  opacity: 1;
+  transform: translateY(0);
+  animation: reveal-fade-in 0.7s var(--ease-out-expo) both;
 }
 
+/* JS 加 .visible 后用 transition 控制（IntersectionObserver 触发的二次滑入） */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+  animation: none;
 }
 
 .reveal-d1 { transition-delay: 0.08s; }
@@ -4141,7 +4146,7 @@ main > section.section:nth-of-type(even):not(.quiz-bg) {
 
 /* ──────────────── HEXACO 量表（与 BFI-10 / MBTI Quiz 视觉一致） ──────────────── */
 .hexaco-question-text {
-  font-family: var(--font-serif, Georgia, serif);
+  font-family: var(--font-display, Georgia, serif);
   font-size: clamp(1.3rem, 2.4vw, 1.6rem);
   line-height: 1.5;
   color: var(--text-primary);

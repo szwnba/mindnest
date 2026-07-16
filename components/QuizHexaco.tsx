@@ -497,7 +497,7 @@ function HexacoResult({
           data={dimensions.map((d) => {
             const meta = HEXACO_DIMENSIONS[d];
             return {
-              label: meta.name,
+              label: meta.icon,
               value: result[d],
               letter: meta.fullName,
               emoji: meta.icon,
@@ -508,6 +508,279 @@ function HexacoResult({
           size={320}
         />
       </div>
+
+      {/* ── 🔍 深度解读卡片（对标测智网报告深度） ── */}
+      <section
+        className="hexaco-deep-dive"
+        style={{
+          marginTop: "2rem",
+          padding: "1.5rem",
+          background: "var(--surface)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--border-light)",
+        }}
+      >
+        <h3 style={{
+          margin: "0 0 0.4rem",
+          fontSize: "1.15rem",
+          fontWeight: 700,
+        }}>{t("detailHead")}</h3>
+        <p style={{ margin: "0 0 1.25rem", fontSize: "0.88rem", color: "var(--text-muted)" }}>
+          {t("detailSub")}
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "0.9rem",
+        }}>
+          {dimensions.map((d) => {
+            const meta = HEXACO_DIMENSIONS[d];
+            const pct = result[d];
+            const level = result.profile[d];
+            const dimNameKey = `dim${d}`;
+            const dimName = t(dimNameKey);
+            const descKey = level === "high" ? `dim${d}High` : level === "low" ? `dim${d}Low` : `dim${d}Mid`;
+            const desc = t(descKey);
+            const adviceKey = `deepDiveAdvice${level.charAt(0).toUpperCase() + level.slice(1)}`;
+            const advice = t(adviceKey, { dim: dimName });
+            return (
+              <div
+                key={d}
+                style={{
+                  padding: "0.85rem 1rem",
+                  borderRadius: "var(--radius-md)",
+                  background: "var(--card-bg)",
+                  border: "1px solid var(--border-light)",
+                }}
+              >
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: "0.4rem",
+                }}>
+                  <span style={{
+                    fontWeight: 700,
+                    fontSize: "0.95rem",
+                    color: "var(--text-primary)",
+                  }}>
+                    {meta.icon} {dimName}
+                    <span style={{
+                      fontWeight: 400,
+                      fontSize: "0.78rem",
+                      color: "var(--text-muted)",
+                      marginLeft: "0.4rem",
+                    }}>
+                      {meta.fullName}
+                    </span>
+                  </span>
+                  <span style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.95rem",
+                    fontWeight: 700,
+                    color: level === "high" ? "var(--accent-green)" : level === "low" ? "var(--accent-amber)" : "var(--text-secondary)",
+                  }}>
+                    {pct}
+                    <span style={{ fontWeight: 400, fontSize: "0.75rem", color: "var(--text-muted)", marginLeft: "0.3rem" }}>
+                      /100
+                    </span>
+                  </span>
+                </div>
+                <p style={{
+                  margin: "0 0 0.35rem",
+                  fontSize: "0.83rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.55,
+                }}>{desc}</p>
+                <p style={{
+                  margin: 0,
+                  fontSize: "0.78rem",
+                  color: "var(--text-muted)",
+                  lineHeight: 1.5,
+                }}>
+                  <strong style={{ color: "var(--text-secondary)" }}>{t("deepDiveAdviceTitle")}：</strong>
+                  {advice}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── 💡 专属成长建议 ── */}
+      <section
+        style={{
+          marginTop: "1.5rem",
+          padding: "1.25rem",
+          background: "var(--surface)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--border-light)",
+        }}
+      >
+        <h3 style={{ margin: "0 0 0.6rem", fontSize: "1.05rem", fontWeight: 700 }}>{t("growthCardTitle")}</h3>
+        <p style={{ margin: "0 0 0.75rem", fontSize: "0.82rem", color: "var(--text-muted)" }}>{t("growthTip")}</p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "0.6rem",
+        }}>
+          {dimensions.map((d) => {
+            const meta = HEXACO_DIMENSIONS[d];
+            const pct = result[d];
+            const level = result.profile[d];
+            const dimName = t(`dim${d}`);
+            const rangeLabel = level === "high" ? t("growthHigh") : level === "low" ? t("growthLow") : t("growthMid");
+            const tipKey = `growthTip${level === "high" ? "High" : level === "low" ? "Low" : ""}${d}`;
+            const tip = pct >= 70
+              ? t(`growthTipHigh${d}`)
+              : pct <= 30
+                ? t(`growthTipLow${d}`)
+                : "";
+            if (!tip) return null;
+            return (
+              <div
+                key={d}
+                style={{
+                  display: "flex",
+                  gap: "0.6rem",
+                  alignItems: "flex-start",
+                  padding: "0.6rem 0.75rem",
+                  background: "var(--card-bg)",
+                  borderRadius: "var(--radius-sm)",
+                }}
+              >
+                <span style={{
+                  flex: "0 0 auto",
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  padding: "0.1rem 0.45rem",
+                  borderRadius: "4px",
+                  background: level === "high" ? "rgba(var(--accent-green-rgb, 34,197,94),0.12)" : "rgba(var(--accent-amber-rgb, 245,158,11),0.12)",
+                  color: level === "high" ? "var(--accent-green)" : "var(--accent-amber)",
+                }}>{rangeLabel}</span>
+                <p style={{
+                  margin: 0,
+                  fontSize: "0.8rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.55,
+                }}>
+                  <strong>{meta.icon} {dimName}：</strong>{tip}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── 🧭 与 MBTI 的对照 ── */}
+      <section
+        style={{
+          marginTop: "1.5rem",
+          padding: "1.25rem",
+          background: "var(--surface)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--border-light)",
+        }}
+      >
+        <h3 style={{ margin: "0 0 0.3rem", fontSize: "1.05rem", fontWeight: 700 }}>{t("mbtiMapTitle")}</h3>
+        <p style={{ margin: "0 0 1rem", fontSize: "0.82rem", color: "var(--text-muted)" }}>{t("mbtiMapSub")}</p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "0.45rem",
+          fontSize: "0.82rem",
+        }}>
+          {dimensions.map((d) => {
+            const meta = HEXACO_DIMENSIONS[d];
+            const pct = result[d];
+            const mbtiKey = `mbtiRelation${d}`;
+            const mbtiLabel = t(mbtiKey);
+            const letterKey = pct >= 50 ? "highLabel" : "lowLabel";
+            const letter = t(letterKey, {
+              letter: d,
+              oppLetter: d,
+            });
+            return (
+              <div key={d} style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0.4rem 0",
+                borderBottom: "1px dashed var(--border-light)",
+              }}>
+                <span style={{ color: "var(--text-secondary)" }}>
+                  {meta.icon} {t(`dim${d}`)}
+                </span>
+                <span style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.78rem",
+                  color: "var(--text-muted)",
+                }}>
+                  → {mbtiLabel} · {letter}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <p style={{ margin: "0.75rem 0 0", fontSize: "0.75rem", color: "var(--text-muted)", fontStyle: "italic" }}>
+          {t("mbtiCompareDesc")}
+        </p>
+      </section>
+
+      {/* ── 💞 关系风格 ── */}
+      <section
+        style={{
+          marginTop: "1.5rem",
+          padding: "1.25rem",
+          background: "var(--surface)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--border-light)",
+        }}
+      >
+        <h3 style={{ margin: "0 0 0.3rem", fontSize: "1.05rem", fontWeight: 700 }}>{t("relationTitle")}</h3>
+        <p style={{ margin: "0 0 0.75rem", fontSize: "0.82rem", color: "var(--text-muted)" }}>{t("relationSub")}</p>
+        <p style={{
+          margin: 0,
+          fontSize: "0.85rem",
+          color: "var(--text-secondary)",
+          lineHeight: 1.7,
+        }}>{t("relationDesc")}</p>
+        <div style={{
+          marginTop: "0.75rem",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: "0.5rem",
+        }}>
+          {dimensions.map((d) => {
+            const meta = HEXACO_DIMENSIONS[d];
+            const pct = result[d];
+            const descKey = pct >= 50 ? `dim${d}High` : `dim${d}Low`;
+            return (
+              <div key={d} style={{
+                padding: "0.55rem 0.65rem",
+                background: "var(--card-bg)",
+                borderRadius: "var(--radius-sm)",
+                fontSize: "0.78rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.5,
+              }}>
+                <strong style={{ color: "var(--text-primary)" }}>{meta.icon} {t(`dim${d}`)} ({pct})</strong><br />
+                {t(descKey)}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── 下一步 ── */}
+      <p style={{
+        marginTop: "1.5rem",
+        textAlign: "center",
+        fontSize: "0.88rem",
+        color: "var(--text-muted)",
+      }}>
+        {t("nextStep")}
+      </p>
 
       <div className="quiz-result-actions">
         <button type="button" className="btn btn-primary" onClick={onCopy}>
