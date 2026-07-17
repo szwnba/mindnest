@@ -57,7 +57,6 @@ export function getHexacoInsights(r: HexacoResult): PersonalityInsight {
   const top1 = sorted[0];
   const top2 = sorted[1];
   const bottom1 = sorted[5];
-  const bottom2 = sorted[4];
 
   // ── Narrative ──
   const narrative = buildHexacoNarrative(top1, top2, bottom1, percentiles);
@@ -77,7 +76,7 @@ export function getHexacoInsights(r: HexacoResult): PersonalityInsight {
   // ── Blind Spot (从最低维度洞察) ──
   const blindSpot: PersonalityInsight["blindSpot"] = {
     title: hexacoBlindSpotTitle(bottom1, r[bottom1]),
-    insight: hexacoBlindSpotInsight(bottom1, r[bottom1], bottom2, r[bottom2]),
+    insight: hexacoBlindSpotInsight(bottom1, r[bottom1]),
   };
 
   // ── Standout Stats ──
@@ -121,7 +120,6 @@ function buildHexacoNarrative(
   percentiles: Record<HexacoDimension, number>
 ): string {
   const t1 = HEXACO_DIMENSIONS[top1];
-  const t2 = HEXACO_DIMENSIONS[top2];
   const b1 = HEXACO_DIMENSIONS[bottom1];
   const p1 = percentiles[top1];
   const pb1 = percentiles[bottom1];
@@ -232,9 +230,7 @@ const hexacoBlindSpotTitle = (d: HexacoDimension, score: number): string => {
 
 const hexacoBlindSpotInsight = (
   d: HexacoDimension,
-  score: number,
-  d2: HexacoDimension,
-  score2: number
+  score: number
 ): string => {
   if (score >= 60) return "";
   const insights: Record<HexacoDimension, string> = {
@@ -285,7 +281,6 @@ export function getBfi10Insights(r: BFI10Result): PersonalityInsight {
   const top1 = sorted[0];
   const top2 = sorted[1];
   const bottom1 = sorted[4];
-  const bottom2 = sorted[3];
 
   const narrative = buildBfi10Narrative(top1, top2, bottom1, percentiles);
   const signatureStrengths: PersonalityInsight["signatureStrengths"] = [
@@ -345,7 +340,6 @@ function buildBfi10Narrative(
   percentiles: Record<BigFiveDimension, number>
 ): string {
   const t1 = BIG_FIVE_DIMENSIONS[top1];
-  const t2 = BIG_FIVE_DIMENSIONS[top2];
   const b1 = BIG_FIVE_DIMENSIONS[bottom1];
 
   // 高 N 需要正向包装

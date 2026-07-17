@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   BFI10_QUESTIONS,
   type BigFiveDimension,
@@ -47,42 +47,39 @@ export default function QuizBFI10() {
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<BFI10Answers>({});
   const [result, setResult] = useState<BFI10Result | null>(null);
-  const [hydrated, setHydrated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
+  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  useEffect(() => {
-    if (hydrated) return;
-    if (typeof window === "undefined") return;
-    let nextPhase: Phase | null = null;
-    let nextResult: BFI10Result | null = null;
-    let nextAnswers: BFI10Answers | null = null;
-    let nextQIdx: number | null = null;
+  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  if (hydrated && !hydrationApplied) {
+    setHydrationApplied(true);
     try {
       const savedResult = window.sessionStorage.getItem(BFI10_RESULT_STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(BFI10_ANSWERS_STORAGE_KEY);
       if (savedResult) {
-        nextResult = JSON.parse(savedResult) as BFI10Result;
-        nextAnswers = savedAnswers ? (JSON.parse(savedAnswers) as BFI10Answers) : {};
-        nextPhase = "result";
+        setResult(JSON.parse(savedResult) as BFI10Result);
+        if (savedAnswers) setAnswers(JSON.parse(savedAnswers) as BFI10Answers);
+        setPhase("result");
       } else if (savedAnswers) {
         const a = JSON.parse(savedAnswers) as BFI10Answers;
         const nextUnanswered = BFI10_QUESTIONS.findIndex((q) => !(q.id in a));
-        nextAnswers = a;
+        setAnswers(a);
         if (nextUnanswered >= 0) {
-          nextQIdx = nextUnanswered;
-          nextPhase = "answering";
+          setQIdx(nextUnanswered);
+          setPhase("answering");
         }
       }
     } catch {
       // ignore
     }
-    if (nextResult) setResult(nextResult);
-    if (nextAnswers) setAnswers(nextAnswers);
-    if (nextQIdx !== null) setQIdx(nextQIdx);
-    if (nextPhase) setPhase(nextPhase);
-    setHydrated(true);
-  }, [hydrated]);
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return;

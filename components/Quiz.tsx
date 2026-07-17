@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   DIMENSION_LABELS,
   QUIZ_QUESTIONS,
@@ -46,42 +46,39 @@ export default function Quiz() {
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [result, setResult] = useState<QuizResult | null>(null);
-  const [hydrated, setHydrated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
+  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  useEffect(() => {
-    if (hydrated) return;
-    if (typeof window === "undefined") return;
-    let nextPhase: Phase | null = null;
-    let nextResult: QuizResult | null = null;
-    let nextAnswers: Answers | null = null;
-    let nextQIdx: number | null = null;
+  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  if (hydrated && !hydrationApplied) {
+    setHydrationApplied(true);
     try {
       const savedResult = window.sessionStorage.getItem(STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(ANSWERS_STORAGE_KEY);
       if (savedResult) {
-        nextResult = JSON.parse(savedResult) as QuizResult;
-        nextAnswers = savedAnswers ? (JSON.parse(savedAnswers) as Answers) : {};
-        nextPhase = "result";
+        setResult(JSON.parse(savedResult) as QuizResult);
+        if (savedAnswers) setAnswers(JSON.parse(savedAnswers) as Answers);
+        setPhase("result");
       } else if (savedAnswers) {
         const a = JSON.parse(savedAnswers) as Answers;
         const nextUnanswered = QUIZ_QUESTIONS.findIndex((q) => !(q.id in a));
-        nextAnswers = a;
+        setAnswers(a);
         if (nextUnanswered >= 0) {
-          nextQIdx = nextUnanswered;
-          nextPhase = "answering";
+          setQIdx(nextUnanswered);
+          setPhase("answering");
         }
       }
     } catch {
       // ignore
     }
-    if (nextResult) setResult(nextResult);
-    if (nextAnswers) setAnswers(nextAnswers);
-    if (nextQIdx !== null) setQIdx(nextQIdx);
-    if (nextPhase) setPhase(nextPhase);
-    setHydrated(true);
-  }, [hydrated]);
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -273,7 +270,6 @@ function AnsweringPanel({
   onPick: (s: LikertScore) => void;
   onPrev: () => void;
 }) {
-  const t = useTranslations("quiz");
   const ta = useTranslations("quiz.answering");
   const likert = useLikertOptions();
   const q = QUIZ_QUESTIONS[qIdx];

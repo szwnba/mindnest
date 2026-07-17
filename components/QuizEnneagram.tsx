@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import {
   ENNEAGRAM_QUESTIONS,
@@ -20,12 +20,12 @@ export default function QuizEnneagram() {
   const [page, setPage] = useState(0);
   const [result, setResult] = useState<EnneagramResult | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
-  const [hydrated, setHydrated] = useState(false);
-
   //  hydration guard — 防止 SSR 与客户端初始渲染不一致
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const answersRef = useRef<EnneagramAnswers>({});
   const [answers, setAnswers] = useState<EnneagramAnswers>({});
@@ -119,7 +119,7 @@ export default function QuizEnneagram() {
   );
 
   const currentProgress = useMemo(() => {
-    return Object.keys(answersRef.current).length;
+    return Object.keys(answers).length;
   }, [answers]);
 
   return (

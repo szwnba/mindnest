@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   HEXACO_QUESTIONS,
   HEXACO_DIMENSIONS,
@@ -49,43 +49,44 @@ export default function QuizHexaco() {
   const [answers, setAnswers] = useState<HexacoAnswers>({});
   const answersRef = useRef<HexacoAnswers>({});
   const [result, setResult] = useState<HexacoResult | null>(null);
-  const [hydrated, setHydrated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
+  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  useEffect(() => {
-    if (hydrated) return;
-    if (typeof window === "undefined") return;
-    let nextPhase: Phase | null = null;
-    let nextResult: HexacoResult | null = null;
-    let nextAnswers: HexacoAnswers | null = null;
-    let nextPage: number | null = null;
+  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  if (hydrated && !hydrationApplied) {
+    setHydrationApplied(true);
     try {
       const savedResult = window.sessionStorage.getItem(HEXACO_RESULT_STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(HEXACO_ANSWERS_STORAGE_KEY);
       if (savedResult) {
-        nextResult = JSON.parse(savedResult) as HexacoResult;
-        nextAnswers = savedAnswers ? (JSON.parse(savedAnswers) as HexacoAnswers) : {};
-        nextPhase = "result";
+        const r = JSON.parse(savedResult) as HexacoResult;
+        const a = savedAnswers ? (JSON.parse(savedAnswers) as HexacoAnswers) : {};
+        setResult(r);
+        setAnswers(a);
+        setPhase("result");
       } else if (savedAnswers) {
         const a = JSON.parse(savedAnswers) as HexacoAnswers;
         const answeredCount = Object.keys(a).length;
-        nextAnswers = a;
-        nextPage = Math.min(Math.floor(answeredCount / QUESTIONS_PER_PAGE), TOTAL_PAGES - 1);
-        nextPhase = "answering";
+        setAnswers(a);
+        setPage(Math.min(Math.floor(answeredCount / QUESTIONS_PER_PAGE), TOTAL_PAGES - 1));
+        setPhase("answering");
       }
     } catch {
       // ignore
     }
-    if (nextResult) setResult(nextResult);
-    if (nextAnswers) {
-      setAnswers(nextAnswers);
-      answersRef.current = nextAnswers;
-    }
-    if (nextPage !== null) setPage(nextPage);
-    if (nextPhase) setPhase(nextPhase);
-    setHydrated(true);
-  }, [hydrated]);
+  }
+
+  // 保持 answersRef 与 answers 状态同步（ref 不得在 render 阶段写入）
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

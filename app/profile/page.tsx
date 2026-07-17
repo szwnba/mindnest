@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
   readUnifiedProfile,
@@ -12,10 +12,19 @@ import {
 export default function ProfilePage() {
   const t = useTranslations("profile");
   const [profile, setProfile] = useState<UnifiedProfile | null>(null);
+  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  useEffect(() => {
+  // 首次客户端渲染后从 localStorage 读取档案（render 阶段 setState，React 19 允许）
+  if (hydrated && !hydrationApplied) {
+    setHydrationApplied(true);
     setProfile(readUnifiedProfile());
-  }, []);
+  }
 
   if (!profile) {
     return (

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   clearQuizHistory,
   getQuizHistory,
@@ -38,13 +38,20 @@ function fmtTime(ts: number): string {
 
 export default function QuizHistory() {
   const t = useTranslations("quizHistory");
-  const [hydrated, setHydrated] = useState(false);
+  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [entries, setEntries] = useState<QuizHistoryEntry[]>([]);
+  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  useEffect(() => {
+  // 首次客户端渲染后从 localStorage 恢复历史（render 阶段 setState，React 19 允许）
+  if (hydrated && !hydrationApplied) {
+    setHydrationApplied(true);
     setEntries(getQuizHistory());
-    setHydrated(true);
-  }, []);
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return;

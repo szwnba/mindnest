@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { getTypeByCode } from "@/lib/data/personality-types";
@@ -21,8 +21,11 @@ export default function SharedResultBanner() {
   const [dismissed, setDismissed] = useState(false);
 
   // 不在 SSR 阶段渲染，避免 hydration 不一致
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   if (!mounted) return null;
 
   const raw = params.get("result");
