@@ -117,8 +117,11 @@
       "explorer": "探险家"
     },
     "viewAll": "查看全部 16 种类型 →",
+    "cta": "想知道自己是哪一种？开始测评 →",
     "ariaLabel": "查看 {code} {name} 详细介绍",
-    "tabsAriaLabel": "按人格族群筛选"
+    "tabsAriaLabel": "按人格族群筛选",
+    "metaTitle": "16 种人格类型总览",
+    "metaDesc": "完整的 16 种 MBTI 人格类型介绍，按分析家 / 外交家 / 守卫者 / 探险家四大族群分类，每种类型含核心描述、天然优势与成长方向。"
   },
   "quiz": {
     "eyebrow": "互动测评",
@@ -909,7 +912,8 @@
       "mbtiNote": "来自 MindNest · 28 题 Likert 人格测评",
       "bfiNote": "来自 MindNest · BFI-10 国际通用量表",
       "learnBigFive": "了解大五人格"
-    }
+    },
+    "viewDetail": "查看类型详情"
   },
   "sharedResultBanner": {
     "ariaSharedResult": "朋友分享的测评结果",

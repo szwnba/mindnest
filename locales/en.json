@@ -117,8 +117,11 @@
       "explorer": "Explorers"
     },
     "viewAll": "View all 16 types →",
+    "cta": "Want to know which one you are? Start assessment →",
     "ariaLabel": "View detailed introduction of {code} {name}",
-    "tabsAriaLabel": "Filter by personality tribe"
+    "tabsAriaLabel": "Filter by personality tribe",
+    "metaTitle": "16 Personality Types Overview",
+    "metaDesc": "Complete introduction to all 16 MBTI personality types, organized by Analysts / Diplomats / Sentinels / Explorers — each with core description, natural strengths and growth directions."
   },
   "quiz": {
     "eyebrow": "Interactive Assessment",
@@ -909,7 +912,8 @@
       "mbtiNote": "From MindNest · 28-item Likert personality assessment",
       "bfiNote": "From MindNest · the BFI-10 international scale",
       "learnBigFive": "Learn about Big Five"
-    }
+    },
+    "viewDetail": "View type detail"
   },
   "sharedResultBanner": {
     "ariaSharedResult": "Shared result from a friend",

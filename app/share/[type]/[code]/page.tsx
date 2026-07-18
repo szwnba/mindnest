@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -135,16 +136,18 @@ export async function generateMetadata({
 }
 
 export default async function SharePage({ params, searchParams }: PageProps) {
+  const t = await getTranslations("share");
+  const tl = await getTranslations("share.landing");
   const { type, code } = await params;
   const sp = await searchParams;
   const kind = type.toLowerCase();
 
   if (kind === "mbti") {
-    const t = getTypeByCode(code.toUpperCase());
-    if (!t) notFound();
+    const pt = getTypeByCode(code.toUpperCase());
+    if (!pt) notFound();
 
     // 跳转回首页时保留参数，触发 SharedResultBanner
-    const query = new URLSearchParams({ result: `mbti:${t.code}` });
+    const query = new URLSearchParams({ result: `mbti:${pt.code}` });
     for (const k of ["E", "S", "T", "J"] as const) {
       const v = clampPctFromSp(sp[k]);
       if (v !== null) query.set(k, String(v));
@@ -157,27 +160,27 @@ export default async function SharePage({ params, searchParams }: PageProps) {
         <main id="main" className="share-landing">
           <section
             className="share-landing-card"
-            style={{ background: `var(${t.accentBg})` }}
+            style={{ background: `var(${pt.accentBg})` }}
           >
             <div className="share-landing-icon" aria-hidden="true">
-              {t.icon}
+              {pt.icon}
             </div>
-            <div className="share-landing-code">{t.code}</div>
+            <div className="share-landing-code">{pt.code}</div>
             <h1 className="share-landing-name">
-              {t.nameZh}
-              <small>{t.nameEn}</small>
+              {pt.nameZh}
+              <small>{pt.nameEn}</small>
             </h1>
-            <p className="share-landing-desc">{t.shortDesc}</p>
+            <p className="share-landing-desc">{pt.shortDesc}</p>
             <div className="share-landing-actions">
               <Link href={goHome} className="btn btn-primary btn-lg">
-                我也来测一下 →
+                {t("takeTest")}
               </Link>
-              <Link href={`/types/${t.code}`} className="btn btn-ghost btn-lg">
-                查看类型详情
+              <Link href={`/types/${pt.code}`} className="btn btn-ghost btn-lg">
+                {t("viewDetail")}
               </Link>
             </div>
             <p className="share-landing-note">
-              来自 MindNest · 28 题 Likert 人格测评
+              {tl("mbtiNote")}
             </p>
           </section>
         </main>
@@ -191,11 +194,11 @@ export default async function SharePage({ params, searchParams }: PageProps) {
     if (!decoded) notFound();
 
     const dims = [
-      { key: "O", zh: "开放性", val: decoded.O },
-      { key: "C", zh: "尽责性", val: decoded.C },
-      { key: "E", zh: "外向性", val: decoded.E },
-      { key: "A", zh: "宜人性", val: decoded.A },
-      { key: "N", zh: "神经质", val: decoded.N },
+      { key: "O", zh: tl("dimO"), val: decoded.O },
+      { key: "C", zh: tl("dimC"), val: decoded.C },
+      { key: "E", zh: tl("dimE"), val: decoded.E },
+      { key: "A", zh: tl("dimA"), val: decoded.A },
+      { key: "N", zh: tl("dimN"), val: decoded.N },
     ];
 
     return (
@@ -209,9 +212,9 @@ export default async function SharePage({ params, searchParams }: PageProps) {
             <div className="share-landing-icon" aria-hidden="true">
               ✦
             </div>
-            <h1 className="share-landing-name">大五人格画像</h1>
+            <h1 className="share-landing-name">{tl("bfiTitle")}</h1>
             <p className="share-landing-desc">
-              一份 BFI-10 测评结果，5 个维度全景。
+            {tl("bfiDesc")}
             </p>
             <ul className="share-landing-dims">
               {dims.map((d) => (
@@ -227,14 +230,14 @@ export default async function SharePage({ params, searchParams }: PageProps) {
                 href={`/?result=bfi10:${encodeURIComponent(code)}`}
                 className="btn btn-primary btn-lg"
               >
-                我也来测一下 →
+                {t("takeTest")}
               </Link>
               <Link href="/#quiz-bfi10" className="btn btn-ghost btn-lg">
-                了解大五人格
+                {tl("learnBigFive")}
               </Link>
             </div>
             <p className="share-landing-note">
-              来自 MindNest · BFI-10 国际通用量表
+              {tl("bfiNote")}
             </p>
           </section>
         </main>

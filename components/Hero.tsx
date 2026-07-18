@@ -1,10 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { PERSONALITY_TYPES } from "@/lib/data/personality-types";
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
+  const chipNameMap = new Map(
+    PERSONALITY_TYPES.map((pt) => [pt.code, pt])
+  );
+  const baseChips = [
+    { code: "INTJ", color: "var(--sky)" },
+    { code: "ENFP", color: "var(--sage)" },
+    { code: "ISTJ", color: "var(--warm-gold)" },
+    { code: "ESTP", color: "var(--terracotta)" },
+    { code: "INFJ", color: "var(--sage)" },
+    { code: "ENTJ", color: "var(--sky)" },
+  ];
+  const chipData = [...baseChips, ...baseChips].map((c) => ({
+    ...c,
+    name:
+      chipNameMap.get(c.code)?.[locale === "en" ? "nameEn" : "nameZh"] ?? c.code,
+  }));
 
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
@@ -29,20 +47,7 @@ export default function Hero() {
             ))}
           </h1>
           <div className="hero-type-wheel" aria-hidden="true">
-            {[
-              { code: "INTJ", name: "建筑师", color: "var(--sky)" },
-              { code: "ENFP", name: "竞选者", color: "var(--sage)" },
-              { code: "ISTJ", name: "物流师", color: "var(--warm-gold)" },
-              { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
-              { code: "INFJ", name: "提倡者", color: "var(--sage)" },
-              { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
-              { code: "INTJ", name: "建筑师", color: "var(--sky)" },
-              { code: "ENFP", name: "竞选者", color: "var(--sage)" },
-              { code: "ISTJ", name: "物流师", color: "var(--warm-gold)" },
-              { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
-              { code: "INFJ", name: "提倡者", color: "var(--sage)" },
-              { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
-            ].map((tChip, i) => (
+            {chipData.map((tChip, i) => (
               <span key={`${tChip.code}-${i}`} className="hero-type-chip" style={{ animationDelay: `${(i % 6) * 0.15}s` }}>
                 <span className="hero-type-chip-code">{tChip.code}</span>
                 <span className="hero-type-chip-name">{tChip.name}</span>

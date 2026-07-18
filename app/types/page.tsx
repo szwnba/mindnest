@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, useTranslations } from "next-intl";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import {
@@ -8,16 +9,23 @@ import {
   type TypeGroup,
 } from "@/lib/data/personality-types";
 
-export const metadata: Metadata = {
-  title: "16 种人格类型总览",
-  description:
-    "完整的 16 种 MBTI 人格类型介绍，按分析家 / 外交家 / 守卫者 / 探险家四大族群分类，每种类型含核心描述、天然优势与成长方向。",
-  alternates: { canonical: "/types" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("personalityTypes");
+  const current = t("title") === "探索 16 种人格类型" ? "zh" : "en";
+  return {
+    title: t("metaTitle"),
+    description: t("metaDesc"),
+    alternates: { canonical: "/types" },
+    openGraph: {
+      locale: current === "zh" ? "zh_CN" : "en_US",
+    },
+  };
+}
 
 const GROUP_ORDER: TypeGroup[] = ["analyst", "diplomat", "sentinel", "explorer"];
 
 export default function TypesIndexPage() {
+  const t = useTranslations("personalityTypes");
   return (
     <>
       <Header />
@@ -25,19 +33,18 @@ export default function TypesIndexPage() {
         <header className="types-overview-header">
           <div className="section-eyebrow" style={{ justifyContent: "center" }}>
             <div className="section-eyebrow-dot" aria-hidden="true" />
-            <span className="tag">人格图谱</span>
+            <span className="tag">{t("tag")}</span>
           </div>
-          <h1 className="section-title">16 种人格类型完整图谱</h1>
+          <h1 className="section-title">{t("title")}</h1>
           <p
             className="section-subtitle"
             style={{ marginLeft: "auto", marginRight: "auto" }}
           >
-            每种类型都是一种看待世界的独特方式。点击任意一张卡片可以阅读完整介绍——
-            包括它的优势、成长方向以及与其他类型的差异。
+            {t("subtitle")}
           </p>
           <div style={{ marginTop: "2rem" }}>
             <Link href="/#quiz" className="btn btn-primary">
-              想知道自己是哪一种？开始测评 →
+              {t("cta")}
             </Link>
           </div>
         </header>
@@ -63,7 +70,7 @@ export default function TypesIndexPage() {
                     key={t.code}
                     href={`/types/${t.code}`}
                     className="type-card-link"
-                    aria-label={`查看 ${t.code} ${t.nameZh} 详细介绍`}
+                    aria-label={t("ariaLabel", { code: t.code, name: t.nameZh })}
                   >
                     <article
                       className="type-card"
