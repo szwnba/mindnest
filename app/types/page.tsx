@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getTranslations, useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import {
@@ -65,31 +66,31 @@ export default function TypesIndexPage() {
                 {TYPE_GROUPS[group].label}
               </h2>
               <div className="types-grid">
-                {types.map((t) => (
+                {types.map((type_) => (
                   <Link
-                    key={t.code}
-                    href={`/types/${t.code}`}
+                    key={type_.code}
+                    href={`/types/${type_.code}`}
                     className="type-card-link"
-                    aria-label={t("ariaLabel", { code: t.code, name: t.nameZh })}
+                    aria-label={t("ariaLabel", { code: type_.code, name: type_.nameZh })}
                   >
                     <article
                       className="type-card"
                       style={
                         {
-                          ["--type-accent" as string]: `var(${t.accentColor})`,
-                          ["--type-bg" as string]: `var(${t.accentBg})`,
+                          ["--type-accent" as string]: `var(${type_.accentColor})`,
+                          ["--type-bg" as string]: `var(${type_.accentBg})`,
                         } as React.CSSProperties
                       }
                     >
                       <div className="type-card-top">
-                        <span className="type-code">{t.code}</span>
+                        <span className="type-code">{type_.code}</span>
                         <span className="type-emoji" aria-hidden="true">
-                          {t.icon}
+                          {type_.icon}
                         </span>
                       </div>
-                      <h3 className="type-name-zh">{t.nameZh}</h3>
-                      <div className="type-name-en">{t.nameEn}</div>
-                      <p className="type-desc-short">{t.shortDesc}</p>
+                      <h3 className="type-name-zh">{type_.nameZh}</h3>
+                      <div className="type-name-en">{type_.nameEn}</div>
+                      <p className="type-desc-short">{type_.shortDesc}</p>
                     </article>
                   </Link>
                 ))}
