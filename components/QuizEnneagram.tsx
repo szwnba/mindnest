@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   ENNEAGRAM_QUESTIONS,
@@ -8,6 +8,7 @@ import {
 import { type EnneagramResult } from "@/lib/data/enneagram-questions";
 import { scoreEnneagram, type EnneagramAnswers } from "@/lib/enneagram-scoring";
 import { generateEnneagramInsight } from "@/lib/data/enneagram-types";
+import { useHydrated } from "@/lib/use-hydrated";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -21,11 +22,7 @@ export default function QuizEnneagram() {
   const [result, setResult] = useState<EnneagramResult | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   //  hydration guard — 防止 SSR 与客户端初始渲染不一致
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+  const hydrated = useHydrated();
 
   const answersRef = useRef<EnneagramAnswers>({});
   const [answers, setAnswers] = useState<EnneagramAnswers>({});

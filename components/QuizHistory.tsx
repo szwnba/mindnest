@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import {
   clearQuizHistory,
   getQuizHistory,
@@ -14,6 +14,7 @@ import { BIG_FIVE_DIMENSIONS, BIG_FIVE_ORDER } from "@/lib/data/big-five-dimensi
 import { HEXACO_DIMENSIONS, HEXACO_ORDER } from "@/lib/data/hexaco-questions";
 import type { BFI10Result } from "@/lib/bfi10-scoring";
 import type { HexacoResult } from "@/lib/hexaco-scoring";
+import { useHydratedInit } from "@/lib/use-hydrated";
 
 function isMBTIResult(r: QuizHistoryEntry["result"]): r is MBTIHistoryResult {
   return (r as MBTIHistoryResult).code !== undefined;
@@ -38,20 +39,12 @@ function fmtTime(ts: number): string {
 
 export default function QuizHistory() {
   const t = useTranslations("quizHistory");
-  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
   const [entries, setEntries] = useState<QuizHistoryEntry[]>([]);
-  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  // 首次客户端渲染后从 localStorage 恢复历史（render 阶段 setState，React 19 允许）
-  if (hydrated && !hydrationApplied) {
-    setHydrationApplied(true);
+  // hydration 完成后从 localStorage 恢复历史（render 阶段 setState，React 19 允许）
+  const hydrated = useHydratedInit(() => {
     setEntries(getQuizHistory());
-  }
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;

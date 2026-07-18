@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { getTypeByCode } from "@/lib/data/personality-types";
@@ -9,6 +9,7 @@ import { BIG_FIVE_DIMENSIONS, BIG_FIVE_ORDER } from "@/lib/data/big-five-dimensi
 import { HEXACO_DIMENSIONS, HEXACO_ORDER } from "@/lib/data/hexaco-questions";
 import { decodeBFI10FromUrl } from "@/lib/bfi10-scoring";
 import { decodeHexacoFromUrl } from "@/lib/hexaco-scoring";
+import { useHydrated } from "@/lib/use-hydrated";
 
 /**
  * 当 URL 含 `?result=mbti:INTJ` 或 `?result=bfi10:O72-C58-E33-A65-N42` 时，
@@ -21,11 +22,7 @@ export default function SharedResultBanner() {
   const [dismissed, setDismissed] = useState(false);
 
   // 不在 SSR 阶段渲染，避免 hydration 不一致
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+  const mounted = useHydrated();
   if (!mounted) return null;
 
   const raw = params.get("result");

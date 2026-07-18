@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { type CareerMatch } from "@/lib/career-matches";
 
-export default function CareerSection({ careers }: { careers: CareerMatch[] }) {
+function CareerSectionBase({ careers }: { careers: CareerMatch[] }) {
   const t = useTranslations("careers");
 
   if (careers.length === 0) return null;
@@ -53,3 +54,9 @@ export default function CareerSection({ careers }: { careers: CareerMatch[] }) {
     </div>
   );
 }
+
+/**
+ * 职业匹配展示区,careers 不变时跳过重渲染。
+ */
+const CareerSection = memo(CareerSectionBase);
+export default CareerSection;

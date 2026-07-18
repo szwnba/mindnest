@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   HEXACO_QUESTIONS,
   HEXACO_DIMENSIONS,
@@ -24,6 +24,7 @@ import InsightSection from "@/components/InsightSection";
 import CareerSection from "@/components/CareerSection";
 import { getHexacoInsights } from "@/lib/personality-insights";
 import { getHexacoCareers } from "@/lib/career-matches";
+import { useHydratedInit } from "@/lib/use-hydrated";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -51,17 +52,9 @@ export default function QuizHexaco() {
   const [result, setResult] = useState<HexacoResult | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
-  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
-  if (hydrated && !hydrationApplied) {
-    setHydrationApplied(true);
+  // hydration 完成后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  useHydratedInit(() => {
     try {
       const savedResult = window.sessionStorage.getItem(HEXACO_RESULT_STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(HEXACO_ANSWERS_STORAGE_KEY);
@@ -81,7 +74,7 @@ export default function QuizHexaco() {
     } catch {
       // ignore
     }
-  }
+  });
 
   // 保持 answersRef 与 answers 状态同步（ref 不得在 render 阶段写入）
   useEffect(() => {

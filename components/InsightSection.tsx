@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import { useTranslations } from "next-intl";
 import { type PersonalityInsight } from "@/lib/personality-insights";
 
-export default function InsightSection({ insight }: { insight: PersonalityInsight }) {
+function InsightSectionBase({ insight }: { insight: PersonalityInsight }) {
   const t = useTranslations("insights");
 
   return (
@@ -74,3 +75,9 @@ export default function InsightSection({ insight }: { insight: PersonalityInsigh
     </div>
   );
 }
+
+/**
+ * 洞察展示区,insight 不变时跳过重渲染。
+ */
+const InsightSection = memo(InsightSectionBase);
+export default InsightSection;

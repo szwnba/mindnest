@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   DIMENSION_LABELS,
   QUIZ_QUESTIONS,
@@ -19,6 +19,7 @@ import {
 import { getTypeByCode } from "@/lib/data/personality-types";
 import { projectMBTIResult, saveQuizHistory } from "@/lib/quiz-storage";
 import RadarChart from "@/components/RadarChart";
+import { useHydratedInit } from "@/lib/use-hydrated";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -48,17 +49,9 @@ export default function Quiz() {
   const [result, setResult] = useState<QuizResult | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
-  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
-  if (hydrated && !hydrationApplied) {
-    setHydrationApplied(true);
+  // hydration 完成后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  useHydratedInit(() => {
     try {
       const savedResult = window.sessionStorage.getItem(STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(ANSWERS_STORAGE_KEY);
@@ -78,7 +71,7 @@ export default function Quiz() {
     } catch {
       // ignore
     }
-  }
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;

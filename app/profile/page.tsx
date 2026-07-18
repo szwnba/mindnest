@@ -1,30 +1,23 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   readUnifiedProfile,
   TEST_META,
   type UnifiedProfile,
 } from "@/lib/unified-profile";
+import { useHydratedInit } from "@/lib/use-hydrated";
 
 export default function ProfilePage() {
   const t = useTranslations("profile");
   const [profile, setProfile] = useState<UnifiedProfile | null>(null);
-  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  // 首次客户端渲染后从 localStorage 读取档案（render 阶段 setState，React 19 允许）
-  if (hydrated && !hydrationApplied) {
-    setHydrationApplied(true);
+  // hydration 完成后从 localStorage 读取档案（render 阶段 setState，React 19 允许）
+  useHydratedInit(() => {
     setProfile(readUnifiedProfile());
-  }
+  });
 
   if (!profile) {
     return (

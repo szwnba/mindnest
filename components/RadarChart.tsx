@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 interface RadarChartProps {
   /** 维度数据，最少 3 项 */
@@ -27,7 +27,7 @@ interface RadarChartProps {
  * - 入场动画 scale(0) → scale(1)，0.6s ease-out
  * - prefers-reduced-motion 兼容
  */
-export default function RadarChart({
+function RadarChartBase({
   data,
   size = 240,
   color = "--sage",
@@ -122,8 +122,7 @@ export default function RadarChart({
           const points = vertices
             .map((v) => {
               const r = maxR * level;
-              const angle = (2 * Math.PI * vertices.indexOf(v)) / N - Math.PI / 2;
-              return `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`;
+              return `${cx + r * Math.cos(v.angle)},${cy + r * Math.sin(v.angle)}`;
             })
             .join(" ");
           return (
@@ -235,3 +234,9 @@ export default function RadarChart({
     </div>
   );
 }
+
+/**
+ * 纯 SVG 雷达图,props 不变时跳过重渲染。
+ */
+const RadarChart = memo(RadarChartBase);
+export default RadarChart;

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BFI10_QUESTIONS,
   type BigFiveDimension,
@@ -27,6 +27,7 @@ import InsightSection from "@/components/InsightSection";
 import CareerSection from "@/components/CareerSection";
 import { getBfi10Insights } from "@/lib/personality-insights";
 import { getBfi10Careers } from "@/lib/career-matches";
+import { useHydratedInit } from "@/lib/use-hydrated";
 
 type Phase = "intro" | "answering" | "result";
 
@@ -49,17 +50,9 @@ export default function QuizBFI10() {
   const [result, setResult] = useState<BFI10Result | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const cardRef = useRef<HTMLDivElement | null>(null);
-  // hydration guard — SSR 与客户端首次渲染保持一致，避免 mismatch
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-  const [hydrationApplied, setHydrationApplied] = useState(false);
 
-  // 首次客户端渲染后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
-  if (hydrated && !hydrationApplied) {
-    setHydrationApplied(true);
+  // hydration 完成后从 sessionStorage 恢复进度（render 阶段 setState，React 19 允许）
+  useHydratedInit(() => {
     try {
       const savedResult = window.sessionStorage.getItem(BFI10_RESULT_STORAGE_KEY);
       const savedAnswers = window.sessionStorage.getItem(BFI10_ANSWERS_STORAGE_KEY);
@@ -79,7 +72,7 @@ export default function QuizBFI10() {
     } catch {
       // ignore
     }
-  }
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
