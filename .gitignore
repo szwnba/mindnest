@@ -10,3 +10,5 @@ playwright/.cache/
 .DS_Store
 coverage/
 .turbo/
+# TypeScript build info
+tsconfig.tsbuildinfo
