@@ -2,6 +2,7 @@
 
 import { Component, ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface Props {
   children: ReactNode;
@@ -22,12 +23,12 @@ function ErrorBoundaryFallback() {
     >
       <h1 className="text-2xl font-display font-bold mb-4">{t("title")}</h1>
       <p className="text-[var(--color-muted)] max-w-md">{t("description")}</p>
-      <a
+      <Link
         className="mt-6 inline-flex h-10 items-center rounded-full bg-[var(--color-accent)] px-5 font-medium text-white hover:opacity-90 transition"
         href="/"
       >
         {t("homeLink")}
-      </a>
+      </Link>
     </main>
   );
 }
