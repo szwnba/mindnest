@@ -14,7 +14,7 @@
  * 不支持图片、链接、HTML 内联——这是有意的，资料库正文只用结构化纯文本。
  */
 
-import { Fragment, type ReactElement } from "react";
+import { Fragment } from "react";
 
 type Inline = string | ReactElement;
 

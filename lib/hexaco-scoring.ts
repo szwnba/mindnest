@@ -1,4 +1,4 @@
-import { HEXACO_QUESTIONS, type HexacoDimension } from "./data/hexaco-questions";
+import { HEXACO_QUESTIONS } from "./data/hexaco-questions";
 
 export type HexacoLikert = 1 | 2 | 3 | 4 | 5;
 export type HexacoAnswers = Record<number, HexacoLikert>;

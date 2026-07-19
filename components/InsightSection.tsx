@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { type PersonalityInsight } from "@/lib/personality-insights";
+
 
 export default function InsightSection({ insight }: { insight: PersonalityInsight }) {
   const t = useTranslations("insights");

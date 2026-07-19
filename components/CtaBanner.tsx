@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 export default function CtaBanner() {

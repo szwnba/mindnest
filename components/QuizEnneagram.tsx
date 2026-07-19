@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import {
   ENNEAGRAM_QUESTIONS,
 } from "@/lib/data/enneagram-questions";
-import { type EnneagramResult } from "@/lib/data/enneagram-questions";
+
 import { scoreEnneagram, type EnneagramAnswers } from "@/lib/enneagram-scoring";
 import { generateEnneagramInsight } from "@/lib/data/enneagram-types";
 
