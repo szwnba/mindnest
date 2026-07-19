@@ -19,7 +19,7 @@ export default function SharePage({ searchParams }: SharePageProps) {
     });
   }, [searchParams]);
 
-  const shareText = t("ogDescription", { code });
+  const shareText = t("ogDescription", { type: type.toUpperCase(), code });
   const shareUrl =
     typeof window !== "undefined" ? window.location.origin : "";
 
