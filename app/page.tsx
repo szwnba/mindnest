@@ -16,6 +16,26 @@ import { RevealObserver } from "@/components/RevealObserver";
 import Resources from "@/components/Resources";
 import SharedResultBanner from "@/components/SharedResultBanner";
 import TrustBar from "@/components/TrustBar";
+import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_TITLE, SITE_URL } from "@/lib/site";
+
+export const metadata = {
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "心栖 MindNest",
+    type: "website",
+    locale: "zh_CN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+};
 
 export default function Home() {
   return (

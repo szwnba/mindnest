@@ -36,12 +36,6 @@ export default function Hero() {
               { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
               { code: "INFJ", name: "提倡者", color: "var(--sage)" },
               { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
-              { code: "INTJ", name: "建筑师", color: "var(--sky)" },
-              { code: "ENFP", name: "竞选者", color: "var(--sage)" },
-              { code: "ISTJ", name: "物流师", color: "var(--warm-gold)" },
-              { code: "ESTP", name: "企业家", color: "var(--terracotta)" },
-              { code: "INFJ", name: "提倡者", color: "var(--sage)" },
-              { code: "ENTJ", name: "指挥官", color: "var(--sky)" },
             ].map((tChip, i) => (
               <span key={`${tChip.code}-${i}`} className="hero-type-chip" style={{ animationDelay: `${(i % 6) * 0.15}s` }}>
                 <span className="hero-type-chip-code">{tChip.code}</span>
