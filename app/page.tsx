@@ -17,6 +17,11 @@ import Resources from "@/components/Resources";
 import SharedResultBanner from "@/components/SharedResultBanner";
 import TrustBar from "@/components/TrustBar";
 
+export const metadata = {
+  title: "专业人格心理测评平台 — MBTI、大五人格、九型人格",
+  description: "心栖 MindNest 提供基于 MBTI、大五人格、九型人格等经典科学量表的人格分析、自我探索与成长建议。免费开始测评，深入了解自己。",
+};
+
 export default function Home() {
   return (
     <>
