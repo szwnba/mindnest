@@ -1,4 +1,5 @@
 
+import { type HexacoResult } from "./hexaco-scoring";
 import { type BFI10Result } from "./bfi10-scoring";
 import { HEXACO_DIMENSIONS, type HexacoDimension } from "./data/hexaco-questions";
 import { BIG_FIVE_DIMENSIONS } from "./data/big-five-dimensions";

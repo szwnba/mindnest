@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { type PersonalityInsight } from "@/lib/personality-insights";
 
 
 export default function InsightSection({ insight }: { insight: PersonalityInsight }) {
@@ -17,7 +18,7 @@ export default function InsightSection({ insight }: { insight: PersonalityInsigh
       {insight.standoutStats.length > 0 && (
         <div className="insight-standout">
           <h4 className="insight-standout-title">{t("standoutTitle")}</h4>
-          {insight.standoutStats.map((stat, i) => (
+          {insight.standoutStats.map((stat: { label: string; percentile: number }, i) => (
             <div key={i} className="stat-highlight">
               <span className="stat-percentile">{stat.percentile}%</span>
               <span className="stat-label">{stat.label}</span>
@@ -29,7 +30,7 @@ export default function InsightSection({ insight }: { insight: PersonalityInsigh
       {/* Signature Strengths */}
       <div className="insight-strengths">
         <h4 className="insight-strengths-title">{t("strengthsTitle")}</h4>
-        {insight.signatureStrengths.map((s, i) => (
+        {insight.signatureStrengths.map((s: { title: string; description: string }, i) => (
           <div key={i} className="strength-card">
             <div className="strength-card-title">{s.title}</div>
             <p className="strength-card-desc">{s.description}</p>
@@ -53,7 +54,7 @@ export default function InsightSection({ insight }: { insight: PersonalityInsigh
         <div className="insight-energy">
           <div className="energy-col">
             <h4 className="energy-title energy-drivers-title">{t("driversTitle")}</h4>
-            {insight.drivers.map((d, i) => (
+            {insight.drivers.map((d: { title: string; description: string }, i) => (
               <div key={i} className="energy-item">
                 <span className="energy-item-title">{d.title}</span>
                 <span className="energy-item-desc">{d.description}</span>
@@ -62,7 +63,7 @@ export default function InsightSection({ insight }: { insight: PersonalityInsigh
           </div>
           <div className="energy-col">
             <h4 className="energy-title energy-drainers-title">{t("drainersTitle")}</h4>
-            {insight.drainers.map((d, i) => (
+            {insight.drainers.map((d: { title: string; description: string }, i) => (
               <div key={i} className="energy-item">
                 <span className="energy-item-title">{d.title}</span>
                 <span className="energy-item-desc">{d.description}</span>

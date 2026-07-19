@@ -7,6 +7,7 @@ import {
 } from "@/lib/data/enneagram-questions";
 
 import { scoreEnneagram, type EnneagramAnswers } from "@/lib/enneagram-scoring";
+import { type EnneagramResult } from "@/lib/data/enneagram-questions";
 import { generateEnneagramInsight } from "@/lib/data/enneagram-types";
 
 type Phase = "intro" | "answering" | "result";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { type CareerMatch } from "@/lib/career-matches";
 
 
 export default function CareerSection({ careers }: { careers: CareerMatch[] }) {
