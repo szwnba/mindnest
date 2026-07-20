@@ -13,7 +13,9 @@ export default function ProfilePage() {
   const t = useTranslations("profile");
   const [profile, setProfile] = useState<UnifiedProfile | null>(null);
 
+  // Read unified profile from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore from external storage
     setProfile(readUnifiedProfile());
   }, []);
 

@@ -77,6 +77,8 @@ export default function QuizBFI10() {
     } catch {
       // ignore
     }
+    // Restore saved BFI10 state from sessionStorage on mount
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore external state on mount
     if (nextResult) setResult(nextResult);
     if (nextAnswers) setAnswers(nextAnswers);
     if (nextQIdx !== null) setQIdx(nextQIdx);

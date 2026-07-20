@@ -40,9 +40,6 @@ test.describe("测评流程", () => {
     await page.locator(".quiz-intro .btn-primary").click();
     await page.waitForTimeout(500);
 
-    // 获取第一题文本
-    const firstQuestion = await page.locator(".quiz-question-text").textContent();
-
     // 选择第一个选项
     await page.locator(".likert-btn").first().click();
     await page.waitForTimeout(500);

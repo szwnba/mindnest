@@ -41,7 +41,9 @@ export default function QuizHistory() {
   const [hydrated, setHydrated] = useState(false);
   const [entries, setEntries] = useState<QuizHistoryEntry[]>([]);
 
+  // Restore quiz history from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore from external storage
     setEntries(getQuizHistory());
     setHydrated(true);
   }, []);

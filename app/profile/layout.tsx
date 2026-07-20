@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `我的测评档案 · ${SITE_NAME}`,

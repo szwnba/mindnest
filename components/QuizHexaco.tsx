@@ -77,6 +77,8 @@ export default function QuizHexaco() {
     } catch {
       // ignore
     }
+    // Restore saved HEXACO state from sessionStorage on mount
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore external state on mount
     if (nextResult) setResult(nextResult);
     if (nextAnswers) {
       setAnswers(nextAnswers);
@@ -630,7 +632,6 @@ function HexacoResult({
             const level = result.profile[d];
             const dimName = t(`dim${d}`);
             const rangeLabel = level === "high" ? t("growthHigh") : level === "low" ? t("growthLow") : t("growthMid");
-            const tipKey = `growthTip${level === "high" ? "High" : level === "low" ? "Low" : ""}${d}`;
             const tip = pct >= 70
               ? t(`growthTipHigh${d}`)
               : pct <= 30

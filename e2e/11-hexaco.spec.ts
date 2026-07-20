@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
 test.describe.serial("HEXACO 六大人格维度测试", () => {
-  async function clearHexacoStorage(page) {
+  async function clearHexacoStorage(page: Page) {
     await page.evaluate(() => {
       try {
         window.sessionStorage.removeItem("mindnest:hexaco-result-v1");

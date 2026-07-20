@@ -24,6 +24,7 @@ export default function QuizEnneagram() {
 
   //  hydration guard — 防止 SSR 与客户端初始渲染不一致
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount detection for SSR hydration
     setHydrated(true);
   }, []);
 
@@ -119,7 +120,7 @@ export default function QuizEnneagram() {
   );
 
   const currentProgress = useMemo(() => {
-    return Object.keys(answersRef.current).length;
+    return Object.keys(answers).length;
   }, [answers]);
 
   return (

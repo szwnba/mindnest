@@ -76,6 +76,8 @@ export default function Quiz() {
     } catch {
       // ignore
     }
+    // Restore saved quiz state from sessionStorage on mount
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore external state on mount
     if (nextResult) setResult(nextResult);
     if (nextAnswers) setAnswers(nextAnswers);
     if (nextQIdx !== null) setQIdx(nextQIdx);
@@ -273,7 +275,6 @@ function AnsweringPanel({
   onPick: (s: LikertScore) => void;
   onPrev: () => void;
 }) {
-  const t = useTranslations("quiz");
   const ta = useTranslations("quiz.answering");
   const likert = useLikertOptions();
   const q = QUIZ_QUESTIONS[qIdx];

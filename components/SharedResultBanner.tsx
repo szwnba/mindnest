@@ -22,7 +22,10 @@ export default function SharedResultBanner() {
 
   // 不在 SSR 阶段渲染，避免 hydration 不一致
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount detection for SSR hydration
+    setMounted(true);
+  }, []);
   if (!mounted) return null;
 
   const raw = params.get("result");

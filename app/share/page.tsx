@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface SharePageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -48,12 +49,12 @@ export default function SharePage({ searchParams }: SharePageProps) {
           >
             {t("shareOnX")}
           </a>
-          <a
+          <Link
             className="inline-flex h-10 items-center rounded-full border border-[color-mix(in_srgb,var(--color-foreground)_20%,transparent)] px-5 font-medium hover:bg-[var(--color-card)] transition"
             href="/"
           >
             {t("takeTest")}
-          </a>
+          </Link>
         </div>
       </div>
     </main>

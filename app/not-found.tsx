@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SITE_NAME } from "@/lib/site";
 
 export default function NotFound() {
   return (
