@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "使用条款 · MindNest",
   description:
     "心栖 MindNest 的使用条款。使用本网站即表示你同意以下条款。",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsPage() {

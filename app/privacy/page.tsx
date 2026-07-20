@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "隐私政策 · MindNest",
   description:
     "心栖 MindNest 的隐私政策。我们承诺：所有数据仅存储在浏览器本地，无账号系统，无服务端存储，无第三方追踪。",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {

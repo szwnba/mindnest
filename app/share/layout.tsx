@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     locale: "zh_CN",
   },
   robots: { index: false, follow: true },
+  alternates: {
+    canonical: "/share",
+  },
 };
 
 export default function ShareLayout({

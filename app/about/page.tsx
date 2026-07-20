@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "关于心栖 · MindNest",
   description:
     "心栖 MindNest 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架，用科学且温和的方式帮助每个人更好地理解自己。",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

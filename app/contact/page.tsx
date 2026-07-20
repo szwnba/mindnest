@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "投稿合作 · MindNest",
   description:
     "心栖 MindNest 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

@@ -35,6 +35,9 @@ export const metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
   },
+  alternates: {
+    canonical: "/"
+  }
 };
 
 export default function Home() {

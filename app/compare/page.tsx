@@ -7,7 +7,10 @@ import { COMPARISON } from "@/lib/data/site-comparison";
 export const metadata: Metadata = {
   title: "我们与 16Personalities 的不同 · 完整对比 · 心栖 MindNest",
   description:
-  "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
+    "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
+  alternates: {
+    canonical: "/compare",
+  },
 };
 
 const HIGHLIGHT_BADGE: Record<string, { text: string; cls: string }> = {
