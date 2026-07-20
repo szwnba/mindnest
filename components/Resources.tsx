@@ -38,7 +38,7 @@ export default function Resources() {
                 </div>
                 <div>
                   <div className="resource-author-name">
-                    {featured.author ?? "MindNest 编辑组"}
+                    {featured.author ?? t("editorialTeam")}
                   </div>
                   <div className="resource-author-date">
                     {featured.date ?? t("comingSoon")}

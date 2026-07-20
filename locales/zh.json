@@ -746,7 +746,8 @@
     "indexTocLabel": "分类目录",
     "cta": "开始测一下 →",
     "originalLink": "原始链接 ↗",
-    "ogSection": "人格心理学"
+    "ogSection": "人格心理学",
+    "editorialTeam": "MindNest 编辑组"
   },
   "faq": {
     "eyebrow": "常见问题",
@@ -928,5 +929,10 @@
     "title": "出错了",
     "description": "页面加载时遇到了问题。请刷新页面或返回首页。",
     "homeLink": "返回首页"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "你访问的页面不存在或已被移除",
+    "backHome": "返回首页"
   }
 }

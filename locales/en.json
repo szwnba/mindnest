@@ -746,7 +746,8 @@
     "indexTocLabel": "Table of contents",
     "cta": "Take the assessment →",
     "originalLink": "Original link ↗",
-    "ogSection": "Personality Psychology"
+    "ogSection": "Personality Psychology",
+    "editorialTeam": "MindNest Editorial Team"
   },
   "faq": {
     "eyebrow": "FAQ",
@@ -928,5 +929,10 @@
     "title": "Something went wrong",
     "description": "An error occurred while loading the page. Please refresh or return to the home page.",
     "homeLink": "Return to home"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "The page you are looking for does not exist or has been removed.",
+    "backHome": "Back to Home"
   }
 }
