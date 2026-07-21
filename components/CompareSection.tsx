@@ -125,12 +125,12 @@ export default function CompareSection() {
                 )}
               </div>
               <div className="compare-card-row">
-                <div className="compare-card-label">MindNest</div>
+                <div className="compare-card-label">{t("compare.colUs")}</div>
                 <div className="compare-card-text">{row.mindNest}</div>
               </div>
               <div className="compare-card-row compare-card-row-them">
                 <div className="compare-card-label">
-                  16Personalities
+                  {t("compare.colThem")}
                   {row.highlight === "win" && (
                     <span className="compare-badge-lose" aria-label={t("badgeLose")}> ✗</span>
                   )}
