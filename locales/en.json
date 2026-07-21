@@ -16,7 +16,8 @@
     "closeMenu": "Close menu",
     "homeAria": "MindNest homepage",
     "profile": "My Profile",
-    "mainNavAria": "Main Navigation"
+    "mainNavAria": "Main Navigation",
+    "siteName": "MindNest"
   },
   "hero": {
     "greeting": "Professional Personality Assessment Platform",
@@ -855,7 +856,8 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Use",
       "contact": "Contact Us"
-    }
+    },
+    "siteName": "MindNest"
   },
   "profile": {
     "title": "🧬 My Personality Profile",

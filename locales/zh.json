@@ -16,7 +16,8 @@
     "closeMenu": "关闭菜单",
     "homeAria": "心栖 MindNest 首页",
     "profile": "我的档案",
-    "mainNavAria": "主导航"
+    "mainNavAria": "主导航",
+    "siteName": "心栖 MindNest"
   },
   "hero": {
     "greeting": "专业人格心理测评平台",
@@ -855,7 +856,8 @@
       "privacy": "隐私政策",
       "terms": "使用条款",
       "contact": "联系我们"
-    }
+    },
+    "siteName": "心栖 MindNest"
   },
   "profile": {
     "title": "🧬 我的人格档案",

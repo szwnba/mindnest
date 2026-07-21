@@ -48,7 +48,7 @@ export default function Header() {
         <Link href="/" className="nav-brand" aria-label={t("homeAria")}>
           <div className="nav-logo" aria-hidden="true" />
           <div className="nav-title">
-            心栖 <small>MindNest</small>
+            {t("siteName")}
           </div>
         </Link>
 
