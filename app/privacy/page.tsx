@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "隐私政策 · MindNest",
-  description:
-    "心栖 MindNest 的隐私政策。我们承诺：所有数据仅存储在浏览器本地，无账号系统，无服务端存储，无第三方追踪。",
+  title: `隐私政策 · ${SITE_NAME}`,
+  description: `${SITE_NAME} 的隐私政策。我们承诺：所有数据仅存储在浏览器本地，无账号系统，无服务端存储，无第三方追踪。`,
   alternates: {
     canonical: "/privacy",
   },
@@ -20,9 +20,9 @@ export default function PrivacyPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "隐私政策 · MindNest",
-            "description": "心栖 MindNest 的隐私政策。所有数据仅存储在浏览器本地，无账号系统，无服务端存储。",
-            "url": "https://mindnest-six.vercel.app/privacy"
+            "name": `隐私政策 · ${SITE_NAME}`,
+            "description": `${SITE_NAME} 的隐私政策。所有数据仅存储在浏览器本地，无账号系统，无服务端存储。`,
+            "url": SITE_URL,
           })
         }}
       />

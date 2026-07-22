@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "使用条款 · MindNest",
-  description:
-    "心栖 MindNest 的使用条款。使用本网站即表示你同意以下条款。",
+  title: `使用条款 · ${SITE_NAME}`,
+  description: `${SITE_NAME} 的使用条款。使用本网站即表示你同意以下条款。`,
   alternates: {
     canonical: "/terms",
   },
@@ -20,9 +20,9 @@ export default function TermsPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "使用条款 · MindNest",
-            "description": "心栖 MindNest 的使用条款。",
-            "url": "https://mindnest-six.vercel.app/terms"
+            "name": `使用条款 · ${SITE_NAME}`,
+            "description": `${SITE_NAME} 的使用条款。`,
+            "url": SITE_URL,
           })
         }}
       />

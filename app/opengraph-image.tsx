@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "心栖 MindNest · 专业人格心理测评平台";
+import { SITE_NAME } from "@/lib/site";
+export const alt = `${SITE_NAME} · 专业人格心理测评平台`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

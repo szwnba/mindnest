@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 import QuizEnneagram from "@/components/QuizEnneagram";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "九型人格测试 · Enneagram · 心栖 MindNest",
+  title: `九型人格测试 · Enneagram · ${SITE_NAME}`,
   description:
     "九型人格测评（Enneagram）：探索你的核心动机、恐惧与欲望，找到属于你的9种类型之一，理解行为背后的「为什么」。",
   alternates: {

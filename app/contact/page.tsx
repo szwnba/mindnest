@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "投稿合作 · MindNest",
+  title: `投稿合作 · ${SITE_NAME}`,
   description:
-    "心栖 MindNest 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。",
+    `${SITE_NAME} 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。`,
   alternates: {
     canonical: "/contact",
   },
@@ -20,10 +21,10 @@ export default function ContactPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            name: "投稿合作 · MindNest",
+            name: `投稿合作 · ${SITE_NAME}`,
             description:
-              "心栖 MindNest 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。",
-            url: "https://mindnest-six.vercel.app/contact",
+              `${SITE_NAME} 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。`,
+            url: SITE_URL,
           }),
         }}
       />

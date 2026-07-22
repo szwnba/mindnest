@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
-  authors: [{ name: "MindNest Team" }],
+  authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   alternates: {
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "心栖 MindNest · 专业人格心理测评平台",
+        alt: `${SITE_NAME} · 专业人格心理测评平台`,
       },
     ],
   },
@@ -101,7 +101,7 @@ const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
-  alternateName: "MindNest",
+  alternateName: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
 };

@@ -3,9 +3,10 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { COMPARISON } from "@/lib/data/site-comparison";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "我们与 16Personalities 的不同 · 完整对比 · 心栖 MindNest",
+  title: `我们与 16Personalities 的不同 · 完整对比 · ${SITE_NAME}`,
   description:
     "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
   alternates: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const HIGHLIGHT_BADGE: Record<string, { text: string; cls: string }> = {
-  win: { text: "MindNest 占优", cls: "compare-badge-win" },
+  win: { text: `${SITE_NAME} 占优`, cls: "compare-badge-win" },
   tie: { text: "平分秋色", cls: "compare-badge-tie" },
   behind: { text: "我们在路上", cls: "compare-badge-behind" },
 };
@@ -28,16 +29,17 @@ export default function ComparePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "我们与 16Personalities 的不同 · 完整对比",
-            "description": "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
+            "name": SITE_NAME,
+            "description":
+              "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
             "author": {
               "@type": "Organization",
-              "name": "心栖 MindNest"
+              "name": SITE_NAME
             },
             "publisher": {
               "@type": "Organization",
-              "name": "心栖 MindNest",
-              "url": "https://mindnest-six.vercel.app"
+              "name": SITE_NAME,
+              "url": SITE_URL
             },
             "about": {
               "@type": "CreativeWork",
@@ -86,7 +88,7 @@ export default function ComparePage() {
                 </div>
 
                 <div className="compare-page-row compare-page-row-us">
-                  <div className="compare-page-row-label">MindNest</div>
+                  <div className="compare-page-row-label">{SITE_NAME}</div>
                   <div className="compare-page-row-text">{row.mindNest}</div>
                 </div>
                 <div className="compare-page-row">
