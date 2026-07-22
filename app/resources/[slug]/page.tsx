@@ -38,7 +38,7 @@ export async function generateMetadata({
       type: "article",
       siteName: SITE_NAME,
       publishedTime: a.publishedAt,
-      tags: [a.categoryLabel, "人格心理学", "MindNest"],
+      tags: [a.categoryLabel, "人格心理学", SITE_NAME],
     },
     twitter: {
       card: "summary_large_image",
