@@ -125,7 +125,7 @@ export default function CompareSection() {
                 )}
               </div>
               <div className="compare-card-row">
-                <div className="compare-card-label">MindNest</div>
+                <div className="compare-card-label">{t("colUs")}</div>
                 <div className="compare-card-text">{row.mindNest}</div>
               </div>
               <div className="compare-card-row compare-card-row-them">
