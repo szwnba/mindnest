@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getTypeByCode } from "@/lib/data/personality-types";
+import { SITE_NAME } from "@/lib/site";
 
 export const runtime = "edge";
 
@@ -68,7 +69,7 @@ export async function GET(request: Request) {
               maxWidth: 600,
             }}
           >
-            心栖 MindNest · 人格类型
+            {SITE_NAME} · 人格类型
           </p>
         )}
 

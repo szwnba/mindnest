@@ -3,9 +3,10 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { COMPARISON } from "@/lib/data/site-comparison";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "我们与 16Personalities 的不同 · 完整对比 · 心栖 MindNest",
+  title: `我们与 16Personalities 的不同 · 完整对比 · ${SITE_NAME}`,
   description:
     "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
   alternates: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const HIGHLIGHT_BADGE: Record<string, { text: string; cls: string }> = {
-  win: { text: "MindNest 占优", cls: "compare-badge-win" },
+  win: { text: `${SITE_NAME} 占优`, cls: "compare-badge-win" },
   tie: { text: "平分秋色", cls: "compare-badge-tie" },
   behind: { text: "我们在路上", cls: "compare-badge-behind" },
 };
@@ -28,22 +29,23 @@ export default function ComparePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "我们与 16Personalities 的不同 · 完整对比",
-            "description": "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
+            "name": SITE_NAME,
+            "description":
+              "13 个维度逐项对照：理论框架、量表诚信、商业模式、隐私、社区生态……一份诚实的自我定位。",
             "author": {
               "@type": "Organization",
-              "name": "心栖 MindNest"
+              "name": SITE_NAME,
             },
             "publisher": {
               "@type": "Organization",
-              "name": "心栖 MindNest",
-              "url": "https://mindnest-six.vercel.app"
+              "name": SITE_NAME,
+              "url": SITE_URL,
             },
             "about": {
               "@type": "CreativeWork",
-              "name": "人格心理测评平台对比"
-            }
-          })
+              "name": "人格心理测评平台对比",
+            },
+          }),
         }}
       />
       <Header />
@@ -57,7 +59,7 @@ export default function ComparePage() {
         <h1>我们与 16Personalities 的不同</h1>
         <p className="compare-page-lede">
           16Personalities 是过去十年里全球最大的人格测评入口之一，它的存在
-          让「了解自己的人格」变成了一个流行词。MindNest（心栖）不是它的替代品，
+          让「了解自己的人格」变成了一个流行词。{SITE_NAME}不是它的替代品，
           这页所做的，是把 13 个维度上的差异一项一项摊开来 ——
           有我们更好的地方，有我们暂时还不如的地方，都明说。
           你不需要选边站，只需要知道哪一种工具适合你现在的问题。
@@ -86,7 +88,7 @@ export default function ComparePage() {
                 </div>
 
                 <div className="compare-page-row compare-page-row-us">
-                  <div className="compare-page-row-label">MindNest</div>
+                  <div className="compare-page-row-label">{SITE_NAME}</div>
                   <div className="compare-page-row-text">{row.mindNest}</div>
                 </div>
                 <div className="compare-page-row">
