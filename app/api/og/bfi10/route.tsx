@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_NAME } from "@/lib/site";
 
 export const runtime = "edge";
 
@@ -62,7 +63,7 @@ export async function GET(request: Request) {
             marginBottom: 32,
           }}
         >
-          心栖 MindNest · 人格测评
+          {SITE_NAME} · 人格测评
         </p>
 
         {/* Dimension bars */}

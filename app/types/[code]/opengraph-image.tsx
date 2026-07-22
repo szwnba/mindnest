@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_NAME } from "@/lib/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -44,7 +45,7 @@ export default async function Image({
             letterSpacing: "2px",
           }}
         >
-          心栖 MindNest · 人格类型详解
+          {SITE_NAME} · 人格类型详解
         </div>
         <div
           style={{
