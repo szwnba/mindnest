@@ -163,7 +163,7 @@ export default function ResourcesIndexPage() {
           <h2 id="resources-cta-h">读完了？来测一下你自己</h2>
           <p>
             读理论是一回事，看到自己的分布是另一回事。
-            MindNest 的 MBTI 28 题与 Big Five 短版都免费、不需注册。
+            {SITE_NAME} 的 MBTI 28 题与 Big Five 短版都免费、不需注册。
           </p>
           <Link href="/#quiz" className="btn btn-primary btn-lg">
             开始 28 题测评 →

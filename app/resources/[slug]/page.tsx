@@ -178,7 +178,7 @@ export default async function ResourceDetailPage({ params }: PageProps) {
         <section className="resource-detail-cta" aria-labelledby="cta-h">
           <h2 id="cta-h">读完了？来测一下你自己</h2>
           <p>
-            读理论是一回事，看到自己的分布是另一回事。MindNest 提供 MBTI 28 题
+            读理论是一回事，看到自己的分布是另一回事。{SITE_NAME} 提供 MBTI 28 题
             与 Big Five 短版，免费、不需注册、附完整百分位分布。
           </p>
           <Link href="/#quiz" className="btn btn-primary btn-lg">

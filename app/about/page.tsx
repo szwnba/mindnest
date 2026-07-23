@@ -31,7 +31,7 @@ export default function AboutPage() {
       <Header />
       <main id="main" className="container narrow" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
         <article className="prose">
-          <h1>关于心栖</h1>
+          <h1>关于{SITE_NAME}</h1>
           <p className="lead">
             ${SITE_NAME} 是一个专业人格心理测评平台，致力于用科学且温和的方式，帮助每个人更好地理解自己与他人。
           </p>
