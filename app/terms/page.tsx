@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "使用条款 · MindNest",
-  description:
-    "心栖 MindNest 的使用条款。使用本网站即表示你同意以下条款。",
+  title: `使用条款 · ${SITE_NAME}`,
+  description: `${SITE_NAME} 的使用条款。使用本网站即表示你同意以下条款。`,
   alternates: {
     canonical: "/terms",
   },
@@ -20,8 +20,8 @@ export default function TermsPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "使用条款 · MindNest",
-            "description": "心栖 MindNest 的使用条款。",
+            "name": `使用条款 · ${SITE_NAME}`,
+            "description": `${SITE_NAME} 的使用条款。`,
             "url": "https://mindnest-six.vercel.app/terms"
           })
         }}
@@ -31,12 +31,12 @@ export default function TermsPage() {
         <article className="prose">
           <h1>使用条款</h1>
           <p className="lead">
-            欢迎使用心栖 MindNest。使用本网站即表示你同意以下条款。请仔细阅读。
+            欢迎使用{SITE_NAME}。使用本网站即表示你同意以下条款。请仔细阅读。
           </p>
 
           <h2>1. 服务说明</h2>
           <p>
-            心栖 MindNest 提供免费的人格心理测评服务，包括 MBTI、大五人格（BFI-10）、HEXACO 等测评工具。
+            {SITE_NAME} 提供免费的人格心理测评服务，包括 MBTI、大五人格（BFI-10）、HEXACO 等测评工具。
             本网站提供的所有测评结果仅供参考和自我探索之用，不构成专业心理诊断或治疗建议。
           </p>
 
@@ -48,7 +48,7 @@ export default function TermsPage() {
           </p>
           <p>
             如果你正在经历心理健康困扰，请咨询专业的心理咨询师或医疗机构。
-            心栖 MindNest 不提供心理健康诊断或治疗服务。
+            {SITE_NAME} 不提供心理健康诊断或治疗服务。
           </p>
 
           <h2>3. 用户行为</h2>
@@ -62,7 +62,7 @@ export default function TermsPage() {
 
           <h2>4. 知识产权</h2>
           <p>
-            心栖 MindNest 的源代码以 MIT 协议开源。网站上的文本内容、设计和图形受版权保护。
+            {SITE_NAME} 的源代码以 MIT 协议开源。网站上的文本内容、设计和图形受版权保护。
             如果你希望使用本站内容，请遵循相应的开源协议或联系我们获取授权。
           </p>
 
@@ -74,7 +74,7 @@ export default function TermsPage() {
 
           <h2>6. 责任限制</h2>
           <p>
-            在任何情况下，心栖 MindNest 的作者或贡献者不对因使用本网站而产生的任何直接、
+            在任何情况下，{SITE_NAME} 的作者或贡献者不对因使用本网站而产生的任何直接、
             间接、附带或后果性损害承担责任。
           </p>
 

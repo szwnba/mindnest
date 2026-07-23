@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "关于心栖 · MindNest",
-  description:
-    "心栖 MindNest 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架，用科学且温和的方式帮助每个人更好地理解自己。",
+  title: `关于心栖 · ${SITE_NAME}`,
+  description: `${SITE_NAME} 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架，用科学且温和的方式帮助每个人更好地理解自己。`,
   alternates: {
     canonical: "/about",
   },
@@ -21,8 +21,8 @@ export default function AboutPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": "关于心栖 MindNest",
-            "description": "心栖 MindNest 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架。",
+            "name": `关于心栖 · ${SITE_NAME}`,
+            "description": `${SITE_NAME} 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架。`,
             "url": "https://mindnest-six.vercel.app/about"
           })
         }}
@@ -30,9 +30,9 @@ export default function AboutPage() {
       <Header />
       <main id="main" className="container narrow" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
         <article className="prose">
-          <h1>关于心栖 MindNest</h1>
+          <h1>关于心栖 · {SITE_NAME}</h1>
           <p className="lead">
-            心栖 MindNest 是一个专业人格心理测评平台，致力于用科学且温和的方式，帮助每个人更好地理解自己与他人。
+            {SITE_NAME} 是一个专业人格心理测评平台，致力于用科学且温和的方式，帮助每个人更好地理解自己与他人。
           </p>
 
           <h2>我们的理念</h2>
@@ -59,13 +59,13 @@ export default function AboutPage() {
 
           <h2>开源透明</h2>
           <p>
-            心栖 MindNest 的全部源代码以 MIT 协议开源在 GitHub。题库、算法、UI 均可审阅。
+            {SITE_NAME} 的全部源代码以 MIT 协议开源在 GitHub。题库、算法、UI 均可审阅。
             如果你对计分逻辑有疑问，可以直接查看源码验证。
           </p>
 
           <h2 id="advisors">学术顾问</h2>
           <p>
-            心栖 MindNest 的内容与量表设计参考了以下学者与机构的研究成果：
+            {SITE_NAME} 的内容与量表设计参考了以下学者与机构的研究成果：
           </p>
           <ul>
             <li><strong>Rammstedt & John (2007)</strong> — BFI-10 短量表开发者，其量表为本平台大五测评的基础</li>
@@ -85,7 +85,7 @@ export default function AboutPage() {
 
           <h2>致谢</h2>
           <p>
-            心栖 MindNest 的测评量表基于公开的学术研究文献，包括 Rammstedt & John (2007) 的 BFI-10 量表、
+            {SITE_NAME} 的测评量表基于公开的学术研究文献，包括 Rammstedt & John (2007) 的 BFI-10 量表、
             Ashton & Lee (2009) 的 HEXACO-60 量表等。我们感谢这些学者为人格心理学做出的贡献。
           </p>
         </article>

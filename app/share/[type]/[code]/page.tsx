@@ -177,7 +177,7 @@ export default async function SharePage({ params, searchParams }: PageProps) {
               </Link>
             </div>
             <p className="share-landing-note">
-              来自 MindNest · 28 题 Likert 人格测评
+              来自 {SITE_NAME} · 28 题 Likert 人格测评
             </p>
           </section>
         </main>
@@ -234,7 +234,7 @@ export default async function SharePage({ params, searchParams }: PageProps) {
               </Link>
             </div>
             <p className="share-landing-note">
-              来自 MindNest · BFI-10 国际通用量表
+              来自 {SITE_NAME} · BFI-10 国际通用量表
             </p>
           </section>
         </main>

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getTypeByCode } from "@/lib/data/personality-types";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_ALT_TAGLINE } from "@/lib/site";
 
 export const runtime = "edge";
 
@@ -136,7 +136,7 @@ export async function GET(request: Request) {
             color: "#667788",
           }}
         >
-          认识你自己，是一切成长的起点
+          {SITE_ALT_TAGLINE}
         </p>
       </div>
     ),
