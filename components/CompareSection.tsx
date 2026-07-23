@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { COMPARISON } from "@/lib/data/site-comparison";
+import { SITE_NAME } from "@/lib/site";
 
 export default function CompareSection() {
   const t = useTranslations("compare");
@@ -125,7 +126,7 @@ export default function CompareSection() {
                 )}
               </div>
               <div className="compare-card-row">
-                <div className="compare-card-label">MindNest</div>
+                <div className="compare-card-label">{SITE_NAME}</div>
                 <div className="compare-card-text">{row.mindNest}</div>
               </div>
               <div className="compare-card-row compare-card-row-them">
