@@ -3,6 +3,8 @@
  */
 export const SITE_URL = "https://mindnest-six.vercel.app";
 export const SITE_NAME = "心栖 MindNest";
+export const SITE_SHORT_NAME = "心栖";
+export const SITE_ALT_TAGLINE = "专业人格心理测评平台";
 export const SITE_TITLE = "心栖 · MindNest — 专业人格心理测评平台";
 export const SITE_DESCRIPTION =
   "心栖 MindNest 是一个温和而专业的人格心理测评平台，提供基于 MBTI、大五人格等经典科学量表的人格分析、自我探索与成长建议。";

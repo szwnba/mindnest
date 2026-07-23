@@ -3,9 +3,11 @@ import { Cormorant_Garamond, Noto_Serif_SC, Noto_Sans_SC } from "next/font/googl
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import {
+  SITE_ALT_TAGLINE,
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
   SITE_NAME,
+  SITE_SHORT_NAME,
   SITE_TITLE,
   SITE_URL,
 } from "@/lib/site";
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
-  authors: [{ name: "MindNest Team" }],
+  authors: [{ name: `${SITE_NAME} Team` }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   alternates: {
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "心栖 MindNest · 专业人格心理测评平台",
+        alt: `${SITE_NAME} · ${SITE_ALT_TAGLINE}`,
       },
     ],
   },
@@ -92,7 +94,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "心栖",
+    title: SITE_SHORT_NAME,
   },
   category: "lifestyle",
 };
