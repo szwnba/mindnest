@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import {
   SITE_ALT_TAGLINE,
+  SITE_APP_TITLE,
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
   SITE_NAME,
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
-  authors: [{ name: "MindNest Team" }],
+  authors: [{ name: `${SITE_SHORT_NAME} Team` }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   alternates: {
@@ -94,7 +95,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "心栖",
+    title: SITE_APP_TITLE,
   },
   category: "lifestyle",
 };
