@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_APP_TITLE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `关于心栖 · ${SITE_NAME}`,
+  title: `关于${SITE_APP_TITLE}`,
   description: `${SITE_NAME} 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架，用科学且温和的方式帮助每个人更好地理解自己。`,
   alternates: {
     canonical: "/about",
@@ -21,7 +21,7 @@ export default function AboutPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": `关于心栖 · ${SITE_NAME}`,
+            "name": `关于${SITE_APP_TITLE}`,
             "description": `${SITE_NAME} 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架。`,
             "url": "https://mindnest-six.vercel.app/about"
           })
@@ -30,7 +30,7 @@ export default function AboutPage() {
       <Header />
       <main id="main" className="container narrow" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
         <article className="prose">
-          <h1>关于心栖 · {SITE_NAME}</h1>
+          <h1>关于{SITE_APP_TITLE}</h1>
           <p className="lead">
             {SITE_NAME} 是一个专业人格心理测评平台，致力于用科学且温和的方式，帮助每个人更好地理解自己与他人。
           </p>
