@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_ALT_TAGLINE } from "@/lib/site";
 
-export const alt = `${SITE_NAME} · 专业人格心理测评平台`;
+export const alt = `${SITE_NAME} · ${SITE_ALT_TAGLINE}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -87,7 +87,7 @@ export default async function Image() {
             letterSpacing: "0.03em",
           }}
         >
-          认识你自己，是一切成长的起点
+          {SITE_ALT_TAGLINE}
         </div>
 
         {/* Subtitle */}

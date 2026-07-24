@@ -18,3 +18,6 @@ export const SITE_KEYWORDS = [
   "MindNest",
   "心栖",
 ];
+
+export const SITE_SHORT_NAME = "MindNest";
+export const SITE_ALT_TAGLINE = "认识你自己，是一切成长的起点";
