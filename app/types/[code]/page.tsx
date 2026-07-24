@@ -70,7 +70,7 @@ export default async function TypeDetailPage({ params }: PageProps) {
             "@context": "https://schema.org",
             "@type": "ProfilePage",
             "name": `${type.code} · ${type.nameZh}（${type.nameEn}）`,
-            "description": `心栖 MindNest - ${type.code} ${type.nameZh} 人格类型详解：${type.description.slice(0, 100)}`,
+            "description": `${SITE_NAME} - ${type.code} ${type.nameZh} 人格类型详解：${type.description.slice(0, 100)}`,
             "mainEntity": {
               "@type": "Person",
               "name": `${type.code} ${type.nameZh}`,
