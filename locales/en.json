@@ -46,7 +46,15 @@
       "J / P"
     ],
     "miniStat1Label": "Core Dimensions",
-    "miniStat2Label": "Personality Types"
+    "miniStat2Label": "Personality Types",
+    "chips": {
+      "INTJ": "Architect",
+      "ENFP": "Campaigner",
+      "ISTJ": "Logistician",
+      "ESTP": "Entrepreneur",
+      "INFJ": "Advocate",
+      "ENTJ": "Commander"
+    }
   },
   "trustBar": {
     "title": "Platform Features",

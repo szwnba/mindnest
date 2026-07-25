@@ -46,7 +46,15 @@
       "J / P"
     ],
     "miniStat1Label": "核心维度",
-    "miniStat2Label": "人格类型"
+    "miniStat2Label": "人格类型",
+    "chips": {
+      "INTJ": "建筑师",
+      "ENFP": "竞选者",
+      "ISTJ": "物流师",
+      "ESTP": "企业家",
+      "INFJ": "提倡者",
+      "ENTJ": "指挥官"
+    }
   },
   "trustBar": {
     "title": "平台特点",
