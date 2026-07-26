@@ -938,7 +938,8 @@
   "errorBoundary": {
     "title": "出错了",
     "description": "页面加载时遇到了问题。请刷新页面或返回首页。",
-    "homeLink": "返回首页"
+    "homeLink": "返回首页",
+    "retry": "重试"
   },
   "notFound": {
     "title": "404",

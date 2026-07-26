@@ -938,7 +938,8 @@
   "errorBoundary": {
     "title": "Something went wrong",
     "description": "An error occurred while loading the page. Please refresh or return to the home page.",
-    "homeLink": "Return to home"
+    "homeLink": "Return to home",
+    "retry": "Retry"
   },
   "notFound": {
     "title": "404",
