@@ -15,6 +15,15 @@ export default defineConfig({
     video: "retain-on-failure",
   },
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        launchOptions: {
+          executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH
+            || "/root/.cache/ms-playwright/chromium-1223/chrome-linux64/chrome",
+        },
+      },
+    },
   ],
 });

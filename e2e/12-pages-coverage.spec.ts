@@ -51,7 +51,7 @@ test.describe("使用条款 /terms", () => {
     expect(res?.status()).toBe(200);
 
     await expect(page.locator("h1")).toContainText("使用条款");
-    await expect(page.getByText(/本网站即表示/)).toBeVisible();
+    await expect(page.getByText(/本网站即表示/).first()).toBeVisible();
   });
 });
 
@@ -62,7 +62,7 @@ test.describe("人格档案 /profile", () => {
 
     // 无历史记录时显示空状态
     await expect(
-      page.getByText(/完成一项测试后|开始第一项测评/),
+      page.getByText(/完成一项测试后|开始第一项测评/).first(),
     ).toBeVisible();
   });
 });
