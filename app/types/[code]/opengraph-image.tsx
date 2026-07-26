@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_ALT_TAGLINE } from "@/lib/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -54,7 +54,7 @@ export default async function Image({
             color: "#667788",
           }}
         >
-          认识你自己，是一切成长的起点
+          {SITE_ALT_TAGLINE}
         </div>
       </div>
     ),

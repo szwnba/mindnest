@@ -22,3 +22,4 @@ export const SITE_KEYWORDS = [
 export const SITE_SHORT_NAME = "MindNest";
 export const SITE_ALT_TAGLINE = "认识你自己，是一切成长的起点";
 export const SITE_APP_TITLE = "心栖";
+export const SITE_OG_SUBTITLE = "专业人格心理测评平台 · 免费 · 开源 · 隐私优先";

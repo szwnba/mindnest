@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME, SITE_ALT_TAGLINE } from "@/lib/site";
+import { SITE_NAME, SITE_ALT_TAGLINE, SITE_OG_SUBTITLE } from "@/lib/site";
 
 export const alt = `${SITE_NAME} · ${SITE_ALT_TAGLINE}`;
 export const size = { width: 1200, height: 630 };
@@ -99,7 +99,7 @@ export default async function Image() {
             letterSpacing: "0.04em",
           }}
         >
-          专业人格心理测评平台 · 免费 · 开源 · 隐私优先
+          {SITE_OG_SUBTITLE}
         </div>
       </div>
     ),
