@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `投稿合作 · ${SITE_NAME}`,
@@ -22,7 +22,7 @@ export default function ContactPage() {
             "@type": "ContactPage",
             name: `投稿合作 · ${SITE_NAME}`,
             description: `${SITE_NAME} 欢迎投稿与合作。如果你在人格心理学领域有研究、见解或创作，期待与你共建内容。`,
-            url: "https://mindnest-six.vercel.app/contact",
+            "url": `${SITE_URL}/contact`
           }),
         }}
       />

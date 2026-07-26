@@ -7,7 +7,7 @@ import {
   PERSONALITY_TYPES,
   getTypeByCode,
 } from "@/lib/data/personality-types";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface PageProps {
   params: Promise<{ code: string }>;
@@ -84,7 +84,7 @@ export default async function TypeDetailPage({ params }: PageProps) {
             "isPartOf": {
               "@type": "WebSite",
               "name": SITE_NAME,
-              "url": "https://mindnest-six.vercel.app"
+              "url": SITE_URL
             }
           })
         }}

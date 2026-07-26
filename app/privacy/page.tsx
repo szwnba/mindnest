@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `隐私政策 · ${SITE_NAME}`,
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
             "@type": "WebPage",
             "name": `隐私政策 · ${SITE_NAME}`,
             "description": `${SITE_NAME} 的隐私政策。所有数据仅存储在浏览器本地，无账号系统，无服务端存储。`,
-            "url": "https://mindnest-six.vercel.app/privacy"
+            "url": `${SITE_URL}/privacy`
           })
         }}
       />

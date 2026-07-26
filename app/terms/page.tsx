@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `使用条款 · ${SITE_NAME}`,
@@ -22,7 +22,7 @@ export default function TermsPage() {
             "@type": "WebPage",
             "name": `使用条款 · ${SITE_NAME}`,
             "description": `${SITE_NAME} 的使用条款。`,
-            "url": "https://mindnest-six.vercel.app/terms"
+            "url": `${SITE_URL}/terms`
           })
         }}
       />

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { SITE_NAME, SITE_APP_TITLE } from "@/lib/site";
+import { SITE_NAME, SITE_APP_TITLE, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `关于${SITE_APP_TITLE}`,
@@ -23,7 +23,7 @@ export default function AboutPage() {
             "@type": "AboutPage",
             "name": `关于${SITE_APP_TITLE}`,
             "description": `${SITE_NAME} 是一个专业人格心理测评平台，整合 MBTI、大五人格、HEXACO 等 6 大权威框架。`,
-            "url": "https://mindnest-six.vercel.app/about"
+            "url": `${SITE_URL}/about`
           })
         }}
       />
