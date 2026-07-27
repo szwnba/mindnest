@@ -7,6 +7,7 @@ import {
   TYPE_GROUPS,
   type TypeGroup,
 } from "@/lib/data/personality-types";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "16 种人格类型总览",
@@ -91,6 +92,28 @@ export default function TypesIndexPage() {
           );
         })}
       </main>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "16 种人格类型完整图谱",
+            description:
+              "完整的 16 种 MBTI 人格类型介绍，按分析家 / 外交家 / 守卫者 / 探险家四大族群分类。",
+            numberOfItems: PERSONALITY_TYPES.length,
+            itemListElement: PERSONALITY_TYPES.map((t, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: `${t.code} ${t.nameZh}`,
+              description: t.shortDesc,
+              url: `${SITE_URL}/types/${t.code}`,
+            })),
+          }),
+        }}
+      />
+
       <Footer />
     </>
   );
