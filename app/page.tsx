@@ -16,7 +16,7 @@ import { RevealObserver } from "@/components/RevealObserver";
 import Resources from "@/components/Resources";
 import SharedResultBanner from "@/components/SharedResultBanner";
 import TrustBar from "@/components/TrustBar";
-import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL, SITE_SHORT_NAME} from "@/lib/site";
 
 export const metadata = {
   title: SITE_TITLE,
@@ -71,6 +71,29 @@ export default function Home() {
         <FAQ />
         <div className="divider" aria-hidden="true" />
         <CtaBanner />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: SITE_NAME,
+            alternateName: SITE_SHORT_NAME,
+            description: SITE_DESCRIPTION,
+            url: SITE_URL,
+            inLanguage: "zh-CN",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: `${SITE_URL}/types/{search_term_string}`,
+              },
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
       </main>
       <Footer />
     </>
